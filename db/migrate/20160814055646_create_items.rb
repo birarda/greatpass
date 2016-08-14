@@ -1,8 +1,8 @@
 class CreateItems < ActiveRecord::Migration[5.0]
   def change
     create_table :items do |t|
-      t.uuid :item_id
       t.string :name
+      t.column :type, :integer, default: 0
 
       t.timestamps
     end
