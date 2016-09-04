@@ -11,6 +11,6 @@
 #
 
 class Item < ApplicationRecord
-  enum type: [:topper, :antenna, :wheels, :boost, :decal]
+  enum kind: [:topper, :antenna, :wheels, :boost, :decal]
   enum rarity: [:common, :uncommon, :rare, :super_rare, :premium, :limited]
 end
