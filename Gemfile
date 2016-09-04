@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 2.5'
 # add devise for authentication
 gem 'devise'
 
+# use slim for html templates
+gem 'slim'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
