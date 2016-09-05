@@ -13,4 +13,8 @@
 class Item < ApplicationRecord
   enum kind: [:topper, :antenna, :wheels, :boost, :decal]
   enum rarity: [:common, :uncommon, :rare, :super_rare, :premium, :limited]
+
+  def self.default_scope
+    order(name: :asc)
+  end
 end
