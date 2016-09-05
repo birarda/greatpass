@@ -11,7 +11,11 @@ html
     
     .navbar.navbar-default
       .container-fluid
-      .navbar-header
+        .navbar-header
+        ul.nav.navbar-nav.navbar-right
+          - if current_user
+            li
+              = link_to 'Logout', destroy_user_session_path
       
     .container-fluid
       = yield
