@@ -94,8 +94,8 @@ Item.create([
   { name: 'Candy Cane', rarity: Item.rarities[:limited], kind: Item.kinds[:antenna] },
   { name: 'Holiday Gift', rarity: Item.rarities[:limited], kind: Item.kinds[:antenna] },
   { name: 'Rainbow Flag', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] },
-  { name: 'Waffle', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] }
-  { name: 'Rubber Duckie', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] }
+  { name: 'Waffle', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] },
+  { name: 'Rubber Duckie', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] },
   { name: 'Rocket', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] },
   { name: 'Piñata', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] },
   { name: 'Parrot', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] },
