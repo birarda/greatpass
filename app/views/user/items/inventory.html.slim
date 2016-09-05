@@ -1,6 +1,7 @@
 / form to add to inventory
 = bootstrap_form_for(@new_item) do |f|
   = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: true }
+  = f.select :paint_color, UserItem.paint_colors.keys.collect { |c| c.titleize }, { include_blank: 'None' }
 end
 
 / paginated table of inventory

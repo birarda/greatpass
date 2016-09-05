@@ -60,6 +60,7 @@ group :development do
   # use guard to handle server restarts
   gem 'guard'
   gem 'guard-rails'
+  gem 'guard-livereload'
   gem 'ruby_gntp'
 
   # Annotate schema in source files
