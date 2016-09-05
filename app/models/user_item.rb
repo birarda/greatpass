@@ -32,4 +32,6 @@ class UserItem < ApplicationRecord
     :sky_blue,
     :titanium_white
   ]
+
+  attr_accessor :kind
 end
