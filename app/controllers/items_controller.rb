@@ -22,7 +22,11 @@ class ItemsController < ApplicationController
       end
 
       if @search_params.has_key?(:paint_color)
-        query = query.where(paint_Color: @search_params[:paint_color])
+        query = query.where(paint_color: @search_params[:paint_color])
+      end
+
+      if @search_params.has_key?(:kind)
+        query = query.where(items: { kind: @search_params[:kind] })
       end
 
     end
@@ -32,7 +36,7 @@ class ItemsController < ApplicationController
 
   private
     def permitted_search_params
-      permitted_params = params.permit(item_id: [], certification: [], paint_color: [], platform: [])
+      permitted_params = params.permit(item_id: [], certification: [], paint_color: [], platform: [], kind: [])
 
       permitted_params.keys.each do |filter|
         permitted_params[filter].reject! { |i| i.empty? }
