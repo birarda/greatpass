@@ -4,8 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  enum platform: [:Steam, :PSN, :Xbox]
+
   has_many :items, class_name: 'UserItem', inverse_of: :user
 
-  enum platform: [:Steam, :PSN, :Xbox]
+  validates :platform_username, presence: true
+  validates :platform, presence: true
 
 end
