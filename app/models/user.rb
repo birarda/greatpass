@@ -8,13 +8,4 @@ class User < ApplicationRecord
 
   enum platform: [:Steam, :PSN, :Xbox]
 
-  def platform_ion_class
-    if self.Steam?
-      'ion-steam'
-    elsif self.PSN?
-      'ion-playstation'
-    elsif self.Xbox?
-      'ion-Xbox'
-    end
-  end
 end

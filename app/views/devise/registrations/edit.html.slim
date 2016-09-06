@@ -5,7 +5,7 @@ h3 Account
     .panel-body
       = f.form_group :platform do
         - User.platforms.keys.each do |platform|
-          = f.radio_button :platform, platform, label: platform, inline: true
+          = f.radio_button :platform, platform, label: "<i class='icon #{platform_ion_class(platform)}'></i>&nbsp;#{platform}".html_safe, inline: true
         end
       end
       
