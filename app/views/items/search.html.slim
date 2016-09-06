@@ -51,7 +51,7 @@
             td = i.certification.try(:capitalize)
             td = i.paint_color.try(:titleize)
             td
-              = link_to platform_user_path(platform: i.user.platform.downcase, platform_username: i.user.platform_username), class: 'user-platform-link' do
+              = link_to user_path(i.user), class: 'user-platform-link' do
                 i class="icon #{platform_ion_class(i.user.platform)}"
                 | &nbsp;
                 = i.user.platform_username
