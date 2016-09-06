@@ -3,6 +3,8 @@ class User::ItemsController < ApplicationController
 
   def index
     @new_item = current_user.items.new
+
+    @items = current_user.items
   end
 
   def create
@@ -26,6 +28,8 @@ class User::ItemsController < ApplicationController
       elsif with_kind[:kind].to_i == 2
         with_kind.delete(:certification)
       end
+
+      return with_kind
     end
 
 end

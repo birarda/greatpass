@@ -19,4 +19,7 @@ $(document).on('turbolinks:load', function() {
       $('.paint-select-group').show();
     }
   });
+
+  // handle inventory DataTable
+  $('#user-items-table').DataTable();
 });

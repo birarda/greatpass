@@ -12,10 +12,17 @@ html
     .navbar.navbar-default
       .container-fluid
         .navbar-header
-        ul.nav.navbar-nav.navbar-right
-          - if current_user
-            li
-              = link_to 'Logout', destroy_user_session_path
+          button.navbar-toggle.collapsed type="button" data-toggle="collapse" data-target="#gp-navbar-collapse" aria-expanded="false"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand href="#" Great Pass
+        .collapse.navbar-collapse#gp-navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            - if current_user
+              li
+                = link_to 'Logout', destroy_user_session_path
       
     .container-fluid
       = yield
