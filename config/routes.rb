@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   get 'search', to: 'items#search'
   get 'items/search'
 
+  get 'users/:platform_string/:platform_username', to: 'items#search', as: 'platform_user'
+
   # get 'users/:platform/:platform_username', to: 'users#show', as: 'platform_user'
 
-  resources :users, only: [:show, :update]
+  resources :users, only: [:update]
 
   namespace :user do
     resources :items, only: [:index, :create, :destroy]

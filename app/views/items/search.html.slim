@@ -10,9 +10,11 @@
         = f.select :kind,
           options_for_select(Item.kinds.map { |k, v| [k.titleize, v] }, @search_params[:kind]), 
           { include_blank: 'All' }, { multiple: true, namespace: 'search' }
-      .col-sm-4
+      .col-sm-2
         = f.select :platform, options_for_select(User.platforms, @search_params[:platform]), 
         { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+      .col-sm-2
+        = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
       .clearfix.visible-sm
       .col-sm-6
         = f.select :certification, 
@@ -50,7 +52,7 @@ p
             td = i.certification.try(:capitalize)
             td = i.paint_color.try(:titleize)
             td
-              = link_to user_path(i.user), class: 'user-platform-link' do
+              = link_to platform_user_path(platform_string: i.user.platform.downcase, platform_username: i.user.platform_username), class: 'user-platform-link' do
                 i class="icon #{platform_ion_class(i.user.platform)}"
                 | &nbsp;
                 = i.user.platform_username

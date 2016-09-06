@@ -17,6 +17,10 @@ class ItemsController < ApplicationController
         query = query.where(users: { platform: @search_params[:platform] })
       end
 
+      if @search_params.has_key?(:platform_username)
+        query = query.references(:users).where('users.platform_username ILIKE ?', @search_params[:platform_username])
+      end
+
       if @search_params.has_key?(:certification)
         query = query.where(certification: @search_params[:certification])
       end
@@ -36,10 +40,10 @@ class ItemsController < ApplicationController
 
   private
     def permitted_search_params
-      permitted_params = params.permit(item_id: [], certification: [], paint_color: [], platform: [], kind: [])
+      permitted_params = params.permit(:platform_username, item_id: [], certification: [], paint_color: [], platform: [], kind: [])
 
       permitted_params.keys.each do |filter|
-        permitted_params[filter].reject! { |i| i.empty? }
+        permitted_params[filter].reject! { |i| i.empty? } if permitted_params[filter].kind_of?(Array)
         permitted_params.delete(filter) if permitted_params[filter].empty?
       end
 
