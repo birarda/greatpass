@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Toppers
-Item.create([
+toppers = [
   { name: 'Bobby Helmet' },
   { name: 'Brünnehilde' },
   { name: 'Cherry Top' },
@@ -85,11 +85,15 @@ Item.create([
   { name: 'White Hat', rarity: Item.rarities[:uncommon] },
   { name: 'Baseball Cap [F]', rarity: Item.rarities[:uncommon] },
   { name: 'Baseball Cap [B]', rarity: Item.rarities[:uncommon] },
-])
+]
+
+toppers.each do |topper_attrs|
+  Item.find_or_create_by(topper_attrs)
+end
 
 # Antennas
 
-Item.create([
+antennas = [
   { name: 'Gold Nugget', rarity: Item.rarities[:limited], kind: Item.kinds[:antenna] },
   { name: 'Candy Cane', rarity: Item.rarities[:limited], kind: Item.kinds[:antenna] },
   { name: 'Holiday Gift', rarity: Item.rarities[:limited], kind: Item.kinds[:antenna] },
@@ -114,4 +118,8 @@ Item.create([
   { name: 'Chick Magnet', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] },
   { name: 'Candle', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] },
   { name: 'Alien', rarity: Item.rarities[:uncommon], kind: Item.kinds[:antenna] }
-])
+]
+
+antennas.each do |antenna_attrs|
+  Item.find_or_create_by(antenna_attrs)
+end
