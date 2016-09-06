@@ -1,24 +1,16 @@
-h2
+h3
   | Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      em
-        | (
-        = @minimum_password_length
-        |  characters minimum)
-    br
-    = f.password_field :password, autocomplete: "off"
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+
+.row
+  .col-sm-7
+    .panel.panel-default
+      = bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        .panel-body
+          = devise_error_messages!
+          = f.email_field :email, autofocus: true
+          = f.password_field :password, autocomplete: "off", help: "#{@minimum_password_length ? @minimum_password_length.to_s + ' characters minimum' : nil}"
+          = f.password_field :password_confirmation, autocomplete: "off"
+        .panel-footer
+          .actions
+            = f.submit "Sign up"
+          = render "devise/shared/links"
