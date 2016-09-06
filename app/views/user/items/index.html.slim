@@ -1,6 +1,6 @@
 / form to add to inventory
 .panel.panel-default
-  .panel-heading New Item
+  .panel-heading Add Item
   = bootstrap_form_for(@new_item) do |f|
     .panel-body
       = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: true }
@@ -23,7 +23,7 @@
   .panel-heading Inventory
   .panel-body
     .table-responsive
-      table.table.table-hover.table-bordered#user-
+      table.table.table-hover.table-bordered#user-items-table
         thead
           tr
             th Name
