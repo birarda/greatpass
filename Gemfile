@@ -57,6 +57,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
+  gem 'rack-livereload'
+
   # use guard to handle server restarts
   gem 'guard'
   gem 'guard-rails'
