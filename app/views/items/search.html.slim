@@ -1,7 +1,7 @@
 .panel.panel-default
   .panel-heading Search
   
-  = bootstrap_form_tag url: '/search' do |f|
+  = bootstrap_form_tag url: search_path, method: 'get' do |f|
     .panel-body
       .col-sm-6
         = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: 'All' }, { multiple: true }
@@ -15,3 +15,27 @@
       
     .panel-footer  
       = f.submit 'Search', class: 'btn btn-success'
+
+.table-responsive
+  table.table.table-bordered.table-striped
+    thead
+      tr 
+        th Name
+        th Type
+        th Rarity
+        th Certification
+        th Paint Color
+        th Platform / Gamertag
+    tbody
+      - @result_items.each do |i|
+        tr
+          td = i.item.name
+          td = i.item.kind.titleize
+          td = i.item.rarity.titleize
+          td = i.certification.try(:capitalize)
+          td = i.paint_color.try(:titleize)
+          td 
+            i class="icon #{platform_ion_class(i.user.platform)}"
+            | &nbsp;
+            = i.user.platform_username
+      

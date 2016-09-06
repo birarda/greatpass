@@ -3,9 +3,12 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root to: 'items#index'
+  root to: 'items#search'
 
-  resources :items, only: [:index]
+  get 'search', to: 'items#search'
+  get 'items/search'
+
+
   resources :users, only: [:show, :update]
 
   namespace :user do
