@@ -1,6 +1,6 @@
 .panel.panel-default
   
-  = bootstrap_form_tag url: search_path, method: 'get' do |f|
+  = bootstrap_form_tag url: search_path, html: { method: 'get', autocomplete: 'off' } do |f|
     .panel-body
       .col-sm-4
         = f.select :item_id, 
@@ -19,7 +19,7 @@
       .col-sm-6
         = f.select :certification, 
           options_for_select(UserItem.certifications.map { |k,v| [k.capitalize, v] }, @search_params[:certification]), 
-          { include_blank: 'All' }, { multiple: true, namespace: 'search'}
+          { include_blank: 'All' }, { multiple: true, namespace: 'search' }
       .col-sm-6
         = f.select :paint_color, 
           options_for_select(UserItem.paint_colors.map { |k, v| [k.titleize, v] }, @search_params[:paint_color]), 

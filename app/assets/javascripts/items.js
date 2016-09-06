@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function() {
   var $selectized_selects = [$('#search__item_id'), $('#search__certification'), $('#search__paint_color'), $('#search__platform'), $('#search__kind')]
   $.each($selectized_selects, function(index, $select){
     $select.selectize();
-  })
+  });
 });
 
 
