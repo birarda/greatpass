@@ -40,6 +40,6 @@
           td = i.certification.try(:capitalize)
           td = i.paint_color.try(:titleize)
           td 
-            = link_to user_item_path(i), { data: { confirm: 'Are you sure?' }, method: :delete } do
+            = link_to user_item_path(i), { data: { confirm: 'Are you sure? This will remove the item from your inventory.' }, method: :delete } do
               span.glyphicon.glyphicon-remove aria-hidden=true
             end

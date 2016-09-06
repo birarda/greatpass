@@ -1,0 +1,21 @@
+.navbar.navbar-default
+  .container
+    .navbar-header
+      button.navbar-toggle.collapsed type="button" data-toggle="collapse" data-target="#gp-navbar-collapse" aria-expanded="false"
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      = link_to 'Great Pass', root_path, class: 'navbar-brand'
+    .collapse.navbar-collapse#gp-navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        - if current_user
+          li
+            = link_to 'Inventory', user_items_path
+          li
+            = link_to 'Logout', destroy_user_session_path, method: :delete
+        - else
+          li
+            = link_to 'Sign Up', new_user_registration_path
+          li
+            = link_to 'Login', new_user_session_path
