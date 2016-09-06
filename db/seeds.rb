@@ -156,3 +156,16 @@ boosts = [
 boosts.each do |boost_attrs|
   Item.find_or_create_by(boost_attrs)
 end
+
+# Decals
+
+decals = [
+  { name: 'Junk Food (Breakout)', rarity: Item.rarities[:rare], kind: Item.kinds[:decal] },
+  { name: 'Racer (Octane)', rarity: Item.rarities[:rare], kind: Item.kinds[:decal] },
+  { name: 'Flex (Venom)', rarity: Item.rarities[:rare], kind: Item.kinds[:decal] },
+  { name: 'Royalty (Dominus)', rarity: Item.rarities[:rare], kind: Item.kinds[:decal] }
+]
+
+decals.each do |decal_attrs|
+  Item.find_or_create_by(decal_attrs)
+end
