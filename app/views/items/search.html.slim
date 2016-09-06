@@ -29,10 +29,9 @@
           |  Search
         end
 
-/ p 
-/   = @result_items.total_entries
-/   |  items found
-
+p 
+  = page_entries_info @result_items
+          
 .panel.panel-default
   .table-responsive
     table.table.table-striped
@@ -59,4 +58,4 @@
             td = i.item.kind.titleize
             td = i.item.rarity.titleize
 
-  = will_paginate @result_items, renderer: BootstrapPagination::Rails
+  = paginate @result_items, theme: 'twitter-bootstrap-3'
