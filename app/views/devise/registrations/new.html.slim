@@ -10,6 +10,14 @@ h3
           = f.email_field :email, autofocus: true
           = f.password_field :password, autocomplete: "off", help: "#{@minimum_password_length ? @minimum_password_length.to_s + ' characters minimum' : nil}"
           = f.password_field :password_confirmation, autocomplete: "off"
+          
+          = f.form_group :platform, label: { text: 'Platform' } do
+            - User.platforms.keys.each do |platform|
+              = f.radio_button :platform, platform, label: "<i class='icon #{platform_ion_class(platform)}'></i>&nbsp;#{platform}".html_safe, inline: true
+            end
+          end
+          
+          = f.text_field :platform_username, label: 'Gamertag'
         .panel-footer
           .actions
             = f.submit "Sign up"
