@@ -137,3 +137,22 @@ wheels = [
 wheels.each do |wheel_attrs|
   Item.find_or_create_by(wheel_attrs)
 end
+
+# Boosts
+
+boosts = [
+  { name: 'Candy Corn', rarity: Item.rarities[:limited], kind: Item.kinds[:boost] },
+  { name: 'Xmas', rarity: Item.rarities[:limited], kind: Item.kinds[:boost] },
+  { name: 'Season 2 - Challenger', rarity: Item.rarities[:limited], kind: Item.kinds[:boost] },
+  { name: 'Season 2 - Prospect', rarity: Item.rarities[:limited], kind: Item.kinds[:boost] },
+  { name: 'Season 2 - Star', rarity: Item.rarities[:limited], kind: Item.kinds[:boost] },
+  { name: 'Season 2 - Champion', rarity: Item.rarities[:limited], kind: Item.kinds[:boost] },
+  { name: 'Toon Smoke', rarity: Item.rarities[:super_rare], kind: Item.kinds[:boost] },
+  { name: 'Frostbite', rarity: Item.rarities[:super_rare], kind: Item.kinds[:boost] },
+  { name: 'Hearts', rarity: Item.rarities[:super_rare], kind: Item.kinds[:boost] },
+  { name: 'Lightning', rarity: Item.rarities[:super_rare], kind: Item.kinds[:boost] },
+]
+
+boosts.each do |boost_attrs|
+  Item.find_or_create_by(boost_attrs)
+end
