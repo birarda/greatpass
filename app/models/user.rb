@@ -10,5 +10,4 @@ class User < ApplicationRecord
 
   validates :platform_username, presence: true
   validates :platform, presence: true
-
 end

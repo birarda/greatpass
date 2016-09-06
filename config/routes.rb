@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'search', to: 'items#search'
   get 'items/search'
 
+  get 'users/:platform/:platform_username', to: 'users#show', as: 'platform_user'
 
   resources :users, only: [:show, :update]
 

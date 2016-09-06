@@ -50,10 +50,12 @@
             td = i.item.name
             td = i.certification.try(:capitalize)
             td = i.paint_color.try(:titleize)
-            td 
-              i class="icon #{platform_ion_class(i.user.platform)}"
-              | &nbsp;
-              = i.user.platform_username
+            td
+              = link_to platform_user_path(platform: i.user.platform.downcase, platform_username: i.user.platform_username) do
+                i class="icon #{platform_ion_class(i.user.platform)}"
+                | &nbsp;
+                = i.user.platform_username
+              end
             td = i.item.kind.titleize
             td = i.item.rarity.titleize
 

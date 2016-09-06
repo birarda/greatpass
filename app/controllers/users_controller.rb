@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_same_user!, only: [:update]
 
   def show
-
+    
   end
 
   def update
