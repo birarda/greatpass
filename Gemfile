@@ -40,6 +40,7 @@ gem 'slim'
 # use bootstrap for grid styling
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'bootstrap_form'
+gem 'will_paginate-bootstrap'
 
 # use selectize for searchable select boxes
 gem 'selectize-rails'
