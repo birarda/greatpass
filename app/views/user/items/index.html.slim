@@ -11,8 +11,8 @@
         = f.radio_button :kind, 2, label: 'Painted'
       end
       
-      = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, {}, wrapper_class: 'certification-select-group'
-      = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.titleize, k] }, {}, wrapper_class: 'paint-select-group'
+      = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, { include_blank: true }, { wrapper_class: 'certification-select-group' }
+      = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.titleize, k] }, { include_blank: true }, { wrapper_class: 'paint-select-group' }
     .panel-footer
       = f.submit "Add Item", class: 'btn btn-success'
   end
@@ -26,13 +26,17 @@
       thead
         tr
           th Name
+          th Type
+          th Rarity
           th Certification
           th Paint Color
           th Delete
       tbody
       - @items.each do |i|
         tr
-          th = i.item.try(:name)
-          th = i.certification.try(:capitalize)
-          th = i.paint_color.try(:titleize)
-          th
+          td = i.item.name
+          td = i.item.kind.titleize
+          td = i.item.rarity.titleize
+          td = i.certification.try(:capitalize)
+          td = i.paint_color.try(:titleize)
+          td

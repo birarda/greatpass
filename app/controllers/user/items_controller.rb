@@ -4,7 +4,7 @@ class User::ItemsController < ApplicationController
   def index
     @new_item = current_user.items.new
 
-    @items = current_user.items
+    @items = current_user.items.joins(:item).order('items.name ASC')
   end
 
   def create
