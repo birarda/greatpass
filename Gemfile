@@ -1,4 +1,4 @@
-ruby '2.3.0'
+ruby '2.3.1'
 source 'https://rubygems.org'
 
 
@@ -70,6 +70,11 @@ group :development do
 
   # Annotate schema in source files
   gem 'annotate'
+
+  # use capistrano to deploy to server
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-rbenv', '~> 2.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
