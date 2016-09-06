@@ -4,19 +4,19 @@
   = bootstrap_form_for(@new_item) do |f|
     .panel-body
       = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: true }
-      
+
       = f.form_group :kind, label: { text: 'Type' } do
         = f.radio_button :kind, 0, label: 'Normal', checked: true
         = f.radio_button :kind, 1, label: 'Certified'
         = f.radio_button :kind, 2, label: 'Painted'
       end
-      
+
       = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, { include_blank: true }, { wrapper_class: 'certification-select-group' }
       = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.titleize, k] }, { include_blank: true }, { wrapper_class: 'paint-select-group' }
     .panel-footer
       = f.submit "Add Item", class: 'btn btn-success'
   end
-  
+
 
 / paginated table of inventory
 .panel.panel-default
@@ -39,7 +39,7 @@
           td = i.item.rarity.titleize
           td = i.certification.try(:capitalize)
           td = i.paint_color.try(:titleize)
-          td.glyphicon-cell 
+          td.glyphicon-cell
             = link_to user_item_path(i), { data: { confirm: 'Are you sure? This will remove the item from your inventory.' }, method: :delete } do
               span.glyphicon.glyphicon-remove aria-hidden=true
             end
