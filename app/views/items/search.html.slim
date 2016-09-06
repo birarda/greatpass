@@ -33,27 +33,28 @@
 /   = @result_items.total_entries
 /   |  items found
 
-.table-responsive
-  table.table.table-bordered.table-striped
-    thead
-      tr 
-        th Name
-        th Certification
-        th Paint Color
-        th Platform / Gamertag
-        th Type
-        th Rarity
-    tbody
-      - @result_items.each do |i|
-        tr
-          td = i.item.name
-          td = i.certification.try(:capitalize)
-          td = i.paint_color.try(:titleize)
-          td 
-            i class="icon #{platform_ion_class(i.user.platform)}"
-            | &nbsp;
-            = i.user.platform_username
-          td = i.item.kind.titleize
-          td = i.item.rarity.titleize
+.panel.panel-default
+  .table-responsive
+    table.table.table-striped
+      thead
+        tr 
+          th Name
+          th Certification
+          th Paint Color
+          th Platform / Gamertag
+          th Type
+          th Rarity
+      tbody
+        - @result_items.each do |i|
+          tr class="#{i.user == current_user ? 'info': ''}"
+            td = i.item.name
+            td = i.certification.try(:capitalize)
+            td = i.paint_color.try(:titleize)
+            td 
+              i class="icon #{platform_ion_class(i.user.platform)}"
+              | &nbsp;
+              = i.user.platform_username
+            td = i.item.kind.titleize
+            td = i.item.rarity.titleize
 
-= will_paginate @result_items, renderer: BootstrapPagination::Rails
+  = will_paginate @result_items, renderer: BootstrapPagination::Rails
