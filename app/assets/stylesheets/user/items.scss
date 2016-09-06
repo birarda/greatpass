@@ -1,3 +1,15 @@
 // Place all the styles related to the user/items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.glyphicon-cell {
+  text-align: center;
+
+  a span {
+    color: #333333;
+
+    &:hover {
+      color: #ce4844;
+    }
+  }
+}

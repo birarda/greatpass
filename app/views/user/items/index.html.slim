@@ -30,7 +30,7 @@
           th Rarity
           th Certification
           th Paint Color
-          th Delete
+          th.glyphicon-cell Delete
       tbody
       - @items.each do |i|
         tr
@@ -39,7 +39,7 @@
           td = i.item.rarity.titleize
           td = i.certification.try(:capitalize)
           td = i.paint_color.try(:titleize)
-          td 
+          td.glyphicon-cell 
             = link_to user_item_path(i), { data: { confirm: 'Are you sure? This will remove the item from your inventory.' }, method: :delete } do
               span.glyphicon.glyphicon-remove aria-hidden=true
             end
