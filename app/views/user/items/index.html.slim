@@ -1,6 +1,5 @@
 / form to add to inventory
 .panel.panel-default
-  .panel-heading Add Item
   = bootstrap_form_for(@new_item) do |f|
     .panel-body
       = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: true }
@@ -13,8 +12,10 @@
 
       = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, { include_blank: true }, { wrapper_class: 'certification-select-group' }
       = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.titleize, k] }, { include_blank: true }, { wrapper_class: 'paint-select-group' }
-    .panel-footer
-      = f.submit "Add Item", class: 'btn btn-success'
+      = f.button class: 'btn btn-success', id: 'add-item-button' do
+        span.glyphicon.glyphicon-plus aria-hidden='true'
+        |  Add Item
+      end
   end
 
 
