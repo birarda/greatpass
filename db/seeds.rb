@@ -123,3 +123,17 @@ antennas = [
 antennas.each do |antenna_attrs|
   Item.find_or_create_by(antenna_attrs)
 end
+
+# Wheels
+
+wheels = [
+  { name: 'Sunburst', rarity: Item.rarities[:uncommon], kind: Item.kinds[:wheels] },
+  { name: 'Trahere', rarity: Item.rarities[:uncommon], kind: Item.kinds[:wheels] },
+  { name: 'Rat Rod', rarity: Item.rarities[:uncommon], kind: Item.kinds[:wheels] },
+  { name: 'Tunica', rarity: Item.rarities[:uncommon], kind: Item.kinds[:wheels] },
+  { name: 'Lowrider', rarity: Item.rarities[:uncommon], kind: Item.kinds[:wheels] }
+]
+
+wheels.each do |wheel_attrs|
+  Item.find_or_create_by(wheel_attrs)
+end
