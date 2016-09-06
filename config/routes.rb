@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root to: 'items#index'
 
   resources :items, only: [:index]
-  resources :users, only: [:show]
+  resources :users, only: [:show, :update]
 
   namespace :user do
     resources :items, only: [:index, :create, :destroy]

@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :items, class_name: 'UserItem', inverse_of: :user
+
+  enum platform: [:Steam, :PSN, :Xbox]
 end
