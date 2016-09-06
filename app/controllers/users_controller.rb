@@ -10,9 +10,13 @@ class UsersController < ApplicationController
 
     if @user.update_attributes(update_params)
       flash[:success] = "Platform / Gamertag updated"
+      redirect_to edit_user_registration_path
+    else
+      @resource = @user
+      render 'devise/registrations/edit'
     end
 
-    redirect_to edit_user_registration_path
+
   end
 
   private
