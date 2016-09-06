@@ -1,5 +1,4 @@
 .panel.panel-default
-  .panel-heading Search
   
   = bootstrap_form_tag url: search_path, method: 'get' do |f|
     .panel-body
@@ -18,9 +17,11 @@
         = f.select :paint_color, 
           options_for_select(UserItem.paint_colors.map { |k, v| [k.titleize, v] }, @search_params[:paint_color]), 
           { include_blank: 'All' }, { multiple: true }
-      
-    .panel-footer  
-      = f.submit 'Search', class: 'btn btn-success'
+      .col-sm-12
+        = f.button class: 'btn btn-success', id: 'search-submit-button' do
+          span.glyphicon.glyphicon-search aria-hidden='true'
+          |  Search
+        end
 
 .table-responsive
   table.table.table-bordered.table-striped
