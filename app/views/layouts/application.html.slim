@@ -13,5 +13,5 @@ html
     = render 'navbar'
       
     .container
-      = flash_messages
+      = render partial: 'layouts/flash_messages', flash: flash
       = yield
