@@ -8,6 +8,9 @@
         span.icon-bar
       = link_to 'Great Pass', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse#gp-navbar-collapse
+      ul.nav.navbar-nav
+        li
+          = link_to 'Search', root_path
       ul.nav.navbar-nav.navbar-right
         - if current_user
           li
