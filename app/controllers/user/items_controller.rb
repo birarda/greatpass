@@ -1,8 +1,32 @@
 class User::ItemsController < ApplicationController
   before_action :authenticate_user!
 
-  def inventory
+  def index
     @new_item = current_user.items.new
   end
+
+  def create
+    @new_item = current_user.items.new(new_item_params)
+
+    if @new_item.save
+      redirect_to action: 'index'
+    else
+      render :index
+    end
+  end
+
+  private
+    def new_item_params
+      with_kind = params.require(:user_item).permit(:item_id, :kind, :certification, :paint_color)
+
+      if with_kind[:kind] == 0
+        with_kind.delete(:certification).delete(:paint_color)
+      elsif with_kind[:kind] == 1
+        with_kind.delete(:paint_color)
+      elsif with_kind[:kind] == 2
+        with_kind.delete(:certification)
+      end
+
+    end
 
 end

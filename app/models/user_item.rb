@@ -34,4 +34,13 @@ class UserItem < ApplicationRecord
   ]
 
   attr_accessor :kind
+
+  validate :only_one_kind
+
+  private
+    def only_one_kind
+      if certification != nil && paint_color != nil
+        errors.add(:kind, "an item can be certified or painted but not both")
+      end
+    end
 end

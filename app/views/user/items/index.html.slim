@@ -8,8 +8,9 @@
     = f.radio_button :kind, 2, label: 'Painted'
   end
   
-  = f.select :certification, UserItem.certifications.keys.collect { |c| c.capitalize }, {}, wrapper_class: 'certification-select-group'
-  = f.select :paint_color, UserItem.paint_colors.keys.collect { |c| c.titleize }, {}, wrapper_class: 'paint-select-group'
+  = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, {}, wrapper_class: 'certification-select-group'
+  = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.capitalize, k] }, {}, wrapper_class: 'paint-select-group'
+  = f.submit "Add Item"
 end
 
 / paginated table of inventory
