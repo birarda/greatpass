@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
 
     end
 
-    @result_items = query.joins(:item, :user).order(created_at: :desc).paginate(page: params[:page])
+    @result_items = query.includes(:item, :user).order(created_at: :desc).paginate(page: params[:page])
   end
 
   private
