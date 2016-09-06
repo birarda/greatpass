@@ -13,6 +13,13 @@ class ItemsController < ApplicationController
         query = query.where(item_id: @search_params[:item_id])
       end
 
+      # if we have a platform_string (a clean path to a platform user)
+      # then convert that to the platform array so it can be used below
+      if @search_params.has_key?(:platform_string)
+        puts platform_from_url_string(@search_params[:platform_string])
+        @search_params[:platform] = [platform_from_url_string(@search_params[:platform_string])]
+      end
+
       if @search_params.has_key?(:platform)
         query = query.where(users: { platform: @search_params[:platform] })
       end
@@ -40,7 +47,7 @@ class ItemsController < ApplicationController
 
   private
     def permitted_search_params
-      permitted_params = params.permit(:platform_username, item_id: [], certification: [], paint_color: [], platform: [], kind: [])
+      permitted_params = params.permit(:platform_string, :platform_username, item_id: [], certification: [], paint_color: [], platform: [], kind: [])
 
       permitted_params.keys.each do |filter|
         permitted_params[filter].reject! { |i| i.empty? } if permitted_params[filter].kind_of?(Array)
@@ -48,5 +55,17 @@ class ItemsController < ApplicationController
       end
 
       permitted_params
+    end
+
+    def platform_from_url_string(platform_string)
+      downcase_platform = platform_string.downcase
+
+      if downcase_platform == 'steam'
+        User.platforms[:Steam]
+      elsif downcase_platform == 'psn'
+        User.platforms[:PSN]
+      elsif downcase_platform == 'xbox'
+        User.platforms[:Xbox]
+      end
     end
 end
