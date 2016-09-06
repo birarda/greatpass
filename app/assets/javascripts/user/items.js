@@ -20,6 +20,4 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-  // handle inventory DataTable
-  $('#user-items-table').DataTable();
 });
