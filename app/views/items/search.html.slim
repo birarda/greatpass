@@ -30,7 +30,7 @@
         end
 
 p 
-  = page_entries_info @result_items
+  = page_entries_info @result_items, entry_name: 'result'
           
 .panel.panel-default
   .table-responsive
@@ -58,4 +58,4 @@ p
             td = i.item.kind.titleize
             td = i.item.rarity.titleize
 
-  = paginate @result_items, theme: 'twitter-bootstrap-3'
+= paginate @result_items, theme: 'twitter-bootstrap-3'

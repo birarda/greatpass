@@ -1,23 +1,36 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 $(document).on('turbolinks:load', function() {
-  $('#user_item_item_id').selectize();
-  $('#user_item_certification').selectize();
-  $('#user_item_paint_color').selectize();
+  var $selects = [$('#user_item_item_id'), $('#user_item_certification'), $('#user_item_paint_color')];
 
-  $('.certification-select-group').hide();
-  $('.paint-select-group').hide();
+  $.each($selects, function(index, $select){
+    $select.selectize();
+  });
 
-  // handle radio button changes
-  $('input[type=radio][name=user_item\\[kind\\]]').change(function() {
+  var kind_radio_selector = 'input[type=radio][name=user_item\\[kind\\]]'
+
+  function handleRadioButtonState(value) {
     $('.certification-select-group').hide();
     $('.paint-select-group').hide();
 
-    if (this.value == 1) {
+    if (value == 1) {
       $('.certification-select-group').show();
-    } else if (this.value == 2) {
+    } else if (value == 2) {
       $('.paint-select-group').show();
     }
+  }
+
+  handleRadioButtonState($(kind_radio_selector + ':checked').val());
+
+  // handle radio button changes
+  $(kind_radio_selector).change(function() {
+    handleRadioButtonState(this.value);
   });
 
+});
+
+$(document).on('turbolinks:before-cache', function() {
+  $('.selectized').each(function() {
+    this.selectize.destroy();
+  });
 });
