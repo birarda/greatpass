@@ -22,7 +22,7 @@ html
           ul.nav.navbar-nav.navbar-right
             - if current_user
               li
-                = link_to 'Logout', destroy_user_session_path
+                = link_to 'Logout', destroy_user_session_path, method: :delete
       
     .container-fluid
       = yield
