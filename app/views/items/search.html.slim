@@ -38,22 +38,22 @@
     thead
       tr 
         th Name
-        th Type
-        th Rarity
         th Certification
         th Paint Color
         th Platform / Gamertag
+        th Type
+        th Rarity
     tbody
       - @result_items.each do |i|
         tr
           td = i.item.name
-          td = i.item.kind.titleize
-          td = i.item.rarity.titleize
           td = i.certification.try(:capitalize)
           td = i.paint_color.try(:titleize)
           td 
             i class="icon #{platform_ion_class(i.user.platform)}"
             | &nbsp;
             = i.user.platform_username
+          td = i.item.kind.titleize
+          td = i.item.rarity.titleize
 
 = will_paginate @result_items, renderer: BootstrapPagination::Rails
