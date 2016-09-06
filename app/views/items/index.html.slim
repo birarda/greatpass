@@ -4,14 +4,14 @@
   = bootstrap_form_tag url: '/search' do |f|
     .panel-body
       .col-sm-6
-        = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: 'All' }
+        = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: 'All' }, { multiple: true }
       .col-sm-6
-        = f.select :platform, User.platforms.keys, { include_blank: 'All' }
+        = f.select :platform, User.platforms.keys, { include_blank: 'All' }, { multiple: true }
       .clearfix.visible-sm
       .col-sm-6
-        = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, { include_blank: 'All' }
+        = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, { include_blank: 'All' }, { multiple: true }
       .col-sm-6
-        = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.titleize, k] }, { include_blank: 'All' }
+        = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.titleize, k] }, { include_blank: 'All' }, { multiple: true }
       
     .panel-footer  
       = f.submit 'Search', class: 'btn btn-success'
