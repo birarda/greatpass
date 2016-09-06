@@ -7,4 +7,14 @@ class User < ApplicationRecord
   has_many :items, class_name: 'UserItem', inverse_of: :user
 
   enum platform: [:Steam, :PSN, :Xbox]
+
+  def platform_ion_class
+    if self.Steam?
+      'ion-steam'
+    elsif self.PSN?
+      'ion-playstation'
+    elsif self.Xbox?
+      'ion-Xbox'
+    end
+  end
 end

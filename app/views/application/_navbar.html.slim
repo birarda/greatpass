@@ -14,7 +14,10 @@
             = link_to 'Inventory', user_items_path
           li.dropdown
             a.dropdown-toggle href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+              i class="icon #{current_user.platform_ion_class}"
+              | &nbsp;
               = current_user.platform_username
+              | &nbsp;
               span.caret
             ul.dropdown-menu
               li
