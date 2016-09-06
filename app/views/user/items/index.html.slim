@@ -9,7 +9,7 @@
   end
   
   = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, {}, wrapper_class: 'certification-select-group'
-  = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.capitalize, k] }, {}, wrapper_class: 'paint-select-group'
+  = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.titleize, k] }, {}, wrapper_class: 'paint-select-group'
   = f.submit "Add Item"
 end
 
