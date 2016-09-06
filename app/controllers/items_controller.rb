@@ -2,27 +2,27 @@ class ItemsController < ApplicationController
 
   def search
     # check if we were passed any search parameters
-    search_params = permitted_search_params
+    @search_params = permitted_search_params
 
     query = UserItem.all
 
     # if all query params are empty, simply return all sorted by recency
-    if !search_params.empty?
+    if !@search_params.empty?
 
-      if search_params.has_key?(:item_id)
-        query = query.where(item_id: search_params[:item_id])
+      if @search_params.has_key?(:item_id)
+        query = query.where(item_id: @search_params[:item_id])
       end
 
-      if search_params.has_key?(:platform)
-        query = query.where(users: { platform: search_params[:platform] })
+      if @search_params.has_key?(:platform)
+        query = query.where(users: { platform: @search_params[:platform] })
       end
 
-      if search_params.has_key?(:certification)
-        query = query.where(certification: search_params[:certification])
+      if @search_params.has_key?(:certification)
+        query = query.where(certification: @search_params[:certification])
       end
 
-      if search_params.has_key?(:paint_color)
-        query = query.where(paint_Color: search_params[:paint_color])
+      if @search_params.has_key?(:paint_color)
+        query = query.where(paint_Color: @search_params[:paint_color])
       end
 
     end

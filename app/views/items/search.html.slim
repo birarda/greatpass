@@ -4,14 +4,20 @@
   = bootstrap_form_tag url: search_path, method: 'get' do |f|
     .panel-body
       .col-sm-6
-        = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: 'All' }, { multiple: true }
+        = f.select :item_id, 
+          options_for_select(Item.all.collect { |i| [ i.name, i.id ] }, @search_params[:item_id]), 
+          { include_blank: 'All' }, { multiple: true }
       .col-sm-6
-        = f.select :platform, User.platforms , { include_blank: 'All' }, { multiple: true }
+        = f.select :platform, options_for_select(User.platforms, @search_params[:platform]), { include_blank: 'All' }, { multiple: true }
       .clearfix.visible-sm
       .col-sm-6
-        = f.select :certification, UserItem.certifications.map { |k,v| [k.capitalize, v] }, { include_blank: 'All' }, { multiple: true }
+        = f.select :certification, 
+          options_for_select(UserItem.certifications.map { |k,v| [k.capitalize, v] }, @search_params[:certification]), 
+          { include_blank: 'All' }, { multiple: true }
       .col-sm-6
-        = f.select :paint_color, UserItem.paint_colors.map { |k, v| [k.titleize, v] }, { include_blank: 'All' }, { multiple: true }
+        = f.select :paint_color, 
+          options_for_select(UserItem.paint_colors.map { |k, v| [k.titleize, v] }, @search_params[:paint_color]), 
+          { include_blank: 'All' }, { multiple: true }
       
     .panel-footer  
       = f.submit 'Search', class: 'btn btn-success'
