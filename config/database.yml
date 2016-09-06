@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  host: localhost
   database: greatpass_production
   username: greatpass
   password: <%= ENV['GREATPASS_DATABASE_PASSWORD'] %>
