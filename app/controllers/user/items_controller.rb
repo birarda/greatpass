@@ -17,6 +17,17 @@ class User::ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @matching_item = current_user.items.find(params[:id])
+
+    if @matching_item
+      @matching_item.destroy
+      redirect_to action: 'index'
+    else
+      raise ActiveRecord::RecordNotFound
+    end
+  end
+
   private
     def new_item_params
       with_kind = params.require(:user_item).permit(:item_id, :kind, :certification, :paint_color)

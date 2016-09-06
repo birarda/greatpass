@@ -39,4 +39,7 @@
           td = i.item.rarity.titleize
           td = i.certification.try(:capitalize)
           td = i.paint_color.try(:titleize)
-          td
+          td 
+            = link_to user_item_path(i), { data: { confirm: 'Are you sure?' }, method: :delete } do
+              span.glyphicon.glyphicon-remove aria-hidden=true
+            end
