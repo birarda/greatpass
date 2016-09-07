@@ -25,12 +25,7 @@ end
         p
           | You can search through the player's inventory below.
           br
-            = "Contact #{@platform_user.platform_username} on "
-            - if @platform_user.Steam?
-              = link_to @platform_user.platform, "http://steamcommunity.com/id/#{@platform_user.platform_username}"
-            - else
-              = @platform_user.platform 
-            |  to discuss potential trades.
+            = "Contact #{@platform_user.platform_username} on #{@platform_user.platform} to discuss potential trades."
     - else
       h4 Search
     .panel.panel-default
