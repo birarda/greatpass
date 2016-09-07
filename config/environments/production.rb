@@ -62,6 +62,7 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.devliery_method = :smtp
   config.action_mailer.smtp_settings = {
     from: 'contact@greatpass.io',
     address: 'smtp.sparkpostmail.com',
@@ -69,7 +70,8 @@ Rails.application.configure do
     user_name: 'SMTP_Injection',
     password: ENV['GREATPASS_SPARKPOST_PASSWORD'],
     format: :html,
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+    authentication: 'plain'
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
