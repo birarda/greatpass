@@ -1,3 +1,8 @@
+- content_for(:title) do
+  - if @search_params[:platform_username] 
+    = @search_params[:platform_username]
+end
+
 .row
   .col-xs-12
     p 
