@@ -28,5 +28,8 @@ require 'capistrano/rbenv'
 require 'capistrano/puma'
 require 'capistrano/puma/nginx'
 
+require "capistrano/datadog"
+set :datadog_api_key, "b1a9a696176b2c58f3fafb7b782349b7"
+
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }

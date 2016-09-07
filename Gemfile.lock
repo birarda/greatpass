@@ -80,6 +80,8 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    dogapi (1.23.0)
+      multi_json
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -255,6 +257,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.0)
   capistrano3-puma
   devise
+  dogapi (>= 1.3.0)
   guard
   guard-livereload
   guard-rails
