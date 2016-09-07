@@ -13,6 +13,7 @@ class User::ItemsController < ApplicationController
     if @new_item.save
       redirect_to action: 'index'
     else
+      @items = current_user.items.includes(:item).order('items.name ASC')
       render :index
     end
   end
