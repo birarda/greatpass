@@ -1,63 +1,80 @@
-.panel.panel-default
-  
-  = bootstrap_form_tag url: search_path, html: { method: 'get', autocomplete: 'off' } do |f|
-    .panel-body
-      .col-sm-4
-        = f.select :item_id, 
-          options_for_select(Item.all.collect { |i| [ i.name, i.id ] }, @search_params[:item_id]), 
-          { include_blank: 'All' }, { multiple: true, namespace: 'search' }
-      .col-sm-4
-        = f.select :kind,
-          options_for_select(Item.kinds.map { |k, v| [k.titleize, v] }, @search_params[:kind]), 
-          { include_blank: 'All' }, { multiple: true, namespace: 'search' }
-      .col-sm-2
-        = f.select :platform, options_for_select(User.platforms, @search_params[:platform]), 
-        { include_blank: 'All' }, { multiple: true, namespace: 'search' }
-      .col-sm-2
-        = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
-      .clearfix.visible-sm
-      .col-sm-6
-        = f.select :certification, 
-          options_for_select(UserItem.certifications.map { |k,v| [k.capitalize, v] }, @search_params[:certification]), 
-          { include_blank: 'All' }, { multiple: true, namespace: 'search' }
-      .col-sm-6
-        = f.select :paint_color, 
-          options_for_select(UserItem.paint_colors.map { |k, v| [k.titleize, v] }, @search_params[:paint_color]), 
-          { include_blank: 'All' }, { multiple: true, namespace: 'search' }
-      .clearfix.visible-sm
-      .col-sm-12
-        = f.button class: 'btn btn-success', id: 'search-submit-button' do
-          span.glyphicon.glyphicon-search aria-hidden='true'
-          |  Search
-        end
+.row
+  .col-xs-12
+    p 
+      | Great Pass helps you find Rocket League items to trade for.
+      br
+      | Use the search below to find the item you want. 
+      br
+      | Contact the owner via Steam, PSN, or Xbox Live to inquire about a trade.
 
-p 
-  = page_entries_info @result_items, entry_name: 'result'
-          
-.panel.panel-default
-  .table-responsive
-    table.table.table-striped
-      thead
-        tr 
-          th Name
-          th Certification
-          th Paint Color
-          th Platform / Gamertag
-          th Type
-          th Rarity
-      tbody
-        - @result_items.each do |i|
-          tr class="#{i.user == current_user ? 'info': ''}"
-            td = i.item.name
-            td = i.certification.try(:capitalize)
-            td = i.paint_color.try(:titleize)
-            td
-              = link_to platform_user_path(platform_string: i.user.platform.downcase, platform_username: i.user.platform_username), class: 'user-platform-link' do
-                i class="icon #{platform_ion_class(i.user.platform)}"
-                | &nbsp;
-                = i.user.platform_username
-              end
-            td = i.item.kind.titleize
-            td = i.item.rarity.titleize
+.row
+  .col-xs-12
+    .panel.panel-default
+      
+      = bootstrap_form_tag url: search_path, html: { method: 'get', autocomplete: 'off' } do |f|
+        .panel-body
+          .col-sm-4
+            = f.select :item_id, 
+              options_for_select(Item.all.collect { |i| [ i.name, i.id ] }, @search_params[:item_id]), 
+              { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+          .col-sm-4
+            = f.select :kind,
+              options_for_select(Item.kinds.map { |k, v| [k.titleize, v] }, @search_params[:kind]), 
+              { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+          .col-sm-2
+            = f.select :platform, options_for_select(User.platforms, @search_params[:platform]), 
+            { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+          .col-sm-2
+            = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
+          .clearfix.visible-sm
+          .col-sm-6
+            = f.select :certification, 
+              options_for_select(UserItem.certifications.map { |k,v| [k.capitalize, v] }, @search_params[:certification]), 
+              { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+          .col-sm-6
+            = f.select :paint_color, 
+              options_for_select(UserItem.paint_colors.map { |k, v| [k.titleize, v] }, @search_params[:paint_color]), 
+              { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+          .clearfix.visible-sm
+          .col-sm-12
+            = f.button class: 'btn btn-success', id: 'search-submit-button' do
+              span.glyphicon.glyphicon-search aria-hidden='true'
+              |  Search
+            end
 
-= paginate @result_items, theme: 'twitter-bootstrap-3'
+.row
+  .col-xs-12
+    p 
+      = page_entries_info @result_items, entry_name: 'result'
+
+.row
+  .col-xs-12
+    .panel.panel-default
+      .table-responsive
+        table.table.table-striped
+          thead
+            tr 
+              th Name
+              th Certification
+              th Paint Color
+              th Platform / Gamertag
+              th Type
+              th Rarity
+          tbody
+            - @result_items.each do |i|
+              tr class="#{i.user == current_user ? 'info': ''}"
+                td = i.item.name
+                td = i.certification.try(:capitalize)
+                td = i.paint_color.try(:titleize)
+                td
+                  = link_to platform_user_path(platform_string: i.user.platform.downcase, platform_username: i.user.platform_username), class: 'user-platform-link' do
+                    i class="icon #{platform_ion_class(i.user.platform)}"
+                    | &nbsp;
+                    = i.user.platform_username
+                  end
+                td = i.item.kind.titleize
+                td = i.item.rarity.titleize
+
+.row
+  .col-xs-12
+    = paginate @result_items, theme: 'twitter-bootstrap-3'
