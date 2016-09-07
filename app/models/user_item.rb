@@ -10,7 +10,7 @@ class UserItem < ApplicationRecord
     :juggler,
     :paragon,
     :playmaker,
-    :scorer,
+    :striker,
     'show-off',
     :sniper,
     :sweeper,
