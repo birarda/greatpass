@@ -14,6 +14,7 @@
     .panel.panel-default
       = bootstrap_form_for(@new_item) do |f|
         .panel-body
+          = f.alert_message "There was a problem adding that item to your inventory"
           = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: true }
 
           = f.form_group :kind, label: { text: 'Type' } do
