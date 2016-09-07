@@ -39,6 +39,7 @@ class UserItem < ApplicationRecord
   attr_accessor :kind
 
   validate :only_one_kind
+  validates :item_id, presence: true
   # validates_uniqueness_of :item_id, scope: [:certification, :paint_color], message: 'is already in your inventory'
 
   private

@@ -50,11 +50,11 @@
           tbody
           - @items.each do |i|
             tr
-              td = i.item.name
+              td = i.item.try(:name)
               td = i.certification.try(:capitalize)
               td = i.paint_color.try(:titleize)
-              td = i.item.kind.titleize
-              td = i.item.rarity.titleize
+              td = i.item.try(:kind).try(:titleize)
+              td = i.item.try(:rarity).try(:titleize)
               td.glyphicon-cell
                 = link_to user_item_path(i), { data: { confirm: 'Are you sure? This will remove the item from your inventory.' }, method: :delete } do
                   span.glyphicon.glyphicon-remove aria-hidden=true
