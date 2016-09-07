@@ -4,7 +4,8 @@ footer {
   padding: 30px 20px;
 
   #link-icons {
-    text-align: center;
+    display: table;
+    margin: 0 auto;
 
     a {
       display: inline-block;
