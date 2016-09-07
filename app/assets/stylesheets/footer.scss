@@ -3,12 +3,20 @@ footer {
   margin-top: 20px;
   padding: 30px 20px;
 
-  a {
-    display: block;
+  #link-icons {
     text-align: center;
-    .icon {
-      color: #333333;
-      font-size: 40px;
+
+    a {
+      display: inline-block;
+
+      .icon {
+        color: #333333;
+        font-size: 40px;
+      }
+
+      + a {
+        margin-left: 20px;
+      }
     }
   }
 }
