@@ -26,7 +26,7 @@ end
           | You can search through the player's inventory below.
           br
             = "Contact #{@platform_user.platform_username} on "
-            - if @platform_user.platform != User.platforms[:Steam]
+            - if @platform_user.Steam?
               = link_to @platform_user.platform, "http://steamcommunity.com/id/#{@platform_user.platform_username}"
             - else
               = @platform_user.platform 
