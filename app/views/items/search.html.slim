@@ -3,18 +3,33 @@
     = @search_params[:platform_username]
 end
 
-.row
-  .col-xs-12
-    p 
-      | Great Pass helps you find 
-      = link_to 'Rocket League', 'http://www.rocketleaguegame.com/', target: '_blank' 
-      |  items available via in-game Player-to-Player trading.
-      br
-      | Contact the owner on their platform to discuss a trade.
+- if !@platform_user
+  .row
+    .col-xs-12
+      p 
+        | Great Pass helps you find 
+        = link_to 'Rocket League', 'http://www.rocketleaguegame.com/', target: '_blank' 
+        |  items available via in-game Player-to-Player trading.
+        br
+        | Contact the owner on their platform to discuss a trade.
+
+
 
 .row
   .col-xs-12
-    h4 Search
+    - if @platform_user
+      #platform-user-header
+        h4
+          i class="icon #{platform_ion_class(@platform_user.platform)}"
+          | &nbsp;
+          = @platform_user.platform_username
+          |  - Inventory
+        p
+          | You can search through the player's inventory below.
+          br
+          = "Contact #{@platform_user.platform_username} on #{@platform_user.platform} to discuss potential trades."
+    - else
+      h4 Search
     .panel.panel-default
       
       = bootstrap_form_tag url: search_path, html: { method: 'get', autocomplete: 'off' } do |f|
