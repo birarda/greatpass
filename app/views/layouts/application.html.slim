@@ -1,7 +1,9 @@
 doctype html
 html
   head
-    title Great Pass - Rocket League Trading
+
+    title = "#{content_for?(:title) ? yield(:title) + ' - ' : ''}Great Pass - Rocket League Trading"
+    
     = csrf_meta_tags
     
     meta name="viewport" content="width=device-width, initial-scale=1"

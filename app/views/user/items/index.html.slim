@@ -1,46 +1,60 @@
+= content_for(:title) { 'My Inventory' }
+.row
+  .col-xs-12
+    p 
+      | This is your inventory page. You can add and delete items below.
+      br
+      | To link other users to your inventory, use 
+      = link_to 'this page', platform_user_path(platform_string: current_user.platform.downcase, platform_username: current_user.platform_username)
+      | .
 / form to add to inventory
-.panel.panel-default
-  = bootstrap_form_for(@new_item) do |f|
-    .panel-body
-      = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: true }
+.row
+  .col-xs-12
+    h4 Add Item
+    .panel.panel-default
+      = bootstrap_form_for(@new_item) do |f|
+        .panel-body
+          = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: true }
 
-      = f.form_group :kind, label: { text: 'Type' } do
-        = f.radio_button :kind, 0, label: 'Normal', checked: true
-        = f.radio_button :kind, 1, label: 'Certified'
-        = f.radio_button :kind, 2, label: 'Painted'
-      end
+          = f.form_group :kind, label: { text: 'Type' } do
+            = f.radio_button :kind, 0, label: 'Normal', checked: true
+            = f.radio_button :kind, 1, label: 'Certified'
+            = f.radio_button :kind, 2, label: 'Painted'
+          end
 
-      = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, { include_blank: true }, { wrapper_class: 'certification-select-group' }
-      = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.titleize, k] }, { include_blank: true }, { wrapper_class: 'paint-select-group' }
-      = f.button class: 'btn btn-success', id: 'add-item-button' do
-        span.glyphicon.glyphicon-plus aria-hidden='true'
-        |  Add Item
+          = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, { include_blank: true }, { wrapper_class: 'certification-select-group' }
+          = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.titleize, k] }, { include_blank: true }, { wrapper_class: 'paint-select-group' }
+          = f.button class: 'btn btn-success', id: 'add-item-button' do
+            span.glyphicon.glyphicon-plus aria-hidden='true'
+            |  Add Item
+          end
       end
-  end
 
 
 / paginated table of inventory
-.panel.panel-default
-  .panel-heading Inventory
-  .table-responsive
-    table.table.table-hover.table-striped#user-items-table
-      thead
-        tr
-          th Name
-          th Certification
-          th Paint Color
-          th Type
-          th Rarity
-          th.glyphicon-cell Delete
-      tbody
-      - @items.each do |i|
-        tr
-          td = i.item.name
-          td = i.certification.try(:capitalize)
-          td = i.paint_color.try(:titleize)
-          td = i.item.kind.titleize
-          td = i.item.rarity.titleize
-          td.glyphicon-cell
-            = link_to user_item_path(i), { data: { confirm: 'Are you sure? This will remove the item from your inventory.' }, method: :delete } do
-              span.glyphicon.glyphicon-remove aria-hidden=true
-            end
+.row
+  .col-xs-12
+    h4 Inventory
+    .panel.panel-default
+      .table-responsive
+        table.table.table-hover.table-striped#user-items-table
+          thead
+            tr
+              th Name
+              th Certification
+              th Paint Color
+              th Type
+              th Rarity
+              th.glyphicon-cell Delete
+          tbody
+          - @items.each do |i|
+            tr
+              td = i.item.name
+              td = i.certification.try(:capitalize)
+              td = i.paint_color.try(:titleize)
+              td = i.item.kind.titleize
+              td = i.item.rarity.titleize
+              td.glyphicon-cell
+                = link_to user_item_path(i), { data: { confirm: 'Are you sure? This will remove the item from your inventory.' }, method: :delete } do
+                  span.glyphicon.glyphicon-remove aria-hidden=true
+                end
