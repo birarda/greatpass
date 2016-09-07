@@ -85,6 +85,7 @@ toppers = [
   { name: 'White Hat', rarity: Item.rarities[:uncommon] },
   { name: 'Baseball Cap [F]', rarity: Item.rarities[:uncommon] },
   { name: 'Baseball Cap [B]', rarity: Item.rarities[:uncommon] },
+  { name: 'Foam Hat', rarity: Item.rarities[:uncommon] }
 ]
 
 toppers.each do |topper_attrs|
