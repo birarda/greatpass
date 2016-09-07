@@ -32,7 +32,8 @@ class UserItem < ApplicationRecord
     :purple,
     :saffron,
     :sky_blue,
-    :titanium_white
+    :titanium_white,
+    :orange
   ]
 
   attr_accessor :kind
