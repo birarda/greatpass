@@ -11,7 +11,7 @@
 #
 
 class Item < ApplicationRecord
-  enum kind: [:topper, :antenna, :wheels, :boost, :decal]
+  enum kind: [:topper, :antenna, :wheels, :boost, :decal, :crate, 'battle-car']
   enum rarity: [:common, :uncommon, :rare, :super_rare, :premium, :limited]
 
   has_many :user_items, inverse_of: :item
