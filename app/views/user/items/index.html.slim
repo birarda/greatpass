@@ -23,8 +23,8 @@
             = f.radio_button :kind, 2, label: 'Painted'
           end
 
-          = f.select :certification, UserItem.certifications.keys.collect { |k| [k.capitalize, k] }, { include_blank: true }, { wrapper_class: 'certification-select-group' }
-          = f.select :paint_color, UserItem.paint_colors.keys.collect { |k| [k.titleize, k] }, { include_blank: true }, { wrapper_class: 'paint-select-group' }
+          = f.select :certification, UserItem.certifications.keys.sort.collect { |k| [k.capitalize, k] }, { include_blank: true }, { wrapper_class: 'certification-select-group' }
+          = f.select :paint_color, UserItem.paint_colors.keys.sort.collect { |k| [k.titleize, k] }, { include_blank: true }, { wrapper_class: 'paint-select-group' }
           = f.button class: 'btn btn-success', id: 'add-item-button' do
             span.glyphicon.glyphicon-plus aria-hidden='true'
             |  Add Item
