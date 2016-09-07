@@ -26,7 +26,12 @@ class ItemsController < ApplicationController
 
       if @search_params.has_key?(:platform_username)
         @platform_user = User.where('platform_username ILIKE ?', @search_params[:platform_username]).first
-        query = query.references(:users).where(users: { id: @platform_user.id })
+        if @platform_user
+          query = query.references(:users).where(users: { id: @platform_user.id })
+        else
+          @result_items = UserItem.none.page(params[:page])
+          return
+        end
       end
 
       if @search_params.has_key?(:certification)
