@@ -62,7 +62,7 @@ class UserItem < ApplicationRecord
 
     def common_is_special
       if self.item && self.item.common? && (self.certification.nil? && self.paint_color.nil?)
-        errors.add(:item_id, "that is common is only tradable if it is painted or certified")
+        errors.add(:item_id, "that is common is only tradeable if it is painted or certified")
       end
     end
 end
