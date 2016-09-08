@@ -10,14 +10,14 @@ class User < ApplicationRecord
 
   validates :platform_username, presence: true, length: { maximum: 32 }
   validates :platform, presence: true
-  validates :platform_url, url: { no_local: true, allow_nil: true }
+  validates :platform_url, url: { no_local: true, allow_nil: true, allow_blank: true }
 
   before_validation :smart_add_platform_url_protocol
 
   protected
 
   def smart_add_platform_url_protocol
-    unless self.platform_url[/\Ahttp:\/\//] || self.platform_url[/\Ahttps:\/\//]
+    unless self.platform_url.blank? || self.platform_url[/\Ahttp:\/\//] || self.platform_url[/\Ahttps:\/\//]
       self.platform_url = "http://#{self.platform_url}"
     end
   end
