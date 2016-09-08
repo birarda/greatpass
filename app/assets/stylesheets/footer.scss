@@ -3,6 +3,13 @@ footer {
   margin-top: 20px;
   padding: 30px 20px;
 
+  #logo {
+    text-align: center;
+    img {
+      height: 25px;
+    }
+  }
+
   #link-icons {
     display: table;
     margin: 0 auto;
