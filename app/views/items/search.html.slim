@@ -40,11 +40,10 @@ end
             = f.select :kind,
               options_for_select(Item.kinds.sort.map { |k, v| [k.titleize, v] }, @search_params[:kind]), 
               { include_blank: 'All' }, { multiple: true, namespace: 'search' }
-          .col-sm-2
-            = f.select :platform, options_for_select(User.platforms.sort, @search_params[:platform]), 
-            { include_blank: 'All' }, { multiple: true, namespace: 'search' }
-          .col-sm-2
-            = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
+          .col-sm-4
+            = f.select :rarity,
+              options_for_select(Item.rarities.sort.map { |k, v| [k.titleize, v] }, @search_params[:rarity]),
+              { include_blank: 'All' }, { multiple: true, namespace: 'search' }
           .clearfix.visible-sm
           .col-sm-6
             = f.select :certification, 
@@ -54,6 +53,12 @@ end
             = f.select :paint_color, 
               options_for_select(UserItem.paint_colors.sort.map { |k, v| [k.titleize, v] }, @search_params[:paint_color]), 
               { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+          .clearfix.visible-sm
+          .col-sm-6
+            = f.select :platform, options_for_select(User.platforms.sort, @search_params[:platform]), 
+            { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+          .col-sm-6
+            = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
           .clearfix.visible-sm
           .col-sm-12
             = f.button class: 'btn btn-success', id: 'search-submit-button' do

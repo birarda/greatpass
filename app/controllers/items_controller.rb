@@ -46,6 +46,10 @@ class ItemsController < ApplicationController
         query = query.where(items: { kind: @search_params[:kind] })
       end
 
+      if @search_params.has_key?(:rarity)
+        query = query.where(items: { rarity: @search_params[:rarity] })
+      end
+
     end
 
     @result_items = query.includes(:item, :user).order(created_at: :desc).page(params[:page])
@@ -53,7 +57,7 @@ class ItemsController < ApplicationController
 
   private
     def permitted_search_params
-      permitted_params = params.permit(:platform_string, :platform_username, item_id: [], certification: [], paint_color: [], platform: [], kind: [])
+      permitted_params = params.permit(:platform_string, :platform_username, item_id: [], certification: [], paint_color: [], platform: [], kind: [], rarity: [])
 
       permitted_params.keys.each do |filter|
         permitted_params[filter].reject! { |i| i.empty? } if permitted_params[filter].kind_of?(Array)
