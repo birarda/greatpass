@@ -11,6 +11,7 @@ class User::ItemsController < ApplicationController
     @new_item = current_user.items.new(new_item_params)
 
     if @new_item.save
+      flash[:success] = "Added <strong>#{@new_item.to_s}</strong> to your inventory"
       redirect_to action: 'index'
     else
       @items = current_user.items.includes(:item).order('items.name ASC')
