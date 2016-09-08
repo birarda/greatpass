@@ -29,7 +29,7 @@ end
           br
             = "Contact #{@platform_user.platform_username} "
             - if @platform_user.platform_url
-              = link_to 'on their platform', @platform_user.platform_url
+              = link_to "on #{@platform_user.platform}", @platform_user.platform_url
             - else
               | on their platform
             |  or look for them in 
