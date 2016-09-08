@@ -11,7 +11,9 @@ end
         = link_to 'Rocket League', 'http://www.rocketleaguegame.com/', target: '_blank' 
         |  items available via in-game Player-to-Player trading.
         br
-        | Contact the owner on their platform to discuss a trade.
+        | Contact the owner on their platform or look for them in 
+        = link_to 'our Discord channel', 'https://discord.gg/3U87mfj'
+        |  to discuss a trade.
 
 .row
   .col-xs-12
@@ -25,7 +27,10 @@ end
         p
           | You can search through the player's inventory below.
           br
-            = "Contact #{@platform_user.platform_username} on #{@platform_user.platform} to discuss potential trades."
+            = "Contact #{@platform_user.platform_username} on #{@platform_user.platform}"
+            |  or look for them in 
+            = link_to 'our Discord channel', 'https://discord.gg/3U87mfj'
+            |  to discuss potential trades.
     - else
       h4 Search
     .panel.panel-default
