@@ -19,8 +19,8 @@ h3
             end
           end
           
-          = f.text_field :platform_username, label: 'Gamertag'
-          = f.text_field :platform_url, label: 'Profile URL'
+          = f.text_field :platform_username, label: 'Gamertag', help: 'Username on your platform (will be publicly displayed in searches)'
+          = f.text_field :platform_url, label: 'Profile URL', placeholder: 'optional', help: 'Direct link to your user profile on your platform'
         .panel-footer
           .actions
             = f.submit "Sign up"
