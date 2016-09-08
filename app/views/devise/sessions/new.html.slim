@@ -11,7 +11,7 @@ h3
           = f.email_field :email, autofocus: true
           = f.password_field :password, autocomplete: "off"
           - if devise_mapping.rememberable?
-            .field
+            = f.check_box :remember_me 
         .panel-footer
           .actions
             = f.submit "Log in"
