@@ -41,6 +41,7 @@ class UserItem < ApplicationRecord
   validate :only_one_kind
   validates :item_id, presence: true
   # validates_uniqueness_of :item_id, scope: [:certification, :paint_color], message: 'is already in your inventory'
+  validate :common_is_special
 
   def to_s
     if self.certification
@@ -56,6 +57,12 @@ class UserItem < ApplicationRecord
     def only_one_kind
       if certification != nil && paint_color != nil
         errors.add(:kind, "an item can be certified or painted but not both")
+      end
+    end
+
+    def common_is_special
+      if self.item && self.item.common? && (self.certification.nil? && self.paint_color.nil?)
+        errors.add(:item_id, "that is common is only tradable if it is painted or certified")
       end
     end
 end
