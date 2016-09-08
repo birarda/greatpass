@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     end
 
     def update_params
-      params.require(:user).permit(:platform, :platform_username)
+      params.require(:user).permit(:platform, :platform_username, :platform_url)
     end
 
 end
