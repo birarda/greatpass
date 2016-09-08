@@ -8,6 +8,6 @@ class User < ApplicationRecord
 
   has_many :items, class_name: 'UserItem', inverse_of: :user
 
-  validates :platform_username, presence: true, format: { with: /\A[\d\w\-\.]+\z/i }
+  validates :platform_username, presence: true, length: { maximum: 32 }
   validates :platform, presence: true
 end
