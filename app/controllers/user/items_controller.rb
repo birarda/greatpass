@@ -21,8 +21,10 @@ class User::ItemsController < ApplicationController
   def destroy
     @matching_item = current_user.items.find(params[:id])
 
-    if @matching_item
-      @matching_item.destroy
+    @item_string = @matching_item.try(:to_s)
+    if @matching_item && @matching_item.destroy
+      flash[:notice] = "Removed <strong>#{@item_string}</strong> from your inventory"
+
       redirect_to action: 'index'
     else
       raise ActiveRecord::RecordNotFound

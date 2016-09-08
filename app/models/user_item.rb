@@ -42,6 +42,16 @@ class UserItem < ApplicationRecord
   validates :item_id, presence: true
   # validates_uniqueness_of :item_id, scope: [:certification, :paint_color], message: 'is already in your inventory'
 
+  def to_s
+    if self.certification
+      "#{self.certification.titleize} #{self.item.name.titleize}"
+    elsif self.paint_color
+      "#{self.paint_color.titleize} #{self.item.name.titleize}"
+    else
+      self.item.name
+    end
+  end
+
   private
     def only_one_kind
       if certification != nil && paint_color != nil
