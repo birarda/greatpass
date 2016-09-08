@@ -72,7 +72,11 @@ end
           .col-sm-12
             = f.button class: 'btn btn-success', id: 'search-submit-button' do
               span.glyphicon.glyphicon-search aria-hidden='true'
-              |  Search
+              - if @platform_user
+                |  Search 
+                = @platform_user.platform_username
+              - else
+                |  Search
             end
 
 .row
