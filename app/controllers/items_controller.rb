@@ -1,5 +1,9 @@
 class ItemsController < ApplicationController
 
+  def index
+    
+  end
+
   def search
     # setup the special options for certification/paint color
     @certification_options = UserItem.certifications.sort.map { |k,v| [k.capitalize, v] }

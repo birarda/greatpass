@@ -1,0 +1,17 @@
+h3 Items
+p 
+  | List of all known tradeable Rocket League items.
+  br
+  | Contact us 
+  = link_to 'by email', 'mailto: contact@greatpass.io'
+  |  or 
+  = link_to 'on twitter', 'https://twitter.com/GreatPassRL'
+  |  to report new/missing items.
+
+- Item.all.group_by(&:kind).sort.each do |kind, items|
+  .panel.panel-default
+    .panel-heading
+      h4 = kind.pluralize.titleize
+    .panel-body
+      - items.each do |item|
+        p = item.name
