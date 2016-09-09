@@ -1,0 +1,76 @@
+.row
+  .col-xs-12
+    h3
+      = list_type.titleize
+    p 
+      | You can manage the items on your 
+      = list_type
+      |  below
+      br
+      | To link other users to your 
+      = list_type
+      | , use 
+      = link_to 'this page', platform_user_path(platform_string: current_user.platform.downcase, platform_username: current_user.platform_username)
+      | .
+/ form to add to list
+.row
+  .col-xs-12
+    h4 
+      = "Add Item"
+    .panel.panel-default
+      = bootstrap_form_for(@new_item) do |f|
+        .panel-body
+          = f.alert_message "There was a problem adding that item to your #{list_type}"
+          = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: true }
+          
+          = f.check_box :certified
+          = f.check_box :painted
+
+          = f.select :certification, UserItem.certifications.keys.sort.collect { |k| [k.capitalize, k] }, { include_blank: true }, { wrapper_class: 'certification-select-group' }
+          = f.select :paint_color, UserItem.paint_colors.keys.sort.collect { |k| [k.titleize, k] }, { include_blank: true }, { wrapper_class: 'paint-select-group' }
+          = f.hidden_field :list, value: list_type
+          = f.button class: 'btn btn-success', id: 'add-item-button' do
+            span.glyphicon.glyphicon-plus aria-hidden='true'
+            |  Add Item to 
+            = list_type.titleize
+          end
+      end
+
+
+.row
+  .col-xs-12
+    p 
+      = page_entries_info @items, entry_name: "#{list_type} item"
+
+/ paginated table of list
+.row
+  .col-xs-12
+    .panel.panel-default
+      .table-responsive
+        table.table.table-hover.table-striped#user-items-table
+          thead
+            tr
+              th Name
+              th Certification
+              th Paint Color
+              th Type
+              th Rarity
+              th.glyphicon-cell Delete
+          tbody
+          - @items.each do |i|
+            tr
+              td = i.item.try(:name)
+              td = i.certification.try(:capitalize)
+              td = i.paint_color.try(:titleize)
+              td = i.item.try(:kind).try(:titleize)
+              td = i.item.try(:rarity).try(:titleize)
+              td.glyphicon-cell
+                = link_to user_item_path(i), { method: :delete } do
+                  span.glyphicon.glyphicon-remove aria-hidden=true
+                end
+                
+                
+                
+.row
+  .col-xs-12
+    = paginate @items, theme: 'twitter-bootstrap-3'

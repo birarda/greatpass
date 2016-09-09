@@ -16,7 +16,9 @@
       ul.nav.navbar-nav.navbar-right
         - if current_user
           li
-            = link_to 'My Inventory', user_items_path
+            = link_to 'Wishlist', user_wishlist_path
+          li
+            = link_to 'Inventory', user_items_path
           li.dropdown
             a.dropdown-toggle href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
               i class="icon #{platform_ion_class(current_user.platform)}"

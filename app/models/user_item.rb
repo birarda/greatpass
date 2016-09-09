@@ -2,6 +2,11 @@ class UserItem < ApplicationRecord
   belongs_to :user
   belongs_to :item
 
+  enum list: [
+    :inventory,
+    :wishlist
+  ]
+
   enum certification: [
     :acrobat,
     :aviator,

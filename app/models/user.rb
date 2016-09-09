@@ -7,6 +7,8 @@ class User < ApplicationRecord
   enum platform: [:Steam, :PSN, :Xbox]
 
   has_many :items, class_name: 'UserItem', inverse_of: :user
+  has_many :inventory, -> { where('user_items.list = ?', UserItem.lists[:inventory]) }, class_name: 'UserItem', inverse_of: :user
+  has_many :wishlist, -> { where('user_items.list = ?', UserItem.lists[:wishlist]) }, class_name: 'UserItem', inverse_of: :user
 
   validates :platform_username, presence: true, length: { maximum: 32 }, uniqueness: { scope: :platform, case_sensitive: false }
   validates :platform, presence: true

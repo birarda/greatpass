@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
     # check if we were passed any search parameters
     @search_params = permitted_search_params
 
-    query = UserItem.all
+    query = UserItem.inventory
 
     # if all query params are empty, simply return all sorted by recency
     if !@search_params.empty?

@@ -17,5 +17,6 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :items, only: [:index, :create, :destroy]
+    get 'wishlist', to: 'items#wishlist'
   end
 end
