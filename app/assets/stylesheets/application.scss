@@ -41,3 +41,9 @@ html, body {
   overflow: auto;
   padding-bottom: 170px;
 }
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}

@@ -44,6 +44,9 @@
   .col-xs-12
     p 
       = page_entries_info @items, entry_name: "#{list_type} item"
+    - if list_type == 'wishlist'
+      p.text-muted
+        | Click the name to search for that item on your platform
 
 / paginated table of list
 .row
@@ -63,7 +66,15 @@
           tbody
           - @items.each do |i|
             tr
-              td = i.item.try(:name)
+              - if !i.item || list_type == 'inventory'
+                td = i.item.try(:name)
+              - else
+                td
+                  = link_to i.item.name, 
+                  items_search_path(item_id: [i.item_id], 
+                    certification: [UserItem.certifications[i.certification]], 
+                    paint_color: [UserItem.paint_colors[i.paint_color]],
+                    platform: [User.platforms[current_user.platform]])
               td = i.item.try(:kind).try(:titleize)
               td = i.certification.try(:capitalize)
               td = i.paint_color.try(:titleize)
