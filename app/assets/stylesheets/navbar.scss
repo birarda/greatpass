@@ -1,6 +1,18 @@
-a.navbar-brand {
-  img {
-    height: 25px;
-    margin-top: -2px;
+.navbar.navbar-default {
+  // background-color: $brand-primary;
+  //
+  // li a {
+  //   color: white;
+  // }
+  //
+  // .dropdown-menu {
+  //   background-color: $brand-primary;
+  // }
+
+  a.navbar-brand {
+    img {
+      height: 25px;
+      margin-top: -2px;
+    }
   }
 }

@@ -2,7 +2,7 @@
 
 h3 Account
 .panel.panel-default
-  .panel-heading Platform / Gamertag
+  .panel-heading Gaming / Social
   = bootstrap_form_for(resource, as: resource_name, url: user_path(resource), html: { method: :put }) do |f|
     .panel-body
       = f.form_group :platform do
@@ -13,8 +13,9 @@ h3 Account
       
       = f.text_field :platform_username, label: 'Gamertag', help: 'Username on your platform (will be publicly displayed in searches)'
       = f.text_field :platform_url, label: 'Profile URL', placeholder: 'https://steamcommunity.com/id/gamertag', help: "Optional - Direct link to your user profile on your platform's site"
+      = f.text_field :reddit_username, help: 'Optional - Creates a link to your Reddit profile from your Great Pass profile'
     .panel-footer
-      = f.submit "Update Platform / Gamertag"
+      = f.submit "Update Gaming / Social"
       
 .panel.panel-default
   .panel-heading Email / Password

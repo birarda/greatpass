@@ -19,6 +19,7 @@
 #  platform_username      :string
 #  platform_url           :string
 #  admin                  :boolean          default(FALSE)
+#  reddit_username        :string
 #
 
 class User < ApplicationRecord

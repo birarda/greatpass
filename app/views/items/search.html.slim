@@ -24,19 +24,11 @@ end
           | &nbsp;
           = @platform_user.platform_username
           |  - Inventory
+        = render 'users/contact_options'
         p
           | You can search through the player's inventory below or view 
           = link_to 'their wishlist', platform_user_wishlist_path(platform_string: @platform_user.platform.downcase, platform_username: @platform_user.platform_username)
           | .
-          br
-            = "Contact #{@platform_user.platform_username} "
-            - if @platform_user.platform_url
-              = link_to "on #{@platform_user.platform}", @platform_user.platform_url
-            - else
-              | on their platform
-            |  or look for them in 
-            = link_to 'our Discord channel', 'https://discord.gg/3U87mfj'
-            |  to discuss potential trades.
     - else
       h4 Search
     .panel.panel-default
