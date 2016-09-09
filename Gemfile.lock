@@ -134,6 +134,10 @@ GEM
       tilt
     http_parser.rb (0.6.0)
     i18n (0.7.0)
+    inline_svg (0.11.0)
+      activesupport (>= 4.0)
+      loofah (>= 2.0)
+      nokogiri (~> 1.6)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -307,6 +311,7 @@ DEPENDENCIES
   guard-annotate
   guard-livereload
   guard-rails
+  inline_svg
   jbuilder (~> 2.5)
   jquery-rails
   kaminari

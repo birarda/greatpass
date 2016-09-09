@@ -9,7 +9,7 @@ footer {
 
   #logo {
     text-align: center;
-    margin-top: 5px;
+    margin-top: 8px;
     img {
       height: 25px;
     }
@@ -28,14 +28,30 @@ footer {
 
       .icon {
         color: white;
+
+        &:hover {
+          color: $highlight-color;
+        }
+
         font-size: 30px;
+
+        &.ion-social-reddit {
+          position: relative;
+          top: -2px;
+        }
       }
 
       #discord-svg {
         position: relative;
-        top: -6px;
+        top: 10px;
         left: -5px;
         height: 40px;
+
+        &:hover {
+          .st0 {
+            fill: $highlight-color;
+          }
+        }
       }
     }
   }
