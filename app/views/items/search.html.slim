@@ -59,11 +59,11 @@ end
           .col-sm-6
             = f.select :certification, 
               options_for_select(@certification_options, @search_params[:certification]), 
-              { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+              { include_blank: 'Any / None' }, { multiple: true, namespace: 'search' }
           .col-sm-6
             = f.select :paint_color, 
               options_for_select(@paint_options, @search_params[:paint_color]), 
-              { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+              { include_blank: 'Any / None' }, { multiple: true, namespace: 'search' }
           .clearfix.visible-sm
           .col-sm-6
             = f.select :platform, options_for_select(User.platforms.sort, @search_params[:platform]), 
