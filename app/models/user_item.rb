@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: user_items
+#
+#  id            :integer          not null, primary key
+#  item_id       :integer
+#  user_id       :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  paint_color   :integer
+#  certification :integer
+#  list          :integer
+#
+
 class UserItem < ApplicationRecord
   belongs_to :user
   belongs_to :item

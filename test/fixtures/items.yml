@@ -4,10 +4,10 @@
 #
 #  id         :integer          not null, primary key
 #  name       :string
-#  kind       :integer          default(0)
+#  kind       :integer          default("topper")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  rarity     :integer          default("common")
+#  rare_class :integer          default("common")
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

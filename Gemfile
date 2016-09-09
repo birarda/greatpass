@@ -77,6 +77,7 @@ group :development do
   gem 'guard'
   gem 'guard-rails'
   gem 'guard-livereload'
+  gem 'guard-annotate'
   gem 'ruby_gntp'
 
   # Annotate schema in source files
