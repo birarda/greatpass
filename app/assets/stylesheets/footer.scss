@@ -1,8 +1,11 @@
 footer {
+  position: relative;
+  margin-top: -150px;
+  height: 150px;
+  padding: 30px 20px;
+  clear: both;
   background-color: #243D64;
   border-top: 1px solid #ddd;
-  margin-top: 20px;
-  padding: 30px 20px;
 
   #logo {
     text-align: center;

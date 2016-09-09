@@ -26,10 +26,11 @@ html
         ga('create', 'UA-83762936-1', 'auto');
         ga('send', 'pageview');
   body
-    = render 'navbar'
-      
-    .container
-      = render partial: 'layouts/flash_messages', flash: flash
-      = yield
+    #wrap
+      = render 'navbar'
+    
+      .container#main
+        = render partial: 'layouts/flash_messages', flash: flash
+        = yield
       
     = render 'footer'
