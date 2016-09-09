@@ -3,15 +3,16 @@
     h3
       = list_type.titleize
     p 
-      | You can manage the items on your 
+      | Manage the items on your 
       = list_type
-      |  below
-      br
-      | To link other users to your 
-      = list_type
-      | , use 
-      = link_to 'this page', platform_user_path(platform_string: current_user.platform.downcase, platform_username: current_user.platform_username)
-      | .
+      |  below.
+      - if list_type == 'inventory'
+        br
+        | To link other users to your 
+        = list_type
+        | , use 
+        = link_to 'this page', platform_user_path(platform_string: current_user.platform.downcase, platform_username: current_user.platform_username)
+        | .
 / form to add to list
 .row
   .col-xs-12
