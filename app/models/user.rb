@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   has_many :items, class_name: 'UserItem', inverse_of: :user
 
-  validates :platform_username, presence: true, length: { maximum: 32 }
+  validates :platform_username, presence: true, length: { maximum: 32 }, uniqueness: { scope: :platform }
   validates :platform, presence: true
   validates :platform_url, url: { no_local: true, allow_nil: true, allow_blank: true }
 
