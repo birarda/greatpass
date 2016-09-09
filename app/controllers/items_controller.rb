@@ -1,6 +1,13 @@
 class ItemsController < ApplicationController
 
   def search
+    # setup the special options for certification/paint color
+    @certification_options = UserItem.certifications.sort.map { |k,v| [k.capitalize, v] }
+    @certification_options.insert(0, ['Any', -1], ['None', -2])
+
+    @paint_options = UserItem.paint_colors.sort.map { |k, v| [k.titleize, v] }
+    @paint_options.insert(0, ['Any', -1], ['None', -2])
+
     # check if we were passed any search parameters
     @search_params = permitted_search_params
 
@@ -66,13 +73,6 @@ class ItemsController < ApplicationController
     end
 
     @result_items = query.includes(:item, :user).order(created_at: :desc).page(params[:page])
-
-    # setup the special options for certification/paint color
-    @certification_options = UserItem.certifications.sort.map { |k,v| [k.capitalize, v] }
-    @certification_options.insert(0, ['Any', -1], ['None', -2])
-
-    @paint_options = UserItem.paint_colors.sort.map { |k, v| [k.titleize, v] }
-    @paint_options.insert(0, ['Any', -1], ['None', -2])
   end
 
   private
