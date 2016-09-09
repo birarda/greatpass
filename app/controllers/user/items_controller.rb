@@ -34,17 +34,11 @@ class User::ItemsController < ApplicationController
 
   private
     def new_item_params
-      with_kind = params.require(:user_item).permit(:item_id, :kind, :certification, :paint_color)
+      with_kinds = params.require(:user_item).permit(:item_id, :certified, :painted, :certification, :paint_color)
+      with_kinds.delete(:certification) if with_kinds[:certified].to_i == 0
+      with_kinds.delete(:paint_color) if with_kinds[:painted].to_i == 0
 
-      if with_kind[:kind].to_i == 0
-        with_kind.delete(:certification).delete(:paint_color)
-      elsif with_kind[:kind].to_i === 1
-        with_kind.delete(:paint_color)
-      elsif with_kind[:kind].to_i == 2
-        with_kind.delete(:certification)
-      end
-
-      return with_kind
+      return with_kinds
     end
 
 end

@@ -16,12 +16,9 @@
         .panel-body
           = f.alert_message "There was a problem adding that item to your inventory"
           = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: true }
-
-          = f.form_group :kind, label: { text: 'Type' } do
-            = f.radio_button :kind, 0, label: 'Normal', checked: true
-            = f.radio_button :kind, 1, label: 'Certified'
-            = f.radio_button :kind, 2, label: 'Painted'
-          end
+          
+          = f.check_box :certified
+          = f.check_box :painted
 
           = f.select :certification, UserItem.certifications.keys.sort.collect { |k| [k.capitalize, k] }, { include_blank: true }, { wrapper_class: 'certification-select-group' }
           = f.select :paint_color, UserItem.paint_colors.keys.sort.collect { |k| [k.titleize, k] }, { include_blank: true }, { wrapper_class: 'paint-select-group' }
