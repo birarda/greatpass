@@ -67,15 +67,18 @@ class UserItem < ApplicationRecord
   end
 
   def owned_percentage
-    Rails.cache.fetch("#{self.to_s}/owned_percentage", expires_in: 5.minutes) do
+    cache_key = "#{self.to_s}/owned_percentage"
+
+    Rails.cache.fetch(cache_key, expires_in: 5.minutes) do
+
       total_item_count = UserItem.where(item_id: self.item_id, certification: self.certification, paint_color: self.paint_color)
                                  .count('DISTINCT user_id')
-                                 
-      return 0 if total_item_count == 0
-
-      total_users = User.count
-
-      return 100 * (total_item_count.to_f / total_users)
+      if total_item_count == 0
+        total_item_count
+      else
+        total_users = User.count
+        (100 * (total_item_count.to_f / total_users)).round(1)
+      end
     end
   end
 
