@@ -16,7 +16,6 @@ class ItemsController < ApplicationController
       # if we have a platform_string (a clean path to a platform user)
       # then convert that to the platform array so it can be used below
       if @search_params.has_key?(:platform_string)
-        puts platform_from_url_string(@search_params[:platform_string])
         @search_params[:platform] = [platform_from_url_string(@search_params[:platform_string])]
       end
 
@@ -65,17 +64,5 @@ class ItemsController < ApplicationController
       end
 
       permitted_params
-    end
-
-    def platform_from_url_string(platform_string)
-      downcase_platform = platform_string.downcase
-
-      if downcase_platform == 'steam'
-        User.platforms[:Steam]
-      elsif downcase_platform == 'psn'
-        User.platforms[:PSN]
-      elsif downcase_platform == 'xbox'
-        User.platforms[:Xbox]
-      end
     end
 end

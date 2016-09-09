@@ -1,0 +1,25 @@
+- content_for(:title) { "#{params[:platform_username]} - Wishlist" }
+
+.row
+  .col-xs-12
+    #platform-user-header
+      h4
+        i class="icon #{platform_ion_class(@platform_user.platform)}"
+        | &nbsp;
+        = @platform_user.platform_username
+        |  - Wishlist
+      p
+        | You can view the player's wishlist below or view 
+        = link_to 'their inventory', platform_user_path(platform_string: @platform_user.platform.downcase, platform_username: @platform_user.platform_username)
+        | .
+        br
+          = "Contact #{@platform_user.platform_username} "
+          - if @platform_user.platform_url
+            = link_to "on #{@platform_user.platform}", @platform_user.platform_url
+          - else
+            | on their platform
+          |  or look for them in 
+          = link_to 'our Discord channel', 'https://discord.gg/3U87mfj'
+          |  to discuss potential trades.
+
+= render 'items/paginated_table'

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'items/search'
 
   get 'users/:platform_string/:platform_username', to: 'items#search', as: 'platform_user'
+  get 'users/:platform_string/:platform_username/wishlist', to: 'users#wishlist', as: 'platform_user_wishlist'
 
   # get 'users/:platform/:platform_username', to: 'users#show', as: 'platform_user'
 

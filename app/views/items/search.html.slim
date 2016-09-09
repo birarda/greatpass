@@ -25,7 +25,9 @@ end
           = @platform_user.platform_username
           |  - Inventory
         p
-          | You can search through the player's inventory below.
+          | You can search through the player's inventory below or view 
+          = link_to 'their wishlist', platform_user_wishlist_path(platform_string: @platform_user.platform.downcase, platform_username: @platform_user.platform_username)
+          | .
           br
             = "Contact #{@platform_user.platform_username} "
             - if @platform_user.platform_url
@@ -79,39 +81,4 @@ end
                 |  Search
             end
 
-.row
-  .col-xs-12
-    p 
-      = page_entries_info @result_items, entry_name: 'result'
-
-.row
-  .col-xs-12
-    .panel.panel-default
-      .table-responsive
-        table.table.table-striped
-          thead
-            tr 
-              th Name
-              th Certification
-              th Paint Color
-              th Platform / Gamertag
-              th Type
-              th Rarity
-          tbody
-            - @result_items.each do |i|
-              tr class="#{i.user == current_user ? 'info': ''}"
-                td = i.item.try(:name)
-                td = i.certification.try(:capitalize)
-                td = i.paint_color.try(:titleize)
-                td
-                  = link_to platform_user_path(platform_string: i.user.platform.downcase, platform_username: i.user.platform_username), class: 'user-platform-link' do
-                    i class="icon #{platform_ion_class(i.user.platform)}"
-                    | &nbsp;
-                    = i.user.platform_username
-                  end
-                td = i.item.try(:kind).try(:titleize)
-                td = i.item.try(:rarity).try(:titleize)
-
-.row
-  .col-xs-12
-    = paginate @result_items, theme: 'twitter-bootstrap-3'
+= render 'items/paginated_table'

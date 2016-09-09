@@ -1,6 +1,22 @@
 class UsersController < ApplicationController
   before_action :authenticate_same_user!, only: [:update]
 
+  def wishlist
+    @platform_user = User.where(
+      'platform_username ILIKE ? AND platform = ?',
+      params[:platform_username],
+      platform_from_url_string(params[:platform_string])
+    ).first
+
+    if @platform_user
+      @result_items = @platform_user.wishlist
+    else
+      @result_items = UserItem.none
+    end
+
+    @result_items = @result_items.includes(:item).order('items.name ASC').page(params[:page])
+  end
+
   def update
     @user = User.find(params[:id])
 
@@ -11,8 +27,6 @@ class UsersController < ApplicationController
       @resource = @user
       render 'devise/registrations/edit'
     end
-
-
   end
 
   private
