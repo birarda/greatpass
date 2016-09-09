@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909032336) do
+ActiveRecord::Schema.define(version: 20160909051927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 20160909032336) do
     t.integer  "paint_color"
     t.integer  "certification"
     t.integer  "list"
+    t.index ["certification"], name: "index_user_items_on_certification", using: :btree
+    t.index ["item_id"], name: "index_user_items_on_item_id", using: :btree
+    t.index ["list"], name: "index_user_items_on_list", using: :btree
+    t.index ["paint_color"], name: "index_user_items_on_paint_color", using: :btree
+    t.index ["user_id"], name: "index_user_items_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
