@@ -18,7 +18,7 @@
     h4 
       = "Add Item"
     .panel.panel-default
-      = bootstrap_form_for(@new_item) do |f|
+      = bootstrap_form_for(@new_item, url: (list_type == 'inventory' ? user_items_path : user_wishlist_add_path)) do |f|
         .panel-body
           = f.alert_message "There was a problem adding that item to your #{list_type}"
           = f.select :item_id, Item.all.collect { |i| [ i.name, i.id ] }, { include_blank: true }
@@ -65,7 +65,7 @@
               td = i.item.try(:kind).try(:titleize)
               td = i.item.try(:rarity).try(:titleize)
               td.glyphicon-cell
-                = link_to user_item_path(i), { method: :delete } do
+                = link_to list_type == 'inventory' ? user_item_path(i) : user_wishlist_path(i), { method: :delete } do
                   span.glyphicon.glyphicon-remove aria-hidden=true
                 end
                 
