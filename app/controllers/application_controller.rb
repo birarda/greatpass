@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   protected
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:platform, :platform_username, :platform_url])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:platform, :platform_username, :platform_url, :reddit_username])
     end
 
     def platform_from_url_string(platform_string)
