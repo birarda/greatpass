@@ -66,6 +66,19 @@ class UserItem < ApplicationRecord
     "#{self.paint_color ? self.paint_color.titleize + ' ' : ''}#{self.certification ? self.certification.capitalize + ' ' : ''}#{self.item.name}"
   end
 
+  def owned_percentage
+    Rails.cache.fetch("#{self.to_s}/owned_percentage", expires_in: 5.minutes) do
+      total_item_count = UserItem.where(item_id: self.item_id, certification: self.certification, paint_color: self.paint_color)
+                                 .count('DISTINCT user_id')
+                                 
+      return 0 if total_item_count == 0
+
+      total_users = User.count
+
+      return 100 * (total_item_count.to_f / total_users)
+    end
+  end
+
   private
 
     def common_is_special

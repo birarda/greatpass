@@ -11,15 +11,17 @@
           thead
             tr 
               th Name
+              th Type
               th Certification
               th Paint Color
               th Platform / Gamertag
-              th Type
               th Class
+              th Owned %
           tbody
             - @result_items.each do |i|
               tr class="#{i.user == current_user ? 'info': ''}"
                 td = i.item.try(:name)
+                td = i.item.try(:kind).try(:titleize)
                 td = i.certification.try(:capitalize)
                 td = i.paint_color.try(:titleize)
                 td
@@ -28,8 +30,8 @@
                     | &nbsp;
                     = i.user.platform_username
                   end
-                td = i.item.try(:kind).try(:titleize)
                 td = i.item.try(:rare_class).try(:titleize)
+                td = i.owned_percentage
 
 .row
   .col-xs-12
