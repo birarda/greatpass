@@ -57,7 +57,7 @@
               th Certification
               th Paint Color
               th Type
-              th Rarity
+              th Class
               th.glyphicon-cell Delete
           tbody
           - @items.each do |i|
@@ -66,7 +66,7 @@
               td = i.certification.try(:capitalize)
               td = i.paint_color.try(:titleize)
               td = i.item.try(:kind).try(:titleize)
-              td = i.item.try(:rarity).try(:titleize)
+              td = i.item.try(:rare_class).try(:titleize)
               td.glyphicon-cell
                 = link_to list_type == 'inventory' ? user_item_path(i) : user_wishlist_path(i), { method: :delete } do
                   span.glyphicon.glyphicon-remove aria-hidden=true

@@ -15,7 +15,7 @@
               th Paint Color
               th Platform / Gamertag
               th Type
-              th Rarity
+              th Class
           tbody
             - @result_items.each do |i|
               tr class="#{i.user == current_user ? 'info': ''}"
@@ -29,7 +29,7 @@
                     = i.user.platform_username
                   end
                 td = i.item.try(:kind).try(:titleize)
-                td = i.item.try(:rarity).try(:titleize)
+                td = i.item.try(:rare_class).try(:titleize)
 
 .row
   .col-xs-12

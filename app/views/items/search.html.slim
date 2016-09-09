@@ -52,9 +52,9 @@ end
               options_for_select(Item.kinds.sort.map { |k, v| [k.titleize, v] }, @search_params[:kind]), 
               { include_blank: 'All' }, { multiple: true, namespace: 'search' }
           .col-sm-4
-            = f.select :rarity,
-              options_for_select(Item.rarities.sort.map { |k, v| [k.titleize, v] }, @search_params[:rarity]),
-              { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+            = f.select :rare_class,
+              options_for_select(Item.rare_classes.sort.map { |k, v| [k.titleize, v] }, @search_params[:rare_class]),
+              { include_blank: 'All', label: 'Class' }, { multiple: true, namespace: 'search' }
           .clearfix.visible-sm
           .col-sm-6
             = f.select :certification, 

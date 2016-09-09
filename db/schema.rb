@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909052204) do
+ActiveRecord::Schema.define(version: 20160909053206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 20160909052204) do
     t.integer  "kind",       default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.integer  "rarity",     default: 0
+    t.integer  "rare_class", default: 0
     t.index ["kind"], name: "index_items_on_kind", using: :btree
-    t.index ["rarity"], name: "index_items_on_rarity", using: :btree
+    t.index ["rare_class"], name: "index_items_on_rare_class", using: :btree
   end
 
   create_table "user_items", force: :cascade do |t|
