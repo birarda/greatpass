@@ -62,7 +62,7 @@ end
               { include_blank: 'All' }, { multiple: true, namespace: 'search' }
           .col-sm-6
             = f.select :paint_color, 
-              options_for_select(UserItem.paint_colors.sort.map { |k, v| [k.titleize, v] }, @search_params[:paint_color]), 
+              options_for_select(@paint_options, @search_params[:paint_color]), 
               { include_blank: 'All' }, { multiple: true, namespace: 'search' }
           .clearfix.visible-sm
           .col-sm-6

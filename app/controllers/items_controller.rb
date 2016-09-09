@@ -35,33 +35,22 @@ class ItemsController < ApplicationController
 
       if @search_params.has_key?(:certification)
         # pull out the Any/None options
-        without_any = @search_params[:certification].reject { |i| i.to_i == -1 }
-        query_any = without_any.length < @search_params[:certification].length
+        query_any = @search_params[:certification].include?('-1')
+        query_none = @search_params[:certification].include?('-2')
 
-        valid_certifications = without_any.reject { |i| i.to_i == -2 }
-        query_none = valid_certifications.length < without_any.length
-
-        if !valid_certifications.empty?
-          query = query.where(certification: @search_params[:certification])
-        end
-
-        if query_any && query_none
-          # don't need to do anything here - these cancel each other out
-        else
-          if query_any
-            if valid_certifications.empty?
-              query = query.where('certification is NOT NULL')
+        if !query_any || !query_none
+          if !@search_params[:certification].empty?
+            if query_any == query_none
+              query = query.where(certification: @search_params[:certification])
             else
-              query = query.or(UserItem.where('certification is NOT NULL'))
+              query = query.where("certification IN (?) OR certification is #{query_any ? 'NOT NULL' : 'NULL'}", @search_params[:certification])
             end
-          end
-
-          if query_none
-            if valid_certifications.empty?
-              query = query.where('certification is NULL')
-            else
-              query = query.or(UserItem.where('certification is NULL'))
-            end
+          elsif query_any && query_none
+            # don't need to do anything here - these cancel each other out
+          elsif query_any
+            query = query.where('certification is NOT NULL')
+          elsif query_none
+            query = query.where('certification is NULL')
           end
         end
       end
@@ -85,6 +74,8 @@ class ItemsController < ApplicationController
     # setup the special options for certification/paint color
     @certification_options = UserItem.certifications.sort.map { |k,v| [k.capitalize, v] }
     @certification_options.insert(0, ['Any', -1], ['None', -2])
+
+    @paint_options = UserItem.paint_colors.sort.map { |k, v| [k.titleize, v] }
   end
 
   private
