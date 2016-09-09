@@ -58,7 +58,7 @@ end
           .clearfix.visible-sm
           .col-sm-6
             = f.select :certification, 
-              options_for_select(UserItem.certifications.sort.map { |k,v| [k.capitalize, v] }, @search_params[:certification]), 
+              options_for_select(@certification_options, @search_params[:certification]), 
               { include_blank: 'All' }, { multiple: true, namespace: 'search' }
           .col-sm-6
             = f.select :paint_color, 

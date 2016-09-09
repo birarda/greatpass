@@ -34,7 +34,36 @@ class ItemsController < ApplicationController
       end
 
       if @search_params.has_key?(:certification)
-        query = query.where(certification: @search_params[:certification])
+        # pull out the Any/None options
+        without_any = @search_params[:certification].reject { |i| i.to_i == -1 }
+        query_any = without_any.length < @search_params[:certification].length
+
+        valid_certifications = without_any.reject { |i| i.to_i == -2 }
+        query_none = valid_certifications.length < without_any.length
+
+        if !valid_certifications.empty?
+          query = query.where(certification: @search_params[:certification])
+        end
+
+        if query_any && query_none
+          # don't need to do anything here - these cancel each other out
+        else
+          if query_any
+            if valid_certifications.empty?
+              query = query.where('certification is NOT NULL')
+            else
+              query = query.or(UserItem.where('certification is NOT NULL'))
+            end
+          end
+
+          if query_none
+            if valid_certifications.empty?
+              query = query.where('certification is NULL')
+            else
+              query = query.or(UserItem.where('certification is NULL'))
+            end
+          end
+        end
       end
 
       if @search_params.has_key?(:paint_color)
@@ -52,6 +81,10 @@ class ItemsController < ApplicationController
     end
 
     @result_items = query.includes(:item, :user).order(created_at: :desc).page(params[:page])
+
+    # setup the special options for certification/paint color
+    @certification_options = UserItem.certifications.sort.map { |k,v| [k.capitalize, v] }
+    @certification_options.insert(0, ['Any', -1], ['None', -2])
   end
 
   private
