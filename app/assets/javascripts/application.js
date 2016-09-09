@@ -26,4 +26,6 @@ $(document).on('turbolinks:load', function () {
     $('ul.nav a').filter(function () {
         return this.href == url;
     }).parent().addClass('active').parent().parent().addClass('active');
+
+    $('[data-toggle="tooltip"]').tooltip();
 });

@@ -16,7 +16,8 @@
               th Paint Color
               th Platform / Gamertag
               th Class
-              th Owned %
+              th data-toggle="tooltip" data-placement="top" title="Percentage of Great Pass users who own at least one of the exact item" 
+                | Owned %
           tbody
             - @result_items.each do |i|
               tr class="#{i.user == current_user ? 'info': ''}"
