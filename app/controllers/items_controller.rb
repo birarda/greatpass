@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
           if !query_any || !query_none
             if !@search_params[filter].empty?
               if query_any == query_none
-                query = query.where(filter: @search_params[filter])
+                query = query.where("#{filter.to_s} IN (?)", @search_params[filter])
               else
                 query = query.where("#{filter.to_s} IN (?) OR #{filter.to_s} is #{query_any ? 'NOT NULL' : 'NULL'}", @search_params[filter])
               end
