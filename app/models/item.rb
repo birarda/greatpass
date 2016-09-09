@@ -16,7 +16,7 @@ class Item < ApplicationRecord
 
   has_many :user_items, inverse_of: :item
 
-  validates :name, uniqueness: { scope: :kind }
+  validates :name, uniqueness: { scope: :kind, case_sensitive: false }
 
   def self.default_scope
     order(name: :asc)
