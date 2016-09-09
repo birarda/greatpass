@@ -50,7 +50,7 @@ end
           .col-sm-4
             = f.select :kind,
               options_for_select(Item.kinds.sort.map { |k, v| [k.titleize, v] }, @search_params[:kind]), 
-              { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+              { include_blank: 'All', label: 'Type' }, { multiple: true, namespace: 'search' }
           .col-sm-4
             = f.select :rare_class,
               options_for_select(Item.rare_classes.sort.map { |k, v| [k.titleize, v] }, @search_params[:rare_class]),
