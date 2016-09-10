@@ -9,9 +9,23 @@ p
   |  to report new/missing items.
 
 - Item.all.group_by(&:kind).sort.each do |kind, items|
-  .panel.panel-default
-    .panel-heading
-      h4 = kind.pluralize.titleize
-    .panel-body
-      - items.each do |item|
-        p = item.name
+  - if kind != Item.kinds[:crate]
+    .panel.panel-default
+      .panel-heading
+        h4 = kind.pluralize.titleize
+      .panel-body
+        - items.each_with_index do |item, index|
+          .col-xs-4.col-sm-3.col-md-2
+            = link_to items_search_path(item_id: [item.id]) do
+              .item-tile
+                img.img-responsive.center-block src="http://placehold.it/128x128"
+                p.text-center.item-name = item.name
+          - if (index + 1) % 3 == 0
+            .clearfix.visible-xs
+          - if (index + 1) % 4 == 0
+            .clearfix.visible-sm
+          - if (index + 1) % 6 == 0
+            .clearfix.visible-md.visible-lg
+                
+              
+        
