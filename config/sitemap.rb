@@ -1,4 +1,6 @@
 # Set the host name for URL creation
+SitemapGenerator::Sitemap.sitemaps_path = '/var/www/greatpass/shared/' if Rails.env.production?
+
 SitemapGenerator::Sitemap.default_host = "https://greatpass.io"
 
 SitemapGenerator::Sitemap.create do
@@ -24,6 +26,9 @@ SitemapGenerator::Sitemap.create do
   #   Article.find_each do |article|
   #     add article_path(article), :lastmod => article.updated_at
   #   end
+
+  # Add the search page
+  add items_search_path, changefreq: 'daily'
 
   # Add all item pages
   Item.find_each do |item|
