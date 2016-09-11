@@ -69,7 +69,7 @@ gem 'inline_svg'
 gem 'config'
 
 # use paperclip for attachment handling (to upload to S3)
-gem 'paperclip'
+gem 'paperclip', '~> 5.0.0'
 gem 'aws-sdk', '~> 2.3.0'
 
 group :development, :test do
