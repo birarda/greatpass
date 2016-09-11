@@ -75,6 +75,9 @@ gem 'aws-sdk', '~> 2.3.0'
 # add whenever to trigger database backup
 gem 'whenever', require: false
 
+# add SitemapGenerator for better search indexing
+gem 'sitemap_generator'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
