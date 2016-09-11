@@ -34,6 +34,6 @@ SitemapGenerator::Sitemap.create do
 
   # Add all item pages
   Item.find_each do |item|
-    add item_path(item_slug: item.url_slug), prority: 0.8, lastmod: item.updated_at
+    add item_path(item_slug: item.url_slug), proirity: 0.8, lastmod: item.updated_at
   end
 end
