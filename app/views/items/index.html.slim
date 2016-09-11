@@ -9,7 +9,7 @@ p
   = link_to 'on twitter', 'https://twitter.com/GreatPassRL'
   |  to report new/missing items.
 
-- cache ['v2', "#{cache_key_for_item_list}-v1"] do
+- cache ['v2', "#{cache_key_for_item_list}-v2"] do
   - Item.all.group_by(&:kind).sort.each do |kind, items|
     - if kind != Item.kinds[:crate]
       .panel.panel-default
