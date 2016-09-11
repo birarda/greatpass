@@ -4,8 +4,8 @@
   .image-container {
     margin-top: 10px;
     background-color: black;
-    height: 128px;
-    width: 128px;
+    max-height: 128px;
+    max-width: 128px;
   }
 
   .item-name {
