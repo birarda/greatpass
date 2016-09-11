@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   # get 'users/:platform/:platform_username', to: 'users#show', as: 'platform_user'
 
   resources :users, only: [:update]
+
   resources :items, only: [:index]
 
   namespace :user do
