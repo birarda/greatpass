@@ -77,7 +77,7 @@ Rails.application.configure do
   # use paperclip for attachment handling
   config.paperclip_defaults = {
     storage: :s3,
-    bucket: 'greatpass'
+    bucket: 'greatpass',
     url: ':s3_alias_url',
     s3_host_alias: 'static.greatpass.io',
     s3_region: 'us-west-1'
