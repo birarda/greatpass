@@ -29,8 +29,8 @@ SitemapGenerator::Sitemap.create do
 
   # Add the search page
   add items_search_path, changefreq: 'daily', priority: 0.8
-  add new_user_session_path, changefreq: 'weekly', prority: 0.4
-  add new_user_registration_path, changefreq: 'weekly', prority: 0.4
+  add new_user_session_path, changefreq: 'weekly', proirity: 0.4
+  add new_user_registration_path, changefreq: 'weekly', proirity: 0.4
 
   # Add all item pages
   Item.find_each do |item|
