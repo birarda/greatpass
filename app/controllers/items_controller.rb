@@ -95,6 +95,7 @@ class ItemsController < ApplicationController
     end
 
     @result_items = query.includes(:item, :user).order(created_at: :desc).page(params[:page])
+    @entry_name = (@search_params[:search_type] == 'w') ? 'wanted items' : 'owned items'
   end
 
   private

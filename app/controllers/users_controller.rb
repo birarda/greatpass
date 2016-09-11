@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     end
 
     @result_items = @result_items.includes(:item).order('items.name ASC').page(params[:page])
+    @entry_name = 'wanted items'
   end
 
   def update
