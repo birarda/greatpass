@@ -80,6 +80,7 @@ Rails.application.configure do
     url: ':s3_alias_url',
     s3_host_alias: 'static.greatpass.io',
     s3_region: 'us-west-1',
+    s3_host_name: 's3-us-west-1.amazonaws.com',
     s3_credentials: {
       bucket: 'greatpass',
       access_key_id: ENV['GP_AWS_ACCESS_KEY_ID'],
