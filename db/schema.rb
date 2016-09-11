@@ -10,17 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909192500) do
+ActiveRecord::Schema.define(version: 20160911003821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
-    t.integer  "kind",       default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "rare_class", default: 0
+    t.integer  "kind",                      default: 0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "rare_class",                default: 0
+    t.string   "game_preview_file_name"
+    t.string   "game_preview_content_type"
+    t.integer  "game_preview_file_size"
+    t.datetime "game_preview_updated_at"
     t.index ["kind"], name: "index_items_on_kind", using: :btree
     t.index ["rare_class"], name: "index_items_on_rare_class", using: :btree
   end

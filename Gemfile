@@ -65,6 +65,10 @@ gem 'dalli'
 # use inline SVG to inline discord logo
 gem 'inline_svg'
 
+# use paperclip for attachment handling (to upload to S3)
+gem 'paperclip'
+gem 'aws-sdk'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
