@@ -20,6 +20,11 @@ class ItemsController < ApplicationController
     # if all query params are empty, simply return all sorted by recency
     if !@search_params.empty?
 
+      if @search_params.has_key?(:item_slug_id)
+        @hero_item = Item.find(@search_params[:item_slug_id])
+        @search_params[:item_id] = [@search_params[:item_slug_id]]
+      end
+
       if @search_params.has_key?(:item_id)
         query = query.where(item_id: @search_params[:item_id])
       end
@@ -81,7 +86,7 @@ class ItemsController < ApplicationController
 
   private
     def permitted_search_params
-      permitted_params = params.permit(:platform_string, :platform_username, item_id: [], certification: [], paint_color: [], platform: [], kind: [], rare_class: [])
+      permitted_params = params.permit(:platform_string, :platform_username, :item_slug_id, item_id: [], certification: [], paint_color: [], platform: [], kind: [], rare_class: [])
 
       permitted_params.keys.each do |filter|
         permitted_params[filter].reject! { |i| i.empty? } if permitted_params[filter].kind_of?(Array)

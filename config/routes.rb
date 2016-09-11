@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :users, only: [:update]
 
   resources :items, only: [:index]
+  get 'items/:item_slug_id', to: 'items#search', as: 'item'
 
   namespace :user do
     resources :items, only: [:index, :create, :destroy]
