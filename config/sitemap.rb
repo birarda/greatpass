@@ -29,11 +29,11 @@ SitemapGenerator::Sitemap.create do
 
   # Add the search page
   add items_search_path, changefreq: 'daily', priority: 0.8
-  add new_user_session_path, changefreq: 'weekly', proirity: 0.4
-  add new_user_registration_path, changefreq: 'weekly', proirity: 0.4
+  add new_user_session_path, changefreq: 'weekly', priority: 0.4
+  add new_user_registration_path, changefreq: 'weekly', priority: 0.4
 
   # Add all item pages
   Item.find_each do |item|
-    add item_path(item_slug: item.url_slug), proirity: 0.8, lastmod: item.updated_at
+    add item_path(item_slug: item.url_slug), priority: 0.8, lastmod: item.updated_at
   end
 end
