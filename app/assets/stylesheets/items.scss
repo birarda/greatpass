@@ -1,8 +1,11 @@
 .item-tile {
   margin-top: 5px;
 
-  img {
+  .image-container {
     margin-top: 10px;
+    background-color: black;
+    height: 128px;
+    width: 128px;
   }
 
   .item-name {

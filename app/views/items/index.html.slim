@@ -16,12 +16,14 @@ p
         h4 = kind.pluralize.titleize
       .panel-body
         - items.each_with_index do |item, index|
-          .col-xs-4.col-sm-3.col-md-2
+          .col-xs-6.col-sm-3.col-md-2
             = link_to items_search_path(item_id: [item.id]) do
               .item-tile
-                img.img-responsive.center-block src="http://placehold.it/128x128"
+                .image-container.center-block
+                  - if item.game_preview.file?
+                    img.img-responsive.center-block src="#{item.game_preview.url}"
                 p.text-center.item-name = item.name
-          - if (index + 1) % 3 == 0
+          - if (index + 1) % 2 == 0
             .clearfix.visible-xs
           - if (index + 1) % 4 == 0
             .clearfix.visible-sm
