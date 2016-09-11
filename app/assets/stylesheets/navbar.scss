@@ -32,6 +32,16 @@
       }
     }
 
+    .dropdown-menu > .active, .dropdown-menu > .open {
+      > a {
+        background-color: #f5f5f5;
+
+        &:hover {
+          color: #333333;
+        }
+      }
+    }
+
     li a {
       color: white;
 
