@@ -63,7 +63,7 @@ class UserItem < ApplicationRecord
   validate :common_is_special
 
   def to_s
-    "#{self.paint_color ? self.paint_color.titleize + ' ' : ''}#{self.certification ? self.certification.capitalize + ' ' : ''}#{self.item.name}"
+    "#{self.paint_color ? self.paint_color.titleize + ' ' : ''}#{self.certification ? self.certification.capitalize + ' ' : ''}#{self.item.try(:name)}"
   end
 
   def owned_percentage
