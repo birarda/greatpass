@@ -24,7 +24,8 @@ class Item < ApplicationRecord
 
   has_attached_file :game_preview,
     styles: { original: ["100%", :jpg] },
-    path: "/images/:attachment/:id/:item_name:dotextension"
+    path: "/images/:attachment/:id/:item_name:dotextension",
+    default_url: "//#{Settings.s3.host_alias}/images/game_previews/missing.png"
 
   validates_attachment_content_type :game_preview, content_type: /\Aimage\/.*\z/
 
