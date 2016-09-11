@@ -27,7 +27,7 @@ set :rbenv_ruby, '2.3.1'
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('.rbenv-vars')
+set :linked_files, fetch(:linked_files, []).push('.rbenv-vars', 'public/sitemap.xml.gz')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'nginx', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
