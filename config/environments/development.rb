@@ -40,15 +40,6 @@ Rails.application.configure do
     port: 1025
   }
 
-  # use paperclip for attachment handling
-  config.paperclip_defaults = {
-    storage: :s3,
-    url: ':s3_alias_url',
-    s3_host_alias: Settings.s3.host_alias,
-    s3_region: 'us-west-1',
-    s3_host_name: 's3-us-west-1.amazonaws.com',
-  }
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

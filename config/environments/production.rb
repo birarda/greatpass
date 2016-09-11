@@ -74,20 +74,6 @@ Rails.application.configure do
     authentication: 'plain'
   }
 
-  # use paperclip for attachment handling
-  config.paperclip_defaults = {
-    storage: :s3,
-    url: ':s3_alias_url',
-    s3_host_alias: 'static.greatpass.io',
-    s3_region: 'us-west-1',
-    s3_host_name: 's3-us-west-1.amazonaws.com',
-    s3_credentials: {
-      bucket: 'greatpass',
-      access_key_id: ENV['GP_AWS_ACCESS_KEY_ID'],
-      secret_access_key: ENV['GP_AWS_SECRET_KEY_ID']
-    }
-  }
-
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
