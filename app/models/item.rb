@@ -12,6 +12,7 @@
 #  game_preview_content_type :string
 #  game_preview_file_size    :integer
 #  game_preview_updated_at   :datetime
+#  url_slug                  :string
 #
 
 class Item < ApplicationRecord
@@ -32,6 +33,8 @@ class Item < ApplicationRecord
 
   validates_attachment_content_type :game_preview, content_type: /\Aimage\/.*\z/
 
+  before_save :change_url_slug_if_name_changed
+
   def self.default_scope
     order(name: :asc)
   end
@@ -40,8 +43,16 @@ class Item < ApplicationRecord
     { bucket: Settings.s3.bucket_name, access_key_id: ENV['GP_AWS_ACCESS_KEY_ID'], secret_access_key: ENV['GP_AWS_SECRET_KEY_ID'] }
   end
 
+  def generated_url_slug
+    self.name.downcase.gsub(" ", "-").gsub(/[\[\]\(\)]/, '')
+  end
+
   private
     Paperclip.interpolates :item_name do |attachment, style|
       attachment.instance.name
+    end
+
+    def change_url_slug_if_name_changed
+      self.url_slug = self.generated_url_slug if self.name_changed?
     end
 end
