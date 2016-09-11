@@ -44,7 +44,7 @@ class Item < ApplicationRecord
   end
 
   def generated_url_slug
-    self.name.downcase.gsub(" ", "-").gsub(/[\[\]\(\)]/, '')
+    self.name.downcase.gsub(" ", "-").gsub(/[\[\]\(\)]/, '').gsub(/-+/, '-')
   end
 
   private

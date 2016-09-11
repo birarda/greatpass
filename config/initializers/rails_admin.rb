@@ -24,7 +24,7 @@ RailsAdmin.config do |config|
   # config.show_gravatar true
 
   config.authorize_with do
-    redirect_to main_app.root_path unless warden.user && warden.user.admin?
+    render file: "public/404.html", status: :not_found, layout: false unless warden.user && warden.user.admin?
   end
 
   config.actions do
