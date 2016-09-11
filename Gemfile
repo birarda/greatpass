@@ -106,6 +106,7 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano3-puma'
   gem 'dogapi', '>= 1.3.0'
+  gem 'capistrano-file-permissions'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
