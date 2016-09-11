@@ -44,14 +44,9 @@ Rails.application.configure do
   config.paperclip_defaults = {
     storage: :s3,
     url: ':s3_alias_url',
-    s3_host_alias: 'static-dev.greatpass.io',
+    s3_host_alias: Settings.s3.host_alias,
     s3_region: 'us-west-1',
     s3_host_name: 's3-us-west-1.amazonaws.com',
-    s3_credentials: {
-      bucket: 'greatpass-dev',
-      access_key_id: ENV['GP_AWS_ACCESS_KEY_ID'],
-      secret_access_key: ENV['GP_AWS_SECRET_KEY_ID']
-    }
   }
 
   # Print deprecation notices to the Rails logger.

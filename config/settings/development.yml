@@ -1,0 +1,3 @@
+s3:
+  bucket_name: greatpass-dev
+  host_alias: static-dev.greatpass.io

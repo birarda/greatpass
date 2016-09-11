@@ -65,6 +65,9 @@ gem 'dalli'
 # use inline SVG to inline discord logo
 gem 'inline_svg'
 
+# use config for environment specific settings
+gem 'config'
+
 # use paperclip for attachment handling (to upload to S3)
 gem 'paperclip'
 gem 'aws-sdk', '~> 2.3.0'

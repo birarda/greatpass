@@ -24,11 +24,17 @@ class Item < ApplicationRecord
 
   has_attached_file :game_preview,
     styles: { original: ["100%", :jpg] },
-    path: "/images/:attachment/:id/:item_name:dotextension"
+    path: "/images/:attachment/:id/:item_name:dotextension",
+    s3_credentials: Proc.new { |a| a.instance.s3_credentials }
+
   validates_attachment_content_type :game_preview, content_type: /\Aimage\/.*\z/
 
   def self.default_scope
     order(name: :asc)
+  end
+
+  def s3_credentials
+    { bucket: Settings.s3.bucket_name, access_key_id: ENV['GP_AWS_ACCESS_KEY_ID'], secret_access_key: ENV['GP_AWS_SECRET_KEY_ID'] }
   end
 
   private
