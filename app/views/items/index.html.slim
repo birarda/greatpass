@@ -21,7 +21,7 @@ p
               .item-tile
                 .image-container.center-block
                   - if item.game_preview.file?
-                    img.img-responsive.center-block src="#{item.game_preview.url}"
+                    img.img-responsive.center-block.unveil-img data-src="#{item.game_preview.url}"
                 p.text-center.item-name = item.name
           - if (index + 1) % 2 == 0
             .clearfix.visible-xs

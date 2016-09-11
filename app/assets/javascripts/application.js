@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require selectize
+//= require jquery.unveil
 //= require_tree .
 
 $(document).on('turbolinks:load', function () {
