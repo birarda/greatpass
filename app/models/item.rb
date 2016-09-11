@@ -25,7 +25,10 @@ class Item < ApplicationRecord
   has_attached_file :game_preview,
     styles: { original: ["100%", :jpg] },
     path: "/images/:attachment/:id/:item_name:dotextension",
-    default_url: "//#{Settings.s3.host_alias}/images/game_previews/missing.png"
+    default_url: "https://#{Settings.s3.host_alias}/images/game_previews/missing.png",
+    s3_headers: {
+      'Cache-Control': 'max-age=31557600', 'Expires': 10.years.from_now.httpdate
+    }
 
   validates_attachment_content_type :game_preview, content_type: /\Aimage\/.*\z/
 
