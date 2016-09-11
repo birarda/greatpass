@@ -3,6 +3,8 @@
     = @search_params[:platform_username]
   - elsif @hero_item
     = "#{@hero_item.name} - #{@hero_item.kind.titleize}"
+  - elsif !current_page?('/')
+    = "Search"
 end
 
 - if current_page?('/')
