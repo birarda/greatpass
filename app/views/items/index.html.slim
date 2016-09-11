@@ -10,7 +10,7 @@
     = link_to 'on twitter', 'https://twitter.com/GreatPassRL'
     |  to report new/missing items.
 
-- cache ['v2', "#{cache_key_for_item_list}-v3"] do
+- cache ['v2', "#{cache_key_for_item_list}"] do
   - Item.all.group_by(&:kind).sort.each do |kind, items|
     - if kind != Item.kinds[:crate]
       .panel.panel-default
@@ -19,7 +19,7 @@
         .panel-body
           - items.each_with_index do |item, index|
             .col-xs-6.col-sm-3.col-md-2
-              = link_to item_path(item_slug_id: item.id) do
+              = link_to item_path(item_slug: item.url_slug) do
                 .item-tile
                   .image-container.center-block 
                     img.img-responsive.center-block.unveil-img data-src="#{item.game_preview.url}"
