@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.sitemaps_path = '/var/www/greatpass/shared/public' if Rails.env.production?
+SitemapGenerator::Sitemap.public_path = '/var/www/greatpass/shared/public' if Rails.env.production?
 
 SitemapGenerator::Sitemap.default_host = "https://greatpass.io"
 
