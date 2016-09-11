@@ -31,6 +31,6 @@ every :monday, at: '5am' do
   command 'AWS_SHARED_CREDENTIALS_FILE="/home/birarda/pg-backups/.aws-config" /var/www/greatpass/current/lib/cron/db_backup.sh weekly'
 end
 
-every 1.day at: '5am' do
+every 1.day, at: '5am' do
   rake "-s sitemap:refresh"
 end
