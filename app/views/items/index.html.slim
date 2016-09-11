@@ -1,13 +1,14 @@
 = content_for(:title) { 'Rocket League Item Database' }
-h3 Rocket League Item Database
-p 
-  | List of all known tradeable Rocket League items.
-  br
-  | Contact us 
-  = link_to 'by email', 'mailto: contact@greatpass.io'
-  |  or 
-  = link_to 'on twitter', 'https://twitter.com/GreatPassRL'
-  |  to report new/missing items.
+#items-header
+  h3 Rocket League Item Database
+  p 
+    | List of all known tradeable Rocket League items.
+    br
+    | Contact us 
+    = link_to 'by email', 'mailto: contact@greatpass.io'
+    |  or 
+    = link_to 'on twitter', 'https://twitter.com/GreatPassRL'
+    |  to report new/missing items.
 
 - cache ['v2', "#{cache_key_for_item_list}-v2"] do
   - Item.all.group_by(&:kind).sort.each do |kind, items|
