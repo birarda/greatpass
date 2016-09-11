@@ -15,7 +15,15 @@ class ItemsController < ApplicationController
     # check if we were passed any search parameters
     @search_params = permitted_search_params
 
-    query = UserItem.inventory
+    if !@search_params.has_key?(:search_type)
+      @search_params[:search_type] = 'i'
+    end
+
+    if @search_params[:search_type] == 'w'
+      query = UserItem.wishlist
+    else
+      query = UserItem.inventory
+    end
 
     # if all query params are empty, simply return all sorted by recency
     if !@search_params.empty?
@@ -91,7 +99,7 @@ class ItemsController < ApplicationController
 
   private
     def permitted_search_params
-      permitted_params = params.permit(:platform_string, :platform_username, :item_slug, item_id: [], certification: [], paint_color: [], platform: [], kind: [], rare_class: [])
+      permitted_params = params.permit(:platform_string, :platform_username, :search_type, :item_slug, item_id: [], certification: [], paint_color: [], platform: [], kind: [], rare_class: [])
 
       permitted_params.keys.each do |filter|
         permitted_params[filter].reject! { |i| i.empty? } if permitted_params[filter].kind_of?(Array)

@@ -15,3 +15,9 @@
 #platform-user-header {
   margin-bottom: 20px;
 }
+
+#list-radio-container {
+  @media (min-width: $screen-sm-min) {
+    float: right;
+  }
+}

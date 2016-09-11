@@ -55,7 +55,7 @@ end
             = f.select :rare_class,
               options_for_select(Item.rare_classes.sort.map { |k, v| [k.titleize, v] }, @search_params[:rare_class]),
               { include_blank: 'All', label: 'Class' }, { multiple: true, namespace: 'search' }
-          .clearfix.visible-sm
+          .clearfix.visible-sm.visible-md.visible-lg
           .col-sm-6
             = f.select :certification, 
               options_for_select(@certification_options, @search_params[:certification]), 
@@ -64,14 +64,20 @@ end
             = f.select :paint_color, 
               options_for_select(@paint_options, @search_params[:paint_color]), 
               { include_blank: 'Any / None' }, { multiple: true, namespace: 'search' }
-          .clearfix.visible-sm
+          .clearfix.visible-sm.visible-md.visible-lg
           .col-sm-6
             = f.select :platform, options_for_select(User.platforms.sort, @search_params[:platform]), 
             { include_blank: 'All' }, { multiple: true, namespace: 'search' }
           .col-sm-6
             = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
-          .clearfix.visible-sm
-          .col-sm-12
+          .clearfix.visible-sm.visible-md.visible-lg
+          - if !@platform_user
+            .col-sm-6#list-radio-container
+              = f.form_group :search_type  do
+                = f.radio_button :search_type, 'i', label: 'Items players have', inline: true, checked: @search_params[:search_type] == 'i'
+                = f.radio_button :search_type, 'w', label: 'Items players want', inline: true, checked: @search_params[:search_type] == 'w'
+              end
+          div class="#{@platform_user ? 'col-sm-12' : 'col-sm-6'}"
             = f.button class: 'btn btn-success', id: 'search-submit-button' do
               span.glyphicon.glyphicon-search aria-hidden='true'
               - if @platform_user
@@ -79,6 +85,6 @@ end
                 = @platform_user.platform_username
               - else
                 |  Search
-            end
+          
 
 = render 'items/paginated_table'
