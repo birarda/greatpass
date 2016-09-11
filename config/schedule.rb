@@ -18,3 +18,15 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+every 1.hour do
+  command 'AWS_SHARED_CREDENTIALS_FILE="/home/birarda/pg-backups/.aws-config" /var/www/greatpass/current/lib/cron/db_backup.sh hourly'
+end
+
+every 1.day do
+  command 'AWS_SHARED_CREDENTIALS_FILE="/home/birarda/pg-backups/.aws-config" /var/www/greatpass/current/lib/cron/db_backup.sh daily'
+end
+
+every 1.week do
+  command 'AWS_SHARED_CREDENTIALS_FILE="/home/birarda/pg-backups/.aws-config" /var/www/greatpass/current/lib/cron/db_backup.sh weekly'
+end
