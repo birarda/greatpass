@@ -51,12 +51,12 @@ GEM
     arel (7.1.1)
     autoprefixer-rails (6.4.1)
       execjs
-    aws-sdk (2.5.11)
-      aws-sdk-resources (= 2.5.11)
-    aws-sdk-core (2.5.11)
+    aws-sdk (2.3.22)
+      aws-sdk-resources (= 2.3.22)
+    aws-sdk-core (2.3.22)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.5.11)
-      aws-sdk-core (= 2.5.11)
+    aws-sdk-resources (2.3.22)
+      aws-sdk-core (= 2.3.22)
     bcrypt (3.1.11)
     bootstrap-kaminari-views (0.0.5)
       kaminari (>= 0.13)
@@ -313,7 +313,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  aws-sdk
+  aws-sdk (~> 2.3.0)
   bootstrap-kaminari-views
   bootstrap-sass (~> 3.3.7)
   bootstrap_form
