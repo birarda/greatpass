@@ -24,8 +24,7 @@ class Item < ApplicationRecord
 
   has_attached_file :game_preview,
     styles: { original: ["100%", :jpg] },
-    path: "/images/:attachment/:id/:item_name:dotextension",
-    s3_credentials: Proc.new { |a| a.instance.s3_credentials }
+    path: "/images/:attachment/:id/:item_name:dotextension"
 
   validates_attachment_content_type :game_preview, content_type: /\Aimage\/.*\z/
 
