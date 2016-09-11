@@ -43,14 +43,10 @@ Rails.application.configure do
   # use paperclip for attachment handling
   config.paperclip_defaults = {
     storage: :s3,
+    bucket: 'greatpass-dev',
     url: ':s3_alias_url',
     s3_host_alias: 'static-dev.greatpass.io',
-    s3_region: 'us-west-1',
-    s3_credentials: {
-      bucket: 'greatpass-dev',
-      access_key_id: ENV['GP_AWS_ACCESS_KEY_ID'],
-      secret_access_key: ENV['GP_AWS_SECRET_KEY_ID']
-    }
+    s3_region: 'us-west-1'
   }
 
   # Print deprecation notices to the Rails logger.
