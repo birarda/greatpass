@@ -54,9 +54,9 @@
       p 
         = page_entries_info @items, entry_name: "#{list_type} item"
       p.text-muted
-        | Click the name to search for that 
+        | Click name to search for 
         = "#{list_type == 'inventory' ? 'wanted' : 'owned'}"
-        |  item on your platform
+        |  items on your platform
     .hidden-sm.hidden-md.hidden-lg
       - if @items.length > 0
         = link_to (list_type == 'inventory' ? user_inventory_clear_path : user_wishlist_clear_path), 
