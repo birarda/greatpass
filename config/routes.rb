@@ -21,8 +21,10 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :items, only: [:index, :create, :destroy]
+    delete 'items', to: 'items#inventory_clear', as: 'inventory_clear'
     get 'wishlist', to: 'items#wishlist', as: 'wishlist_index'
     post 'wishlist', to: 'items#create', as: 'wishlist_add'
     delete 'wishlist/:id', to: 'items#destroy', as: 'wishlist'
+    delete 'wishlist', to: 'items#wishlist_clear', as: 'wishlist_clear'
   end
 end

@@ -17,3 +17,13 @@
 #add-item-button {
   width: 100%;
 }
+
+.list-delete-all-btn {
+  @media (min-width: $screen-sm-min) {
+    float: right;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin: 10px 0px 20px 0px;
+  }
+}

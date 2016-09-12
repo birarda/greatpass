@@ -13,6 +13,18 @@ class User::ItemsController < ApplicationController
     @items = current_user.wishlist.includes(:item).order('items.name ASC').page(params[:page])
   end
 
+  def wishlist_clear
+    @items = current_user.wishlist.destroy_all
+    flash[:notice] = "Removed all items from your wishlist"
+    redirect_to user_wishlist_index_path
+  end
+
+  def inventory_clear
+    @items = current_user.inventory.destroy_all
+    flash[:notice] = "Removed all items from your inventory"
+    redirect_to user_items_path
+  end
+
   def create
     @new_item = current_user.items.new(new_item_params)
 
