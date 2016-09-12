@@ -26,6 +26,7 @@ $highlight-color: #D1E8FF;
 @import "navbar";
 @import "search";
 @import "user/items";
+@import "user/messages";
 @import "users";
 @import "items";
 @import "footer";
@@ -50,4 +51,8 @@ a {
     color: $brand-primary;
     text-decoration: none;
   }
+}
+
+.btn:focus,.btn:active {
+   outline: none !important;
 }

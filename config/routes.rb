@@ -29,5 +29,9 @@ Rails.application.routes.draw do
     post 'wishlist', to: 'items#create', as: 'wishlist_add'
     delete 'wishlist/:id', to: 'items#destroy', as: 'wishlist'
     delete 'wishlist', to: 'items#wishlist_clear', as: 'wishlist_clear'
+
+    # mailboxer
+    resources 'messages', only: [:index, :create]
+    resources 'conversations', only: [:create, :destroy]
   end
 end

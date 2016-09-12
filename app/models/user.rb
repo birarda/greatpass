@@ -41,6 +41,12 @@ class User < ApplicationRecord
 
   before_validation :smart_add_platform_url_protocol
 
+  def inbox
+    Conversation.includes(last_message: [ :sender, :receiver ])
+                .where('receiver_id = ? OR sender_id = ?', self.id, self.id)
+                .order('updated_at DESC')
+  end
+
   protected
 
   def smart_add_platform_url_protocol

@@ -1,0 +1,17 @@
+.modal.fade#message-modal tabindex="-1" role="dialog"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true"
+            | &times;
+        h4.modal-title#message-modal-title Message
+      = bootstrap_form_tag(url: user_messages_path, remote: true) do |f|
+        .modal-body
+          = f.text_field :subject, namespace: 'message'
+          = f.text_area :body, namespace: 'message'
+          = f.hidden_field :receiver_id, namespace: 'message'
+        .modal-footer
+          button.btn.btn-default data-dismiss="modal" aria-label="Close" type="button"
+            | Cancel
+          = f.submit 'Send message', class: 'btn btn-success'

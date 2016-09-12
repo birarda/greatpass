@@ -1,4 +1,9 @@
 #contact-buttons
+  - if @platform_user != current_user
+    button.btn.btn-primary.message-button type="button" data-toggle="modal" data-target="#message-modal" data-receiver-id="#{@platform_user.id}" data-receiver-name="#{@platform_user.platform_username}"
+      i.icon.ion-email
+      |  Message
+    
   - if !@hero_user.platform_url.blank?
     = link_to @hero_user.platform_url, class: 'btn btn-primary' do
       i class="icon #{platform_ion_class(@hero_user.platform)}"
@@ -10,3 +15,4 @@
       = " Reddit"
       
     
+= render 'messages/message_modal'
