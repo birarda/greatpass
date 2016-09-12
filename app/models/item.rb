@@ -39,10 +39,6 @@ class Item < ApplicationRecord
     order(name: :asc)
   end
 
-  def s3_credentials
-    { bucket: Settings.s3.bucket_name, access_key_id: ENV['GP_AWS_ACCESS_KEY_ID'], secret_access_key: ENV['GP_AWS_SECRET_KEY_ID'] }
-  end
-
   def generated_url_slug
     self.name.downcase.gsub(" ", "-").gsub(/[\[\]\(\)]/, '').gsub(/-+/, '-')
   end
