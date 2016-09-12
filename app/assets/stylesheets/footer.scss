@@ -39,12 +39,16 @@ footer {
           position: relative;
           top: -2px;
         }
+
+        &.ion-steam {
+          margin-left: 17px;
+        }
       }
 
       #discord-svg {
         position: relative;
         top: 10px;
-        left: -5px;
+        left: -4px;
         height: 40px;
 
         &:hover {
