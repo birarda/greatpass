@@ -1,17 +1,18 @@
-- content_for(:title) { "#{params[:platform_username]} - Wishlist" }
+- content_for(:title) { "#{@for_reddit ? @hero_user.reddit_username : @hero_user.platform_username} - Wishlist" }
 
 .row
   .col-xs-12
     #platform-user-header
       h4
-        i class="icon #{platform_ion_class(@platform_user.platform)}"
+        
+        i class="icon #{@for_reddit ? 'ion-social-reddit' : platform_ion_class(@hero_user.platform)}"
         | &nbsp;
-        = @platform_user.platform_username
+        = @for_reddit ? @hero_user.reddit_username : @hero_user.platform_username
         |  - Wishlist
       = render 'contact_options'
       p
         | You can view the player's wishlist below or search 
-        = link_to 'their inventory', platform_user_path(platform_string: @platform_user.platform.downcase, platform_username: @platform_user.platform_username)
+        = link_to 'their inventory', platform_user_path(platform_string: @hero_user.platform.downcase, platform_username: @hero_user.platform_username)
         | .
 
 = render 'items/paginated_table'

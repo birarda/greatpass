@@ -21,17 +21,17 @@ end
 
 .row
   .col-xs-12
-    - if @platform_user
+    - if @hero_user
       #platform-user-header
         h4
-          i class="icon #{platform_ion_class(@platform_user.platform)}"
+          i class="icon #{platform_ion_class(@hero_user.platform)}"
           | &nbsp;
-          = @platform_user.platform_username
+          = @hero_user.platform_username
           |  - Inventory
         = render 'users/contact_options'
         p
           | You can search through the player's inventory below or view 
-          = link_to 'their wishlist', platform_user_wishlist_path(platform_string: @platform_user.platform.downcase, platform_username: @platform_user.platform_username)
+          = link_to 'their wishlist', platform_user_wishlist_path(platform_string: @hero_user.platform.downcase, platform_username: @hero_user.platform_username)
           | .
     - elsif @hero_item
       #hero-item-header
@@ -71,18 +71,18 @@ end
           .col-sm-6
             = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
           .clearfix.visible-sm.visible-md.visible-lg
-          - if !@platform_user
+          - if !@hero_user
             .col-sm-6#list-radio-container
               = f.form_group :search_type  do
                 = f.radio_button :search_type, 'i', label: 'Items players have', inline: true, checked: @search_params[:search_type] == 'i'
                 = f.radio_button :search_type, 'w', label: 'Items players want', inline: true, checked: @search_params[:search_type] == 'w'
               end
-          div class="#{@platform_user ? 'col-sm-12' : 'col-sm-6'}"
+          div class="#{@hero_user ? 'col-sm-12' : 'col-sm-6'}"
             = f.button class: 'btn btn-success', id: 'search-submit-button' do
               span.glyphicon.glyphicon-search aria-hidden='true'
-              - if @platform_user
+              - if @hero_user
                 |  Search 
-                = @platform_user.platform_username
+                = @hero_user.platform_username
               - else
                 |  Search
           

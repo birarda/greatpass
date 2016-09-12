@@ -1,11 +1,11 @@
 #contact-buttons
-  - if !@platform_user.platform_url.blank?
-    = link_to @platform_user.platform_url, class: 'btn btn-primary' do
-      i class="icon #{platform_ion_class(@platform_user.platform)}"
-      = " #{@platform_user.platform}"
+  - if !@hero_user.platform_url.blank?
+    = link_to @hero_user.platform_url, class: 'btn btn-primary' do
+      i class="icon #{platform_ion_class(@hero_user.platform)}"
+      = " #{@hero_user.platform}"
       
-  - if !@platform_user.reddit_username.blank?
-    = link_to "https://reddit.com/u/#{@platform_user.reddit_username}", class: 'btn btn-primary' do
+  - if !@hero_user.reddit_username.blank?
+    = link_to "https://reddit.com/u/#{@hero_user.reddit_username}", class: 'btn btn-primary' do
       i class="icon ion-social-reddit"
       = " Reddit"
       

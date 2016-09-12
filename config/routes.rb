@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'search', to: 'items#search'
   get 'items/search'
 
+  get 'users/reddit/:reddit_username', to: 'users#inventory', as: 'reddit_user'
+  get 'users/reddit/:reddit_username/wishlist', to: 'users#wishlist', as: 'reddit_user_wishlist'
+
   get 'users/:platform_string/:platform_username', to: 'items#search', as: 'platform_user', platform_username: /[^\/]+/
   get 'users/:platform_string/:platform_username/wishlist', to: 'users#wishlist', as: 'platform_user_wishlist', platform_username: /[^\/]+/
 

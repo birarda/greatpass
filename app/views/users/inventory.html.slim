@@ -1,0 +1,18 @@
+- content_for(:title) { "#{params[:reddit_username]} - Inventory" }
+
+.row
+  .col-xs-12
+    #platform-user-header
+      h4
+        i class="icon ion-social-reddit"
+        | &nbsp;
+        = @hero_user.reddit_username
+        |  - Inventory
+      = render 'contact_options'
+      p
+        | View the 
+        = link_to "player's wishlist", 
+          @for_reddit ? reddit_user_wishlist_path(reddit_username: @hero_user.reddit_username) : platform_user_wishlist_path(platform_string: @hero_user.platform.downcase, platform_username: @hero_user.platform_username)
+        | .
+
+= render 'items/paginated_table'
