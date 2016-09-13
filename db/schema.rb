@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913045439) do
+ActiveRecord::Schema.define(version: 20160913161705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20160913045439) do
     t.datetime "updated_at",                       null: false
     t.boolean  "receiver_deleted", default: false
     t.boolean  "sender_deleted",   default: false
-    t.index ["receiver_id"], name: "index_conversations_on_receiver_id", using: :btree
-    t.index ["sender_id"], name: "index_conversations_on_sender_id", using: :btree
+    t.index ["receiver_id", "receiver_deleted"], name: "index_conversations_on_receiver_id_and_receiver_deleted", using: :btree
+    t.index ["sender_id", "sender_deleted"], name: "index_conversations_on_sender_id_and_sender_deleted", using: :btree
   end
 
   create_table "items", force: :cascade do |t|
