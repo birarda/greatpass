@@ -6,7 +6,7 @@
           span aria-hidden="true"
             | &times;
         h4.modal-title#message-modal-title Message
-      = bootstrap_form_tag(url: user_conversations_path, remote: true, html: { id: 'message-modal-form' }) do |f|
+      = bootstrap_form_tag(url: user_threads_path, remote: true, html: { id: 'message-modal-form' }) do |f|
         .modal-body
           #message-form-errors.alert.alert-danger role="alert"
           = f.text_field :subject, namespace: 'message'

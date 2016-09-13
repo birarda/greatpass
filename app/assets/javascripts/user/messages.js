@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
 
   $('#user-messages tr.message-row').click(function(event){
     if (!$(event.target).is('a') && !$(event.target).is('span.glyphicon')) {
-      window.location = $(this).data('conversation-link');
+      window.location = $(this).data('thread-link');
     }
   });
 

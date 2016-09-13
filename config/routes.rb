@@ -32,9 +32,9 @@ Rails.application.routes.draw do
 
     # mailboxer
     resources 'messages', only: [:create], constraints: { format: 'json' }
-    resources 'conversations', only: [:index, :show, :destroy]
-    resources 'conversations', only: [:create], constraints: { format: 'json' }
+    resources 'threads', only: [:index, :show, :destroy]
+    resources 'threads', only: [:create], constraints: { format: 'json' }
 
-    get 'inbox', to: 'conversations#index'
+    get 'inbox', to: 'threads#index'
   end
 end
