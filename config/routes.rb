@@ -31,8 +31,9 @@ Rails.application.routes.draw do
     delete 'wishlist', to: 'items#wishlist_clear', as: 'wishlist_clear'
 
     # mailboxer
-    resources 'messages', only: [:create]
-    resources 'conversations', only: [:index, :show, :create, :destroy]
+    resources 'messages', only: [:create], constraints: { format: 'json' }
+    resources 'conversations', only: [:index, :show, :destroy]
+    resources 'conversations', only: [:create], constraints: { format: 'json' }
 
     get 'inbox', to: 'conversations#index'
   end

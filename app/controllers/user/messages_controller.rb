@@ -6,16 +6,17 @@ class User::MessagesController < ApplicationController
     conversation = Conversation.find(message_params[:conversation_id])
 
     # now create our message in the conversation
-    new_message_params = {
+    new_message = Message.new({
+      conversation_id: conversation.id,
       sender_id: current_user.id,
       receiver_id: message_params[:receiver_id],
       body: message_params[:body]
-    }
+    })
 
-    if conversation.messages.create(new_message_params)
-      redirect_to user_conversation_path(conversation)
+    if new_message.save
+      render json: { status: 'success' }
     else
-      # failure in responding to message
+      render status: 400, json: { status: 'failure', errors: new_message.errors.full_messages }
     end
   end
 
