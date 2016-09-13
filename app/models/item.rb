@@ -17,7 +17,17 @@
 
 class Item < ApplicationRecord
   enum kind: [:topper, :antenna, :wheels, :boost, :decal, :crate, 'battle-car']
-  enum rare_class: [:common, :uncommon, :rare, :super_rare, :premium, :limited, :very_rare, :import, :exotic, :black_market]
+  enum rare_class: {
+    common: 0,
+    uncommon: 1,
+    rare: 2,  
+    premium: 4,
+    limited: 5,
+    very_rare: 6,
+    import: 7,
+    exotic: 8,
+    black_market: 9
+  }
 
   has_many :user_items, inverse_of: :item
 
