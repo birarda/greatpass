@@ -5,12 +5,12 @@ h3 Messages
 .row
   .col-xs-12
     .panel.panel-default
-      table.table
+      table.table#user-messages
         tbody
           - @inbox.each do |conversation|
             - message = conversation.last_message
             tr class="#{message.read? ? 'active' : ''}"
-              td
+              td.message-preview
                 - @other_user = (message.sender == current_user ? message.receiver : message.sender) 
                 = link_to platform_user_path(platform_string: @other_user.platform.downcase, platform_username: @other_user.platform_username), class: 'user-platform-link' do
                   i class="icon #{platform_ion_class(@other_user.platform)}"
@@ -19,11 +19,11 @@ h3 Messages
                 end
                 |  -  
                 strong = conversation.subject
-                br 
+                |  - 
                 = message.body
               td.message-delete-cell
-                / = link_to user_conversation_path(conversation), data: { confirm: 'Are you sure? This will permanently delete the message thread.' }, method: :delete do
-                span.glyphicon.glyphicon-remove aria-hidden=true
+                = link_to user_conversation_path(conversation), data: { confirm: 'Are you sure? This will permanently delete the message thread.' }, method: :delete, class: 'btn btn-danger' do
+                  span.glyphicon.glyphicon-remove aria-hidden=true
 
 .row
   .col-xs-12

@@ -18,6 +18,7 @@ class User::MessagesController < ApplicationController
     # now create our message in the conversation
     message = conversation.messages.new({
       sender_id: current_user.id,
+      receiver_id: message_params[:receiver_id],
       body: message_params[:body]
     })
 

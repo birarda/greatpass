@@ -16,6 +16,7 @@ class Conversation < ApplicationRecord
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
   has_many :messages, inverse_of: :conversation
+  has_many :deletions, class_name: 'UserConversationDeletion'
 
   has_one :last_message, ->{ order 'messages.created_At DESC' }, class_name: 'Message'
 end

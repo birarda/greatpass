@@ -23,9 +23,11 @@
             = link_to 'Inventory', user_items_path
           li
             = link_to user_messages_path do
-              | Messages 
-              / - if current_user.mailbox.inbox.count > 0
-                / span.badge = current_user.mailbox.inbox.count
+              | Messages
+              - inbox_count = current_user.unread_message_count
+              - if inbox_count > 0
+                | &nbsp;
+                span.badge = inbox_count
             end
           li.dropdown
             a.dropdown-toggle href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"

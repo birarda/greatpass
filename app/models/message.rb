@@ -16,4 +16,11 @@ class Message < ApplicationRecord
   belongs_to :conversation, touch: true
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
+
+  before_create :remove_conversation_delete_flags
+
+  private
+    def remove_conversation_delete_flags
+      self.conversation.update(receiver_deleted: false, sender_deleted: false)
+    end
 end

@@ -1,8 +1,15 @@
-.message-delete-cell {
-  text-align: right;
+table#user-messages {
+  white-space: nowrap;
+  width: 100%;
+  table-layout: fixed;
+}
 
-  .glyphicon {
-    margin-right: 5px;
-    color: #d44950;
-  }
+td.message-preview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.message-delete-cell {
+  width: 75px;
+  text-align: right;
 }

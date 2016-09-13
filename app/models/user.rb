@@ -34,6 +34,8 @@ class User < ApplicationRecord
   has_many :inventory, -> { where('user_items.list = ?', UserItem.lists[:inventory]) }, class_name: 'UserItem', inverse_of: :user
   has_many :wishlist, -> { where('user_items.list = ?', UserItem.lists[:wishlist]) }, class_name: 'UserItem', inverse_of: :user
 
+  has_many :conversation_deletions, inverse_of: :user, class_name: 'UserConversationDeletion'
+
   validates :platform_username, presence: true, length: { maximum: 32 }, uniqueness: { scope: :platform, case_sensitive: false }
   validates :reddit_username, uniqueness: { case_sensitive: false }
   validates :platform, presence: true
@@ -43,8 +45,12 @@ class User < ApplicationRecord
 
   def inbox
     Conversation.includes(last_message: [ :sender, :receiver ])
-                .where('receiver_id = ? OR sender_id = ?', self.id, self.id)
+                .where('(receiver_id = ? AND receiver_deleted = ?) OR (sender_id = ? AND sender_deleted = ?)', self.id, false, self.id, false)
                 .order('updated_at DESC')
+  end
+
+  def unread_message_count
+     Message.where(receiver_id: self.id, read: false).count('DISTINCT conversation_id')
   end
 
   protected
