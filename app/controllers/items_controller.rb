@@ -98,6 +98,86 @@ class ItemsController < ApplicationController
     @entry_name = (@search_params[:search_type] == 'w') ? 'wanted items' : 'owned items'
   end
 
+  def matchmaker
+    # setup the special options for certification/paint color
+    @certification_options = UserItem.certifications.sort.map { |k,v| [k.capitalize, v] }
+    @certification_options.insert(0, ['Any', -1], ['None', -2])
+
+    @paint_options = UserItem.paint_colors.sort.map { |k, v| [k.titleize, v] }
+    @paint_options.insert(0, ['Any', -1], ['None', -2])
+
+    if params.has_key?(:match_have)
+      @have_params = permitted_matchmaker_have_params
+      @want_params = permitted_matchmaker_want_params
+    end
+
+    if @have_params && @want_params
+      # find user items that match the given request
+      query = UserItem.inventory.where(item_id: @want_params[:item_id]).joins(:user)
+
+      if !@want_params[:certification_id].blank?
+        if @want_params[:certification_id] == '-1' # Any
+          query = query.where('user_items.certification IS NOT NULL')
+        elsif @want_params[:certification_id] == '-2' # None
+          query = query.where(certification: nil)
+        else
+          query = query.where(certification: @want_params[:certification_id])
+        end
+      end
+
+      if !@want_params[:paint_color_id].blank?
+        if @want_params[:paint_color_id] == '-1' # Any
+          query = query.where('user_items.paint_color_id IS NOT NULL')
+        elsif @want_params[:paint_color_id] == '-2' # None
+          query = query.where(paint_color_id: nil)
+        else
+          query = query.where(paint_color_id: @want_params[:paint_color_id])
+        end
+      end
+
+      if !@have_params[:platform].blank?
+        query = query.where('users.platform = ?', @have_params[:platform].to_i)
+      end
+
+      query = query.joins('JOIN user_items AS user_wanted_items ON user_wanted_items.user_id = user_items.user_id')
+                   .where(user_wanted_items: { item_id: @have_params[:item_id], list: UserItem.lists[:wishlist] })
+
+      if !@have_params[:certification_id].blank?
+        if @have_params[:certification_id] == '-1' # Any
+          query = query.where('user_wanted_items.certification IS NOT NULL')
+        elsif @have_params[:certification_id] == '-2' # None
+          query = query.where('user_wanted_items.certification IS NULL')
+        else
+          query = query.where(user_wanted_items: { certification: @have_params[:certification_id] })
+        end
+      end
+
+      if !@have_params[:paint_color_id].blank?
+        if @have_params[:paint_color_id] == '-1' # Any
+          query = query.where('user_wanted_items.paint_color_id IS NOT NULL')
+        elsif @have_params[:paint_color_id] == '-2' # None
+          query = query.where('user_wanted_items.paint_color_id IS NULL')
+        else
+          query = query.where(user_wanted_items: { paint_color: @have_params[:paint_color_id] })
+        end
+      end
+
+      if current_user
+        query.where('user_items.user_id != ?', current_user.id)
+      end
+
+      @result_items = query.includes(:item, :user).order(created_at: :desc).page(params[:page])
+      @entry_name = 'match'
+    else
+      if current_user
+        # default the platform to the current user's platform
+        @have_params = @want_params = {
+          platform: User.platforms[current_user.platform]
+        }
+      end
+    end
+  end
+
   private
     def permitted_search_params
       permitted_params = params.permit(:platform_string, :platform_username, :search_type, :item_slug, item_id: [], certification: [], paint_color: [], platform: [], kind: [], rare_class: [])
@@ -108,5 +188,13 @@ class ItemsController < ApplicationController
       end
 
       permitted_params
+    end
+
+    def permitted_matchmaker_have_params
+      params.require(:match_have).permit(:item_id, :certification_id, :paint_color_id, :platform)
+    end
+
+    def permitted_matchmaker_want_params
+      params.require(:match_want).permit(:item_id, :certification_id, :paint_color_id, :platform)
     end
 end

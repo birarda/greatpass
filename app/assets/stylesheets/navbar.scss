@@ -17,6 +17,12 @@
     }
   }
 
+  li.dropdown > a {
+    &:focus {
+      color: white;
+    }
+  }
+
   @media(min-width: $screen-sm-min) {
     background-color: $brand-primary;
 

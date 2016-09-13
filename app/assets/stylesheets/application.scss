@@ -30,6 +30,7 @@ $link-color: #337ab7;
 @import "user/messages";
 @import "users";
 @import "items";
+@import "matchmaker";
 @import "messages";
 @import "footer";
 
@@ -43,7 +44,7 @@ html, body {
 
 #main {
   overflow: auto;
-  padding-bottom: 170px;
+  padding-bottom: 200px;
 }
 
 a {

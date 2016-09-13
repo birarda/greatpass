@@ -17,6 +17,7 @@
         i.icon.ion-email
         |  Message
         span.hidden-username = user.platform_username
+
     
   - if !user.platform_url.blank?
     = link_to user.platform_url, class: 'btn btn-primary', target: '_blank' do

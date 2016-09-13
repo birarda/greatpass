@@ -1,0 +1,26 @@
+= content_for(:title) { 'Matchmaker' }
+
+h4 Matchmaker
+p.text-muted
+  | Search for players that want an item you have and have an item you want
+
+.row
+  .col-xs-12
+    = bootstrap_form_tag(url: matchmaker_path, html: { method: 'get', autocomplete: 'off' }) do |f|
+      .panel.panel-default
+        .panel-heading I Have
+        .panel-body
+          .col-xs-12
+            = render 'matchmaker_selects', f: f, namespace: 'match_have'
+      .panel.panel-default
+        .panel-heading I Want
+        .panel-body
+          .col-xs-12
+            = render 'matchmaker_selects', f: f, namespace: 'match_want'
+      .row
+        .col-xs-12
+          = f.submit 'Find Matches', class: 'btn btn-success', id: 'match-button'
+      
+- if @result_items
+  #match-results
+    = render 'items/paginated_table'

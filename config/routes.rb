@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get 'search', to: 'items#search'
   get 'items/search'
+  get 'matchmaker', to: 'items#matchmaker'
 
   get 'users/reddit/:reddit_username', to: 'users#inventory', as: 'reddit_user'
   get 'users/reddit/:reddit_username/wishlist', to: 'users#wishlist', as: 'reddit_user_wishlist'

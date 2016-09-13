@@ -12,15 +12,13 @@
     .collapse.navbar-collapse#gp-navbar-collapse
       ul.nav.navbar-nav
         li
+          = link_to 'Item List', items_path
+        li
           = link_to 'Search', search_path
         li
-          = link_to 'Item List', items_path
+          = link_to 'Matchmaker', matchmaker_path
       ul.nav.navbar-nav.navbar-right
         - if current_user
-          li
-            = link_to 'Wishlist', user_wishlist_index_path
-          li
-            = link_to 'Inventory', user_items_path
           li
             = link_to user_inbox_path do
               | Inbox
@@ -37,6 +35,10 @@
               | &nbsp;
               span.caret
             ul.dropdown-menu
+              li
+                = link_to 'Inventory', user_items_path
+              li
+                = link_to 'Wishlist', user_wishlist_index_path
               li
                 = link_to 'Account', edit_user_registration_path
               li.divider role="separator"
