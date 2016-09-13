@@ -14,4 +14,5 @@
       = " Reddit"
       
     
-= render 'messages/message_modal'
+- if !defined?(omit_message) || !omit_message
+  = render 'messages/message_modal'
