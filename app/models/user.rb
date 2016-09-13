@@ -35,7 +35,7 @@ class User < ApplicationRecord
   has_many :wishlist, -> { where('user_items.list = ?', UserItem.lists[:wishlist]) }, class_name: 'UserItem', inverse_of: :user
 
   validates :platform_username, presence: true, length: { maximum: 32 }, uniqueness: { scope: :platform, case_sensitive: false }
-  validates :reddit_username, uniqueness: { case_sensitive: false }
+  validates :reddit_username, uniqueness: { case_sensitive: false, allow_blank: true }
   validates :platform, presence: true
   validates :platform_url, url: { no_local: true, allow_nil: true, allow_blank: true }
 
