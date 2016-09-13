@@ -2,7 +2,7 @@ class User::ConversationsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    
+
   end
 
   def destroy
@@ -15,6 +15,11 @@ class User::ConversationsController < ApplicationController
     end
 
     if update_hash && conversation.update_columns(update_hash)
+
+      # we need to mark all messages up to this point in the conversation as read
+      # so that they do not get counted in the navbar
+      conversation.messages.where(receiver_id: current_user.id).update_all(read: true)
+
       redirect_to user_messages_path
     else
 
