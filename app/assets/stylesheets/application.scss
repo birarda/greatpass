@@ -49,7 +49,7 @@ html, body {
 a {
   color: $link-color;
 
-  &:hover {
+  &:hover, &:focus {
     color: $brand-primary;
     text-decoration: none;
   }
