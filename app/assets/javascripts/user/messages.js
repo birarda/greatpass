@@ -9,7 +9,6 @@ $(document).on('turbolinks:load', function() {
   $('#message-reply-form').on('ajax:success', function(event, data, status, xhr){
     location.reload();
   }).on('ajax:error', function(event, xhr, status, error){
-    console.log(xhr.responseJSON);
     if (xhr.responseJSON['errors']) {
       errorHTML = ""
 
