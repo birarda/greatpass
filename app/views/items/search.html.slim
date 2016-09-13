@@ -63,7 +63,7 @@ end
           .clearfix.visible-sm.visible-md.visible-lg
           .col-sm-6
             = f.select :platform, options_for_select(User.platforms.sort, @search_params[:platform]), 
-              { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+            { include_blank: 'All' }, { multiple: true, namespace: 'search' }
           .col-sm-6
             = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
           .clearfix.visible-sm.visible-md.visible-lg
