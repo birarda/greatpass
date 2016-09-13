@@ -127,11 +127,11 @@ class ItemsController < ApplicationController
 
       if !@want_params[:paint_color_id].blank?
         if @want_params[:paint_color_id] == '-1' # Any
-          query = query.where('user_items.paint_color_id IS NOT NULL')
+          query = query.where('user_items.paint_color IS NOT NULL')
         elsif @want_params[:paint_color_id] == '-2' # None
-          query = query.where(paint_color_id: nil)
+          query = query.where(paint_color: nil)
         else
-          query = query.where(paint_color_id: @want_params[:paint_color_id])
+          query = query.where(paint_color: @want_params[:paint_color_id])
         end
       end
 
@@ -154,9 +154,9 @@ class ItemsController < ApplicationController
 
       if !@have_params[:paint_color_id].blank?
         if @have_params[:paint_color_id] == '-1' # Any
-          query = query.where('user_wanted_items.paint_color_id IS NOT NULL')
+          query = query.where('user_wanted_items.paint_color IS NOT NULL')
         elsif @have_params[:paint_color_id] == '-2' # None
-          query = query.where('user_wanted_items.paint_color_id IS NULL')
+          query = query.where('user_wanted_items.paint_color IS NULL')
         else
           query = query.where(user_wanted_items: { paint_color: @have_params[:paint_color_id] })
         end
