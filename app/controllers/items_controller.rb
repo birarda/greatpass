@@ -169,11 +169,12 @@ class ItemsController < ApplicationController
       @result_items = query.includes(:item, :user).order(created_at: :desc).page(params[:page])
       @entry_name = 'match'
     else
+      @have_params = {}
+      @want_params = {}
+
       if current_user
         # default the platform to the current user's platform
-        @have_params = @want_params = {
-          platform: User.platforms[current_user.platform]
-        }
+        @have_params[:platform] = User.platforms[current_user.platform]
       end
     end
   end

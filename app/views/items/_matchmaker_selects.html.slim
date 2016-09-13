@@ -11,5 +11,5 @@
 
 - if namespace == 'match_have'
   .col-sm-6.col-md-3
-    = f.select :platform, options_for_select(User.platforms.sort, namespace == 'match_have' ? @have_params[:platform] : @want_params[:platform]), 
+    = f.select :platform, options_for_select(User.platforms.sort, @have_params[:platform]), 
       { include_blank: 'All' }, { namespace: namespace, name: "#{namespace}[platform]" }
