@@ -21,23 +21,24 @@ h3 Inbox
           tbody
             - @inbox.each do |conversation|
               - message = conversation.last_message
-              tr class="message-row #{conversation.unread_count == 0 ? 'active' : ''}" data-thread-link="#{user_thread_path(conversation)}"
-                td.message-sender.truncatable
-                  - @other_user = conversation.other_user(current_user)
-                  == platform_username_with_ion(@other_user)
-                td.message-preview.truncatable
-                  - if conversation.unread_count == 0
-                    = conversation.subject_or_fallback
-                  - else
-                    strong = conversation.subject_or_fallback
-                  |  - 
-                  = message.body
-                td.message-time-ago.truncatable
-                  = time_ago_in_words(message.created_at)
-                  |  ago 
-                td.message-delete-cell
-                  = link_to user_thread_path(conversation), id: 'conversation-delete-anchor', method: :delete do
-                    span.glyphicon.glyphicon-remove aria-hidden=true
+              - if message
+                tr class="message-row #{conversation.unread_count == 0 ? 'active' : ''}" data-thread-link="#{user_thread_path(conversation)}"
+                  td.message-sender.truncatable
+                    - @other_user = conversation.other_user(current_user)
+                    == platform_username_with_ion(@other_user)
+                  td.message-preview.truncatable
+                    - if conversation.unread_count == 0
+                      = conversation.subject_or_fallback
+                    - else
+                      strong = conversation.subject_or_fallback
+                    |  - 
+                    = message.body
+                  td.message-time-ago.truncatable
+                    = time_ago_in_words(message.created_at)
+                    |  ago 
+                  td.message-delete-cell
+                    = link_to user_thread_path(conversation), id: 'conversation-delete-anchor', method: :delete do
+                      span.glyphicon.glyphicon-remove aria-hidden=true
 
 .row
   .col-xs-12
