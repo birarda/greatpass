@@ -1,11 +1,11 @@
-= content_for(:title) { "Messages" }
+= content_for(:title) { "Inbox" }
 
-h3 Messages
+h3 Inbox
 
 .row
   .col-xs-12
     p
-      = page_entries_info @inbox, entry_name: 'messages'
+      = page_entries_info @inbox, entry_name: 'conversations'
 
 .row
   .col-xs-12
@@ -26,7 +26,10 @@ h3 Messages
                   - @other_user = conversation.other_user(current_user)
                   == platform_username_with_ion(@other_user)
                 td.message-preview.truncatable
-                  strong = conversation.subject
+                  - if message.sender == current_user || message.read?
+                    = conversation.subject
+                  - else
+                    strong = conversation.subject
                   |  - 
                   = message.body
                 td.message-time-ago.truncatable

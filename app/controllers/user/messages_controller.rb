@@ -1,36 +1,26 @@
 class User::MessagesController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    @inbox = current_user.inbox.page(params[:page])
-  end
-
   def create
-    message_params = permitted_message_params
-
-    # if we have no conversation_id and we have a subject, we'll need to create a new conversation
-    conversation = Conversation.new({
-      subject: message_params[:subject],
-      sender_id: current_user.id,
-      receiver_id: message_params[:receiver_id]
-    })
+    message_params = permitted_message_reply_params
+    conversation = Conversation.find(message_params[:conversation_id])
 
     # now create our message in the conversation
-    message = conversation.messages.new({
+    new_message_params = {
       sender_id: current_user.id,
       receiver_id: message_params[:receiver_id],
       body: message_params[:body]
-    })
+    }
 
-    if message.save
-      render status: 200, json: { status: 'success' }
+    if conversation.messages.create(new_message_params)
+      redirect_to user_conversation_path(conversation)
     else
-      render status: 500, json: { status: 'failure' }
+      # failure in responding to message
     end
   end
 
   private
-    def permitted_message_params
-      params.permit(:subject, :body, :receiver_id)
+    def permitted_message_reply_params
+      params.require(:message).permit(:conversation_id, :body, :receiver_id)
     end
 end

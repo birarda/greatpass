@@ -16,3 +16,12 @@ h4
             span.text-muted
               = "#{time_ago_in_words(message.created_at)} ago" 
           .panel-body = message.body
+
+#reply-box
+  .row
+    .col-xs-12
+      = bootstrap_form_for(@reply_message, url: user_messages_path) do |f|
+        = f.text_area :body, hide_label: true
+        = f.hidden_field :receiver_id
+        = f.hidden_field :conversation_id
+        = f.submit 'Send Message', class: 'btn btn-success' 
