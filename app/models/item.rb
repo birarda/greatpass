@@ -20,8 +20,8 @@ class Item < ApplicationRecord
   enum rare_class: {
     common: 0,
     uncommon: 1,
-    rare: 2,  
-    premium: 4,
+    rare: 2,
+    # premium: 4,
     limited: 5,
     very_rare: 6,
     import: 7,
