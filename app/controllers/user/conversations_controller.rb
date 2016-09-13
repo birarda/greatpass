@@ -20,6 +20,10 @@ class User::ConversationsController < ApplicationController
       # so that they do not get counted in the navbar
       conversation.messages.where(receiver_id: current_user.id).update_all(read: true)
 
+      other_user = (conversation.sender_id == current_user.id) ? conversation.receiver : conversation.sender
+
+      flash[:notice] = "Deleted <strong>#{conversation.subject}</strong> from #{other_user.platform_username}"
+
       redirect_to user_messages_path
     else
 
