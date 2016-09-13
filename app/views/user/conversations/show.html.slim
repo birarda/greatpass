@@ -22,7 +22,7 @@ h4
   .row
     .col-xs-12
       = bootstrap_form_for(@reply_message, url: user_messages_path) do |f|
-        = f.text_area :body, hide_label: true
+        = f.text_area :body, label: 'Message'
         = f.hidden_field :receiver_id
         = f.hidden_field :conversation_id
         = f.submit 'Send Message', class: 'btn btn-success' 
