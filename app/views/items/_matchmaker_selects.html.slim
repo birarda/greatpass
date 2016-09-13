@@ -1,0 +1,15 @@
+.col-sm-6.col-md-3
+  = f.select :item_id, 
+    options_for_select(Item.all.collect { |i| [ i.name, i.id ] }, namespace == 'match_have' ? @have_params[:item_id] : @want_params[:item_id]), {}, { namespace: namespace, name: "#{namespace}[item_id]" }
+.col-sm-6.col-md-3
+  = f.select :certification, 
+    options_for_select(@certification_options, namespace == 'match_have' ? @have_params[:certification_id] : @want_params[:certification_id]), { include_blank: 'Any / None'}, { namespace: namespace, name: "#{namespace}[certification_id]" }
+.clearfix.visible-sm
+.col-sm-6.col-md-3
+  = f.select :paint_color, 
+    options_for_select(@paint_options, namespace == 'match_have' ? @have_params[:paint_color_id] : @want_params[:paint_color_id]), { include_blank: 'Any / None' }, { namespace: namespace, name: "#{namespace}[paint_color_id]" }
+
+- if namespace == 'match_have'
+  .col-sm-6.col-md-3
+    = f.select :platform, options_for_select(User.platforms.sort, namespace == 'match_have' ? @have_params[:platform] : @want_params[:platform]), 
+      { include_blank: 'All' }, { namespace: namespace, name: "#{namespace}[platform]" }
