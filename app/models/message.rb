@@ -39,7 +39,7 @@ class Message < ApplicationRecord
 
       if !(self.sender_id == self.conversation.sender_id && self.receiver_id == self.conversation.receiver_id) &&
          !(self.receiver_id == self.conversation.sender_id && self.sender_id == self.conversation.receiver_id)
-          errors.add(:message, 'must be sent in matching conversation')
+          errors.add(:message, 'must be sent in matching thread')
       end
     end
 end
