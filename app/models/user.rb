@@ -34,8 +34,6 @@ class User < ApplicationRecord
   has_many :inventory, -> { where('user_items.list = ?', UserItem.lists[:inventory]) }, class_name: 'UserItem', inverse_of: :user
   has_many :wishlist, -> { where('user_items.list = ?', UserItem.lists[:wishlist]) }, class_name: 'UserItem', inverse_of: :user
 
-  has_many :conversation_deletions, inverse_of: :user, class_name: 'UserConversationDeletion'
-
   validates :platform_username, presence: true, length: { maximum: 32 }, uniqueness: { scope: :platform, case_sensitive: false }
   validates :reddit_username, uniqueness: { case_sensitive: false }
   validates :platform, presence: true
