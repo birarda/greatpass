@@ -113,7 +113,7 @@ class ItemsController < ApplicationController
 
     if @have_params && @want_params
       # find user items that match the given request
-      query = UserItem.where(item_id: @want_params[:item_id])
+      query = UserItem.inventory.where(item_id: @want_params[:item_id]).joins(:user)
 
       if !@want_params[:certification_id].blank?
         if @want_params[:certification_id] == '-1' # Any
@@ -135,12 +135,12 @@ class ItemsController < ApplicationController
         end
       end
 
-      if !@want_params[:platform].blank?
-        query = query.where(users: { platform: @want_params[:platform] })
+      if !@have_params[:platform].blank?
+        query = query.where('users.platform = ?', @have_params[:platform].to_i)
       end
 
       query = query.joins('JOIN user_items AS user_wanted_items ON user_wanted_items.user_id = user_items.user_id')
-                   .where(user_wanted_items: { item_id: @have_params[:item_id] })
+                   .where(user_wanted_items: { item_id: @have_params[:item_id], list: UserItem.lists[:wishlist] })
 
       if !@have_params[:certification_id].blank?
         if @have_params[:certification_id] == '-1' # Any
