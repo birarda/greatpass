@@ -2,7 +2,10 @@ class User::ConversationsController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    @conversation = Conversation.find(params[:id])
+    raise ActiveRecord::RecordNotFound if (@conversation.sender_id != current_user.id && @conversation.receiver_id != current_user.id)
 
+    @messages = @conversation.messages.order('created_at ASC')
   end
 
   def destroy

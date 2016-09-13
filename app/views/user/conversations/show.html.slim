@@ -1,0 +1,18 @@
+- content_for(:title) { "Conversation with #{@conversation.other_user(current_user).platform_username}" }
+
+h3
+  | Conversation - 
+  = @conversation.subject
+h4
+  == platform_username_with_ion(@conversation.other_user(current_user)) 
+
+#message-panels
+  .row
+    .col-xs-12
+      - @messages.each do |message|
+        .panel class="#{message.sender != current_user ? 'panel-info' : 'panel-default'}"
+          .panel-heading
+            p = message.sender.platform_username
+            span.text-muted
+              = "#{time_ago_in_words(message.created_at)} ago" 
+          .panel-body = message.body

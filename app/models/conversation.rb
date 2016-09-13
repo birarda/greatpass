@@ -19,4 +19,8 @@ class Conversation < ApplicationRecord
   has_many :deletions, class_name: 'UserConversationDeletion'
 
   has_one :last_message, ->{ order 'messages.created_At DESC' }, class_name: 'Message'
+
+  def other_user(this_user)
+    (this_user.id == self.sender_id) ? self.receiver : self.sender
+  end
 end

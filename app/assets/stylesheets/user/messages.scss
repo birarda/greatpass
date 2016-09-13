@@ -9,7 +9,7 @@ table#user-messages {
       }
     }
   }
-  
+
   td, td.active {
     cursor: pointer;
   }
@@ -36,4 +36,8 @@ table#user-messages {
   .glyphicon {
     color: #d44950;
   }
+}
+
+#message-panels {
+  margin-top: 20px;
 }

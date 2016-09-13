@@ -23,10 +23,8 @@ h3 Messages
               - message = conversation.last_message
               tr class="message-row #{message.sender == current_user || message.read? ? 'active' : ''}" data-conversation-link="#{user_conversation_path(conversation)}"
                 td.message-sender.truncatable
-                  - @other_user = (message.sender == current_user ? message.receiver : message.sender) 
-                  i class="icon #{platform_ion_class(@other_user.platform)}"
-                  | &nbsp;
-                  = @other_user.platform_username
+                  - @other_user = conversation.other_user(current_user)
+                  == platform_username_with_ion(@other_user)
                 td.message-preview.truncatable
                   strong = conversation.subject
                   |  - 
