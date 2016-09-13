@@ -6,11 +6,18 @@
           span aria-hidden="true"
             | &times;
         h4.modal-title#message-modal-title Message
-      = bootstrap_form_tag(url: user_threads_path, remote: true, html: { id: 'message-modal-form' }) do |f|
+      - if current_user
+        = bootstrap_form_tag(url: user_threads_path, remote: true, html: { id: 'message-modal-form' }) do |f|
+          .modal-body
+            #message-form-errors.alert.alert-danger role="alert"
+            = f.text_field :subject, namespace: 'message'
+            = f.text_area :body, label: 'Text', namespace: 'message'
+            = f.hidden_field :receiver_id, namespace: 'message'
+          .modal-footer
+            = f.submit 'Send message', class: 'btn btn-success'
+      - else
         .modal-body
-          #message-form-errors.alert.alert-danger role="alert"
-          = f.text_field :subject, namespace: 'message'
-          = f.text_area :body, label: 'Text', namespace: 'message'
-          = f.hidden_field :receiver_id, namespace: 'message'
+          p You need a Great Pass account to send messages.
         .modal-footer
-          = f.submit 'Send message', class: 'btn btn-success'
+          = link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary'
+          = link_to 'Log In', new_user_session_path, class: 'btn btn-primary'
