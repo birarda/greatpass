@@ -1,6 +1,6 @@
 #contact-buttons
-  - if @platform_user != current_user
-    button.btn.btn-primary.message-button type="button" data-toggle="modal" data-target="#message-modal" data-receiver-id="#{@platform_user.id}" data-receiver-name="#{@platform_user.platform_username}"
+  - if @hero_user != current_user
+    button.btn.btn-primary.message-button type="button" data-toggle="modal" data-target="#message-modal" data-receiver-id="#{@hero_user.id}" data-receiver-name="#{@hero_user.platform_username}"
       i.icon.ion-email
       |  Message
     
