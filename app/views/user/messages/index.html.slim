@@ -21,7 +21,7 @@ h3 Messages
           tbody
             - @inbox.each do |conversation|
               - message = conversation.last_message
-              tr class="#{message.read? ? 'active' : ''}"
+              tr class="message-row #{message.sender == current_user || message.read? ? 'active' : ''}" data-conversation-link="#{user_conversation_path(conversation)}"
                 td.message-sender.truncatable
                   - @other_user = (message.sender == current_user ? message.receiver : message.sender) 
                   i class="icon #{platform_ion_class(@other_user.platform)}"
@@ -35,7 +35,7 @@ h3 Messages
                   = time_ago_in_words(message.created_at)
                   |  ago 
                 td.message-delete-cell
-                  = link_to user_conversation_path(conversation), data: { confirm: 'Are you sure? This will permanently delete the message thread.' }, method: :delete do
+                  = link_to user_conversation_path(conversation), id: 'conversation-delete-anchor', method: :delete do
                     span.glyphicon.glyphicon-remove aria-hidden=true
 
 .row

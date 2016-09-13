@@ -1,6 +1,10 @@
 class User::ConversationsController < ApplicationController
   before_action :authenticate_user!
 
+  def show
+    
+  end
+
   def destroy
     conversation = Conversation.find(params[:id])
 

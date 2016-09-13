@@ -32,6 +32,6 @@ Rails.application.routes.draw do
 
     # mailboxer
     resources 'messages', only: [:index, :create]
-    resources 'conversations', only: [:create, :destroy]
+    resources 'conversations', only: [:destroy, :show]
   end
 end

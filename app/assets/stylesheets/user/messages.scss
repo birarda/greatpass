@@ -2,6 +2,18 @@ table#user-messages {
   table-layout: fixed;
   min-width: 500px;
 
+  tr {
+    &:hover {
+      td, td.active {
+        background-color: #d9edf7;
+      }
+    }
+  }
+  
+  td, td.active {
+    cursor: pointer;
+  }
+
   td.truncatable {
     white-space: nowrap;
     overflow: hidden;
