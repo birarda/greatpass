@@ -4,6 +4,10 @@ $(document).on('turbolinks:load', function() {
     $('#message__receiver_id').val($(this).data('receiver-id'));
   });
 
+  $('#message-modal').on('shown.bs.modal', function() {
+    $('#message_subject').focus();
+  });
+
   $('#message-modal-form').on('ajax:success', function(event, data, status, xhr){
     $('#message-modal').modal('hide');
   }).on('ajax:error', function(event, xhr, status, error){

@@ -27,17 +27,23 @@ class User::ThreadsController < ApplicationController
       receiver_id: message_params[:receiver_id]
     })
 
-    message = conversation.messages.new({
-      sender_id: current_user.id,
-      receiver_id: message_params[:receiver_id],
-      body: message_params[:body]
-    })
+    if conversation.save
+      message = conversation.messages.new({
+        sender_id: current_user.id,
+        receiver_id: message_params[:receiver_id],
+        body: message_params[:body]
+      })
 
-    if message.save
-      render status: 200, json: { status: 'success' }
+      if message.save
+        render status: 200, json: { status: 'success' }
+      else
+        render status: 400, json: { status: 'failure', errors: message.errors.full_messages }
+      end
     else
-      render status: 400, json: { status: 'failure', errors: message.errors.full_messages }
+      render status: 400, json: { status: 'failure', errors: conversation.errors.full_messages }
     end
+
+
   end
 
   def destroy

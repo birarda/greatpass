@@ -14,7 +14,14 @@ module UsersHelper
   end
 
   def button_popover_for_user(user)
-    "<button type='button' class='btn btn-primary message-button' data-toggle='modal' data-target='#message-modal' data-receiver-id='#{user.id}' data-receiver-name='#{user.platform_username}'>Message</button> \
-     <a class='btn btn-primary' href='#{platform_user_path(platform_string: user.platform.downcase, platform_username: user.platform_username)}'>Inventory</button>".html_safe
+    popover_html = ""
+
+    if user != current_user
+      popover_html += "<button type='button' class='btn btn-primary message-button' data-toggle='modal' data-target='#message-modal' data-receiver-id='#{user.id}' data-receiver-name='#{user.platform_username}'>Message</button>"
+    end
+
+    popover_html += "<a class='btn btn-primary' href='#{platform_user_path(platform_string: user.platform.downcase, platform_username: user.platform_username)}'>Inventory</button>"
+
+    popover_html.html_safe
   end
 end
