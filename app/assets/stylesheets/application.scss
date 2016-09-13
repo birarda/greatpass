@@ -17,6 +17,7 @@
 
 $brand-primary: #243D64;
 $highlight-color: #D1E8FF;
+$link-color: #337ab7;
 
 @import "bootstrap";
 
@@ -46,7 +47,7 @@ html, body {
 }
 
 a {
-  color: #337ab7;
+  color: $link-color;
 
   &:hover {
     color: $brand-primary;
@@ -54,6 +55,6 @@ a {
   }
 }
 
-.btn:focus,.btn:active {
+.btn:focus, .btn:active, a:focus, a:active {
    outline: none !important;
 }
