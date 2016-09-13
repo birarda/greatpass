@@ -21,12 +21,12 @@ h3 Inbox
           tbody
             - @inbox.each do |conversation|
               - message = conversation.last_message
-              tr class="message-row #{message.sender == current_user || message.read? ? 'active' : ''}" data-conversation-link="#{user_conversation_path(conversation)}"
+              tr class="message-row #{conversation.unread_count == 0 ? 'active' : ''}" data-conversation-link="#{user_conversation_path(conversation)}"
                 td.message-sender.truncatable
                   - @other_user = conversation.other_user(current_user)
                   == platform_username_with_ion(@other_user)
                 td.message-preview.truncatable
-                  - if message.sender == current_user || message.read?
+                  - if conversation.unread_count == 0
                     = conversation.subject_or_fallback
                   - else
                     strong = conversation.subject_or_fallback
