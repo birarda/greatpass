@@ -30,7 +30,6 @@ Rails.application.routes.draw do
     delete 'wishlist/:id', to: 'items#destroy', as: 'wishlist'
     delete 'wishlist', to: 'items#wishlist_clear', as: 'wishlist_clear'
 
-    # mailboxer
     resources 'messages', only: [:create], constraints: { format: 'json' }
     resources 'threads', only: [:index, :show, :destroy]
     resources 'threads', only: [:create], constraints: { format: 'json' }
