@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
   $('body').on('click', '.message-button', function(){
-    $('#message-modal-title').html('Message ' + $(this).data('receiver-name'));
+    $('#message-modal-title').html('Message ' + $(this).find('.hidden-username').html());
     $('#message__receiver_id').val($(this).data('receiver-id'));
   });
 

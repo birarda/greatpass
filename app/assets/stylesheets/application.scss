@@ -58,3 +58,9 @@ a {
 .btn:focus, .btn:active, a:focus, a:active {
    outline: none !important;
 }
+
+button {
+  .hidden-username {
+    display: none;
+  }
+}
