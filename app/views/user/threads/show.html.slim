@@ -7,7 +7,7 @@
 h4
   == platform_username_with_ion(@conversation.other_user(current_user)) 
 
-= render 'users/contact_options', user: @conversation.other_user(current_user), omit_message: true
+= render 'users/contact_options', user: @conversation.other_user(current_user), from_thread: true
 
 #message-panels
   .row

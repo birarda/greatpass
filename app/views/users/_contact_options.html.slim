@@ -1,5 +1,12 @@
 #contact-buttons
-  - if user != current_user && (!defined?(omit_message) || !omit_message)
+  - if defined?(from_thread) && from_thread
+    = link_to platform_user_path(platform_string: user.platform.downcase, platform_username: user.platform_username), class: 'btn btn-primary' do
+      | Inventory
+    
+    = link_to platform_user_wishlist_path(platform_string: user.platform.downcase, platform_username: user.platform_username), class: 'btn btn-primary' do
+      | Wishlist
+  
+  - if user != current_user && (!defined?(from_thread) || !from_thread)
     button.btn.btn-primary.message-button type="button" data-toggle="modal" data-target="#message-modal" data-receiver-id="#{user.id}" data-receiver-name="#{user.platform_username}"
       i.icon.ion-email
       |  Message
@@ -14,5 +21,5 @@
       = " Reddit"
       
     
-- if !defined?(omit_message) || !omit_message
+- if !defined?(from_thread) || !from_thread
   = render 'messages/message_modal'
