@@ -6,7 +6,9 @@ p.text-muted
 
 .row
   .col-xs-12
-    = bootstrap_form_tag(url: matchmaker_path, html: { method: 'get', autocomplete: 'off' }) do |f|
+    #pick-item-error.alert.alert-danger role="alert"
+      p You must select an item you have and an item you want
+    = bootstrap_form_tag(url: matchmaker_path, html: { id: 'matchmaker-form', method: 'get', autocomplete: 'off' }) do |f|
       .panel.panel-default
         .panel-heading I Have
         .panel-body

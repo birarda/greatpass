@@ -5,6 +5,14 @@ $(document).on('turbolinks:load', function() {
   $.each($selectized_selects, function(index, $select){
     $select.selectize();
   });
+
+  $('#matchmaker-form').submit(function(e){
+
+    if (!$('#match_have__item_id').val() || !$('#match_want__item_id').val()) {
+      $('#pick-item-error').show();
+      return false;
+    }
+  });
 });
 
 
