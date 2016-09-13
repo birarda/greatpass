@@ -57,7 +57,7 @@ class User::ThreadsController < ApplicationController
 
       redirect_to user_inbox_path
     else
-      flash[:error] = "There was a problem deleting that conversation. Please try again."
+      flash[:error] = "There was a problem deleting that thread. Please try again."
       redirect_to user_inbox_path
     end
   end
