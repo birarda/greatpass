@@ -28,7 +28,8 @@ class User::ThreadsController < ApplicationController
     })
 
     if conversation.save
-      message = conversation.messages.new({
+      message = Message.new({
+        conversation_id: conversation.id,
         sender_id: current_user.id,
         receiver_id: message_params[:receiver_id],
         body: message_params[:body]

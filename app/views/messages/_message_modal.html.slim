@@ -10,7 +10,7 @@
         .modal-body
           #message-form-errors.alert.alert-danger role="alert"
           = f.text_field :subject, namespace: 'message'
-          = f.text_area :body, namespace: 'message'
+          = f.text_area :body, label: 'Text', namespace: 'message'
           = f.hidden_field :receiver_id, namespace: 'message'
         .modal-footer
           = f.submit 'Send message', class: 'btn btn-success'
