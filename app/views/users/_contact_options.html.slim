@@ -1,12 +1,17 @@
 #contact-buttons
-  - if !@hero_user.platform_url.blank?
-    = link_to @hero_user.platform_url, class: 'btn btn-primary' do
-      i class="icon #{platform_ion_class(@hero_user.platform)}"
-      = " #{@hero_user.platform}"
+  - if user != current_user && (!defined?(omit_message) || !omit_message)
+    button.btn.btn-primary.message-button type="button" data-toggle="modal" data-target="#message-modal" data-receiver-id="#{user.id}" data-receiver-name="#{user.platform_username}"
+      i.icon.ion-email
+      |  Message
+    
+  - if !user.platform_url.blank?
+    = link_to user.platform_url, class: 'btn btn-primary', target: '_blank' do
+      == platform_username_with_ion(user)
       
-  - if !@hero_user.reddit_username.blank?
-    = link_to "https://reddit.com/u/#{@hero_user.reddit_username}", class: 'btn btn-primary' do
+  - if !user.reddit_username.blank?
+    = link_to "https://reddit.com/u/#{user.reddit_username}", class: 'btn btn-primary', target: '_blank' do
       i class="icon ion-social-reddit"
       = " Reddit"
       
     
+= render 'messages/message_modal'

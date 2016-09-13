@@ -9,7 +9,7 @@
         | &nbsp;
         = @for_reddit ? @hero_user.reddit_username : @hero_user.platform_username
         |  - Wishlist
-      = render 'contact_options'
+      = render 'contact_options', user: @hero_user
       p
         | You can view the player's wishlist below or search 
         = link_to 'their inventory', platform_user_path(platform_string: @hero_user.platform.downcase, platform_username: @hero_user.platform_username)

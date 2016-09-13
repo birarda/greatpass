@@ -29,4 +29,6 @@ $(document).on('turbolinks:load', function () {
     }).parent().addClass('active').parent().parent().addClass('active');
 
     $('[data-toggle="tooltip"]').tooltip();
+
+    $('[data-toggle="popover"]').popover();
 });

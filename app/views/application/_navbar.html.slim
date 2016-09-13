@@ -21,6 +21,14 @@
             = link_to 'Wishlist', user_wishlist_index_path
           li
             = link_to 'Inventory', user_items_path
+          li
+            = link_to user_inbox_path do
+              | Inbox
+              - inbox_count = current_user.unread_message_count
+              - if inbox_count > 0
+                | &nbsp;
+                span.badge = inbox_count
+            end
           li.dropdown
             a.dropdown-toggle href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
               i class="icon #{platform_ion_class(current_user.platform)}"

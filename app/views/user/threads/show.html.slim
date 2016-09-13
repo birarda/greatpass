@@ -1,0 +1,31 @@
+- content_for(:title) { "Thread with #{@conversation.other_user(current_user).platform_username}" }
+
+- if !@conversation.subject.blank?
+  h3 
+    = @conversation.subject
+    
+h4
+  == platform_username_with_ion(@conversation.other_user(current_user)) 
+
+= render 'users/contact_options', user: @conversation.other_user(current_user), omit_message: true
+
+#message-panels
+  .row
+    .col-xs-12
+      - @messages.each do |message|
+        .panel class="#{message.sender != current_user ? 'panel-info' : 'panel-default'}"
+          .panel-heading
+            p = message.sender.platform_username
+            span.text-muted
+              = "#{time_ago_in_words(message.created_at)} ago" 
+          .panel-body = message.body
+
+#reply-box
+  .row
+    .col-xs-12
+      #message-form-errors.alert.alert-danger role="alert"
+      = bootstrap_form_for(@reply_message, url: user_messages_path, remote: true, html: { id: 'message-reply-form' }) do |f|
+        = f.text_area :body, label: 'Message'
+        = f.hidden_field :receiver_id
+        = f.hidden_field :conversation_id
+        = f.submit 'Send Message', class: 'btn btn-success' 

@@ -17,6 +17,7 @@
 
 $brand-primary: #243D64;
 $highlight-color: #D1E8FF;
+$link-color: #337ab7;
 
 @import "bootstrap";
 
@@ -26,8 +27,10 @@ $highlight-color: #D1E8FF;
 @import "navbar";
 @import "search";
 @import "user/items";
+@import "user/messages";
 @import "users";
 @import "items";
+@import "messages";
 @import "footer";
 
 html, body {
@@ -44,10 +47,14 @@ html, body {
 }
 
 a {
-  color: #337ab7;
+  color: $link-color;
 
-  &:hover {
+  &:hover, &:focus {
     color: $brand-primary;
     text-decoration: none;
   }
+}
+
+.btn:focus, .btn:active, a:focus, a:active {
+   outline: none !important;
 }

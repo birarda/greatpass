@@ -1,0 +1,49 @@
+table#user-messages {
+  table-layout: fixed;
+  min-width: 500px;
+
+  tr {
+    &:hover {
+      td, td.active {
+        background-color: #d9edf7;
+      }
+    }
+  }
+
+  td, td.active {
+    cursor: pointer;
+  }
+
+  td.truncatable {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .message-sender {
+    width: 150px;
+  }
+
+  .message-time-ago {
+    width: 160px;
+  }
+}
+
+.message-delete-cell {
+  width: 75px;
+  text-align: right;
+
+  .glyphicon {
+    color: $brand-primary;
+  }
+}
+
+#message-panels {
+  margin-top: 20px;
+}
+
+#reply-box {
+  #message_body {
+    height: 115px;
+  }
+}

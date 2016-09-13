@@ -29,5 +29,11 @@ Rails.application.routes.draw do
     post 'wishlist', to: 'items#create', as: 'wishlist_add'
     delete 'wishlist/:id', to: 'items#destroy', as: 'wishlist'
     delete 'wishlist', to: 'items#wishlist_clear', as: 'wishlist_clear'
+
+    resources 'messages', only: [:create], constraints: { format: 'json' }
+    resources 'threads', only: [:index, :show, :destroy]
+    resources 'threads', only: [:create], constraints: { format: 'json' }
+
+    get 'inbox', to: 'threads#index'
   end
 end

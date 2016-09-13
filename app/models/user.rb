@@ -41,6 +41,17 @@ class User < ApplicationRecord
 
   before_validation :smart_add_platform_url_protocol
 
+  def inbox
+    Conversation.includes(:last_message, :sender, :receiver)
+                .select("conversations.*, (SELECT count(*) from messages where conversation_id = conversations.id AND receiver_id = #{self.id} AND messages.read = 'f') as unread_count")
+                .where('(receiver_id = ? AND receiver_deleted = ?) OR (sender_id = ? AND sender_deleted = ?)', self.id, false, self.id, false)
+                .order('updated_at DESC')
+  end
+
+  def unread_message_count
+     Message.where(receiver_id: self.id, read: false).count('DISTINCT conversation_id')
+  end
+
   protected
 
   def smart_add_platform_url_protocol
