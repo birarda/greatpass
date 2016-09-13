@@ -1,7 +1,6 @@
 - content_for(:title) { "Conversation with #{@conversation.other_user(current_user).platform_username}" }
 
-h3
-  | Conversation - 
+h3 
   = @conversation.subject
 h4
   == platform_username_with_ion(@conversation.other_user(current_user)) 

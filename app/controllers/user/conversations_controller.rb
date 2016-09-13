@@ -27,12 +27,16 @@ class User::ConversationsController < ApplicationController
       receiver_id: message_params[:receiver_id]
     })
 
-    respond_to do |format|
-      if message.save
-        render status: 200, json: { status: 'success' }
-      else
-        render status: 500, json: { status: 'failure' }
-      end
+    message = conversation.messages.new({
+      sender_id: current_user.id,
+      receiver_id: message_params[:receiver_id],
+      body: message_params[:body]
+    })
+
+    if message.save
+      render status: 200, json: { status: 'success' }
+    else
+      render status: 500, json: { status: 'failure' }
     end
   end
 
@@ -55,7 +59,7 @@ class User::ConversationsController < ApplicationController
 
       flash[:notice] = "Deleted <strong>#{conversation.subject}</strong> from #{other_user.platform_username}"
 
-      redirect_to user_messages_path
+      redirect_to user_inbox_path
     else
 
     end
