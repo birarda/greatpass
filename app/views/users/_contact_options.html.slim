@@ -6,8 +6,7 @@
     
   - if !@hero_user.platform_url.blank?
     = link_to @hero_user.platform_url, class: 'btn btn-primary' do
-      i class="icon #{platform_ion_class(@hero_user.platform)}"
-      = " #{@hero_user.platform}"
+      == platform_username_with_ion(@hero_user)
       
   - if !@hero_user.reddit_username.blank?
     = link_to "https://reddit.com/u/#{@hero_user.reddit_username}", class: 'btn btn-primary' do

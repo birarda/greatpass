@@ -27,9 +27,7 @@
                 td = i.paint_color.try(:titleize)
                 td
                   = link_to platform_user_path(platform_string: i.user.platform.downcase, platform_username: i.user.platform_username), class: 'user-platform-link' do
-                    i class="icon #{platform_ion_class(i.user.platform)}"
-                    | &nbsp;
-                    = i.user.platform_username
+                    == platform_username_with_ion(i.user)
                 td = i.item.try(:rare_class).try(:titleize)
                 td = i.owned_percentage
 
