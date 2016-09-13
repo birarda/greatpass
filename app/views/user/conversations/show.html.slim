@@ -3,7 +3,7 @@
 - if !@conversation.subject.blank?
   h3 
     = @conversation.subject
-
+    
 h4
   == platform_username_with_ion(@conversation.other_user(current_user)) 
 

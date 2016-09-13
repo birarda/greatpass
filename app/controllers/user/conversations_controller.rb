@@ -9,7 +9,7 @@ class User::ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
     raise ActiveRecord::RecordNotFound if (@conversation.sender_id != current_user.id && @conversation.receiver_id != current_user.id)
 
-    @messages = @conversation.messages.order('created_at ASC')
+    @messages = @conversation.messages.includes(:sender).order('created_at ASC')
 
     # mark everything that was sent to us as read
     @conversation.messages.where(receiver_id: current_user.id).update_all(read: true)
