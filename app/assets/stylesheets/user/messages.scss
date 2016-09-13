@@ -1,15 +1,27 @@
 table#user-messages {
-  white-space: nowrap;
-  width: 100%;
   table-layout: fixed;
-}
+  min-width: 500px;
 
-td.message-preview {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  td.truncatable {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .message-sender {
+    width: 150px;
+  }
+
+  .message-time-ago {
+    width: 140px;
+  }
 }
 
 .message-delete-cell {
   width: 75px;
   text-align: right;
+
+  .glyphicon {
+    color: #d44950;
+  }
 }
