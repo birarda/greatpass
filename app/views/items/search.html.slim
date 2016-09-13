@@ -28,7 +28,7 @@ end
           | &nbsp;
           = @hero_user.platform_username
           |  - Inventory
-        = render 'users/contact_options'
+        = render 'users/contact_options', user: @hero_user
         p
           | You can search through the player's inventory below or view 
           = link_to 'their wishlist', platform_user_wishlist_path(platform_string: @hero_user.platform.downcase, platform_username: @hero_user.platform_username)

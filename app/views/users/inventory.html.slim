@@ -8,7 +8,7 @@
         | &nbsp;
         = @hero_user.reddit_username
         |  - Inventory
-      = render 'contact_options'
+      = render 'contact_options', user: @hero_user
       p
         | View the 
         = link_to "player's wishlist", 
