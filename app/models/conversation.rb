@@ -23,4 +23,8 @@ class Conversation < ApplicationRecord
   def other_user(this_user)
     (this_user.id == self.sender_id) ? self.receiver : self.sender
   end
+
+  def subject_or_fallback
+    self.subject.blank? ? "(no subject)" : self.subject
+  end
 end

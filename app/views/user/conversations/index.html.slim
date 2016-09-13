@@ -27,9 +27,9 @@ h3 Inbox
                   == platform_username_with_ion(@other_user)
                 td.message-preview.truncatable
                   - if message.sender == current_user || message.read?
-                    = conversation.subject
+                    = conversation.subject_or_fallback
                   - else
-                    strong = conversation.subject
+                    strong = conversation.subject_or_fallback
                   |  - 
                   = message.body
                 td.message-time-ago.truncatable

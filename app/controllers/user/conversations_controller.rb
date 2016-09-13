@@ -36,7 +36,7 @@ class User::ConversationsController < ApplicationController
     if message.save
       render status: 200, json: { status: 'success' }
     else
-      render status: 500, json: { status: 'failure' }
+      render status: 400, json: { status: 'failure', errors: message.errors.full_messages }
     end
   end
 
@@ -55,13 +55,10 @@ class User::ConversationsController < ApplicationController
       # so that they do not get counted in the navbar
       conversation.messages.where(receiver_id: current_user.id).update_all(read: true)
 
-      other_user = (conversation.sender_id == current_user.id) ? conversation.receiver : conversation.sender
-
-      flash[:notice] = "Deleted <strong>#{conversation.subject}</strong> from #{other_user.platform_username}"
-
       redirect_to user_inbox_path
     else
-
+      flash[:error] = "There was a problem deleting that conversation. Please try again."
+      redirect_to user_inbox_path
     end
   end
 

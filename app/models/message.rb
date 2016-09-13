@@ -17,6 +17,11 @@ class Message < ApplicationRecord
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
 
+  validates :sender, presence: true
+  validates :receiver, presence: true
+  validates :conversation, presence: true
+  validates :body, length: { maximum: 1000, minimum: 1 }
+
   before_create :remove_conversation_delete_flags
 
   private
