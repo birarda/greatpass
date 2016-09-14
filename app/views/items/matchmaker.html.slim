@@ -10,12 +10,12 @@ p.text-muted
       p You must select an item you have and an item you want
     = bootstrap_form_tag(url: matchmaker_path, html: { id: 'matchmaker-form', method: 'get', autocomplete: 'off' }) do |f|
       .panel.panel-default
-        .panel-heading I Have
+        .panel-heading Have
         .panel-body
           .col-xs-12
             = render 'matchmaker_selects', f: f, namespace: 'match_have'
       .panel.panel-default
-        .panel-heading I Want
+        .panel-heading Want
         .panel-body
           .col-xs-12
             = render 'matchmaker_selects', f: f, namespace: 'match_want'
