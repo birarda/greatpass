@@ -7,7 +7,7 @@
 #  kind                      :integer          default("topper")
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
-#  rare_class                :integer          default("common")
+#  rare_class                :integer          default(NULL)
 #  game_preview_file_name    :string
 #  game_preview_content_type :string
 #  game_preview_file_size    :integer
