@@ -19,7 +19,7 @@
 class Item < ApplicationRecord
   enum kind: [:topper, :antenna, :wheels, :boost, :decal, :crate, 'battle-car']
   enum rare_class: {
-    common: 0,
+    # common: 0,
     uncommon: 1,
     rare: 2,
     # premium: 4,
