@@ -53,12 +53,21 @@ class ItemsController < ApplicationController
       end
 
       if @search_params.has_key?(:platform_username)
-        @hero_user = User.where('platform_username ILIKE ?', @search_params[:platform_username]).first
-        if @hero_user
-          query = query.references(:users).where(users: { id: @hero_user.id })
+        if @search_params.has_key?(:platform_string)
+          @hero_user = User.where(
+            'platform_username ILIKE ? AND platform = ?',
+            @search_params[:platform_username],
+            platform_from_url_string(@search_params[:platform_string])
+          ).first
+
+          if @hero_user
+            query = query.references(:users).where(users: { id: @hero_user.id })
+          else
+            @result_items = UserItem.none.page(params[:page])
+            return
+          end
         else
-          @result_items = UserItem.none.page(params[:page])
-          return
+          query = query.references(:users).where('platform_username ILIKE ?', @search_params[:platform_username])
         end
       end
 
