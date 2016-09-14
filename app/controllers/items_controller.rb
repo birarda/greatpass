@@ -139,34 +139,35 @@ class ItemsController < ApplicationController
         query = query.where('users.platform = ?', @have_params[:platform].to_i)
       end
 
-      query = query.joins('JOIN user_items AS user_wanted_items ON user_wanted_items.user_id = user_items.user_id')
-                   .where(user_wanted_items: { item_id: @have_params[:item_id], list: UserItem.lists[:wishlist] })
+
+      wishlist_query = UserItem.where('user_id = users.id')
+                               .where('item_id = ? AND list = ?', @have_params[:item_id], UserItem.lists[:wishlist])
 
       if !@have_params[:certification_id].blank?
         if @have_params[:certification_id] == '-1' # Any
-          query = query.where('user_wanted_items.certification IS NOT NULL')
+          wishlist_query = wishlist_query.where('user_items.certification IS NOT NULL')
         elsif @have_params[:certification_id] == '-2' # None
-          query = query.where('user_wanted_items.certification IS NULL')
+          wishlist_query = wishlist_query.where('user_items.certification IS NULL')
         else
-          query = query.where(user_wanted_items: { certification: @have_params[:certification_id] })
+          wishlist_query = wishlist_query.where('certification = ?', @have_params[:certification_id])
         end
       end
 
       if !@have_params[:paint_color_id].blank?
         if @have_params[:paint_color_id] == '-1' # Any
-          query = query.where('user_wanted_items.paint_color IS NOT NULL')
+          wishlist_query = wishlist_query.where('paint_color IS NOT NULL')
         elsif @have_params[:paint_color_id] == '-2' # None
-          query = query.where('user_wanted_items.paint_color IS NULL')
+          wishlist_query = wishlist_query.where('paint_color IS NULL')
         else
-          query = query.where(user_wanted_items: { paint_color: @have_params[:paint_color_id] })
+          wishlist_query = wishlist_query.where('paint_color = ?', @have_params[:paint_color_id])
         end
       end
 
       if current_user
-        query.where('user_items.user_id != ?', current_user.id)
+        wishlist_query.where('user_items.user_id != ?', current_user.id)
       end
 
-      @result_items = query.includes(:item, :user).order(created_at: :desc).page(params[:page])
+      @result_items = query.where(wishlist_query.exists).includes(:item, :user).order(created_at: :desc).page(params[:page])
       @entry_name = 'match'
     else
       @have_params = {}
