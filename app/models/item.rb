@@ -13,6 +13,7 @@
 #  game_preview_file_size    :integer
 #  game_preview_updated_at   :datetime
 #  url_slug                  :string
+#  common_base               :boolean          default(FALSE)
 #
 
 class Item < ApplicationRecord
