@@ -17,12 +17,12 @@
 #
 
 class Item < ApplicationRecord
-  enum kind: [:topper, :antenna, :wheels, :boost, :decal, :crate, 'battle-car']
+  enum kind: [:topper, :antenna, :wheels, :boost, :decal, :crate, 'battle-car', :key]
   enum rare_class: {
     # common: 0,
     uncommon: 1,
     rare: 2,
-    # premium: 4,
+    premium: 4,
     limited: 5,
     very_rare: 6,
     import: 7,
