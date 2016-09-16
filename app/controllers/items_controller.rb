@@ -121,62 +121,67 @@ class ItemsController < ApplicationController
     end
 
     if @have_params && @want_params
-      # find user items that match the given request
-      query = UserItem.inventory.where(item_id: @want_params[:item_id]).joins(:user)
+      if @have_params[:item_id].blank? || @want_params[:item_id].blank?
+        @result_items = UserItem.none.page(params[:page])
+      else
+        # find user items that match the given request
+        query = UserItem.inventory.where(item_id: @want_params[:item_id]).joins(:user)
 
-      if !@want_params[:certification_id].blank?
-        if @want_params[:certification_id] == '-1' # Any
-          query = query.where('user_items.certification IS NOT NULL')
-        elsif @want_params[:certification_id] == '-2' # None
-          query = query.where(certification: nil)
-        else
-          query = query.where(certification: @want_params[:certification_id])
+        if !@want_params[:certification_id].blank?
+          if @want_params[:certification_id] == '-1' # Any
+            query = query.where('user_items.certification IS NOT NULL')
+          elsif @want_params[:certification_id] == '-2' # None
+            query = query.where(certification: nil)
+          else
+            query = query.where(certification: @want_params[:certification_id])
+          end
         end
-      end
 
-      if !@want_params[:paint_color_id].blank?
-        if @want_params[:paint_color_id] == '-1' # Any
-          query = query.where('user_items.paint_color IS NOT NULL')
-        elsif @want_params[:paint_color_id] == '-2' # None
-          query = query.where(paint_color: nil)
-        else
-          query = query.where(paint_color: @want_params[:paint_color_id])
+        if !@want_params[:paint_color_id].blank?
+          if @want_params[:paint_color_id] == '-1' # Any
+            query = query.where('user_items.paint_color IS NOT NULL')
+          elsif @want_params[:paint_color_id] == '-2' # None
+            query = query.where(paint_color: nil)
+          else
+            query = query.where(paint_color: @want_params[:paint_color_id])
+          end
         end
-      end
 
-      if !@have_params[:platform].blank?
-        query = query.where('users.platform = ?', @have_params[:platform].to_i)
-      end
-
-
-      wishlist_query = UserItem.where('user_id = users.id')
-                               .where('item_id = ? AND list = ?', @have_params[:item_id], UserItem.lists[:wishlist])
-
-      if !@have_params[:certification_id].blank?
-        if @have_params[:certification_id] == '-1' # Any
-          wishlist_query = wishlist_query.where('user_items.certification IS NOT NULL')
-        elsif @have_params[:certification_id] == '-2' # None
-          wishlist_query = wishlist_query.where('user_items.certification IS NULL')
-        else
-          wishlist_query = wishlist_query.where('certification = ?', @have_params[:certification_id])
+        if !@have_params[:platform].blank?
+          query = query.where('users.platform = ?', @have_params[:platform].to_i)
         end
-      end
 
-      if !@have_params[:paint_color_id].blank?
-        if @have_params[:paint_color_id] == '-1' # Any
-          wishlist_query = wishlist_query.where('paint_color IS NOT NULL')
-        elsif @have_params[:paint_color_id] == '-2' # None
-          wishlist_query = wishlist_query.where('paint_color IS NULL')
-        else
-          wishlist_query = wishlist_query.where('paint_color = ?', @have_params[:paint_color_id])
+
+        wishlist_query = UserItem.where('user_id = users.id')
+                                 .where('item_id = ? AND list = ?', @have_params[:item_id], UserItem.lists[:wishlist])
+
+        if !@have_params[:certification_id].blank?
+          if @have_params[:certification_id] == '-1' # Any
+            wishlist_query = wishlist_query.where('user_items.certification IS NOT NULL')
+          elsif @have_params[:certification_id] == '-2' # None
+            wishlist_query = wishlist_query.where('user_items.certification IS NULL')
+          else
+            wishlist_query = wishlist_query.where('certification = ?', @have_params[:certification_id])
+          end
         end
+
+        if !@have_params[:paint_color_id].blank?
+          if @have_params[:paint_color_id] == '-1' # Any
+            wishlist_query = wishlist_query.where('paint_color IS NOT NULL')
+          elsif @have_params[:paint_color_id] == '-2' # None
+            wishlist_query = wishlist_query.where('paint_color IS NULL')
+          else
+            wishlist_query = wishlist_query.where('paint_color = ?', @have_params[:paint_color_id])
+          end
+        end
+
+        if current_user
+          wishlist_query.where('user_items.user_id != ?', current_user.id)
+        end
+
+        @result_items = query.where(wishlist_query.exists).includes(:item, :user).order(created_at: :desc).page(params[:page])
       end
 
-      if current_user
-        wishlist_query.where('user_items.user_id != ?', current_user.id)
-      end
-
-      @result_items = query.where(wishlist_query.exists).includes(:item, :user).order(created_at: :desc).page(params[:page])
       @entry_name = 'match'
     else
       @have_params = {}
