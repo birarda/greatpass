@@ -1,0 +1,47 @@
+.panel.panel-default
+  = bootstrap_form_tag url: search_path, html: { method: 'get', autocomplete: 'off' } do |f|
+    .panel-body
+      .col-sm-4
+        = f.select :kind,
+          options_for_select(Item.kinds.sort.map { |k, v| [k.titleize, v] }, @search_params[:kind]), 
+        { include_blank: 'All', label: 'Type' }, { multiple: true, namespace: 'search' }
+      .col-sm-4#item-selection
+        = f.select :item_id, 
+          options_for_select(Item.all.collect { |i| [ i.name, i.id, { 'data-kind-id': Item.kinds[i.kind] }]}, @search_params[:item_id]), 
+          { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+        javascript:
+          var itemKinds = #{Item.all.collect { |i| [i.id, Item.kinds[i.kind]] }.to_h.to_json.html_safe}
+      .col-sm-4
+        = f.select :rare_class,
+          options_for_select(Item.rare_classes.sort.map { |k, v| [k.titleize, v] }, @search_params[:rare_class]),
+          { include_blank: 'All', label: 'Class' }, { multiple: true, namespace: 'search' }
+      .clearfix.visible-sm.visible-md.visible-lg
+      .col-sm-6
+        = f.select :certification, 
+          options_for_select(@certification_options, @search_params[:certification]), 
+          { include_blank: 'Any / None' }, { multiple: true, namespace: 'search' }
+      .col-sm-6
+        = f.select :paint_color, 
+          options_for_select(@paint_options, @search_params[:paint_color]), 
+          { include_blank: 'Any / None' }, { multiple: true, namespace: 'search' }
+      .clearfix.visible-sm.visible-md.visible-lg
+      .col-sm-6
+        = f.select :platform, options_for_select(User.platforms.sort, @search_params[:platform]), 
+        { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+      .col-sm-6
+        = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
+      .clearfix.visible-sm.visible-md.visible-lg
+      - if !@hero_user
+        .col-sm-6#list-radio-container
+          = f.form_group :search_type  do
+            = f.radio_button :search_type, 'i', label: 'Items players have', inline: true, checked: @search_params[:search_type] == 'i'
+            = f.radio_button :search_type, 'w', label: 'Items players want', inline: true, checked: @search_params[:search_type] == 'w'
+          end
+      div class="#{@hero_user ? 'col-sm-12' : 'col-sm-6'}"
+        = f.button class: 'btn btn-success', id: 'search-submit-button' do
+          span.glyphicon.glyphicon-search aria-hidden='true'
+          - if @hero_user
+            |  Search 
+            = @hero_user.platform_username
+          - else
+            |  Search
