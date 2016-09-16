@@ -53,11 +53,10 @@ $(document).on('turbolinks:load', function() {
       var itemID = parseInt(itemIDString)
       var itemKind = itemKinds[itemID];
 
-      if (newKinds.indexOf(itemKind.toString()) != -1) {
+      if (!newKinds || newKinds.indexOf(itemKind.toString()) != -1) {
         newSelection.push(itemIDString);
       }
     });
-
 
     itemSelectize.setValue(newSelection);
   });

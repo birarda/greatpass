@@ -1,6 +1,5 @@
 = render 'search_panel'
 
-
 - cache ['v2', "#{cache_key_for_item_list}"] do
   - Item.all.group_by(&:kind).sort.each do |kind, items|
     - if kind != Item.kinds[:crate]
@@ -9,16 +8,16 @@
           h4 = kind.pluralize.titleize
         .panel-body
           - items.each_with_index do |item, index|
-            .col-xs-6.col-sm-3.col-md-2
+            .col-xs-6.col-sm-3.col-md-2.item-col data-item-id="#{item.id}" 
               = link_to item_path(item_slug: item.url_slug) do
-                .item-tile data-item-id="#{item.id}"
+                .item-tile
                   .image-container.center-block 
                     img.img-responsive.center-block.unveil-img data-src="#{item.game_preview.url}"
                     
                   p.text-center.item-name = item.name
             - if (index + 1) % 2 == 0
-              .clearfix.visible-xs
+              / .clearfix.visible-xs
             - if (index + 1) % 4 == 0
-              .clearfix.visible-sm
+              / .clearfix.visible-sm
             - if (index + 1) % 6 == 0
-              .clearfix.visible-md.visible-lg
+              / .clearfix.visible-md.visible-lg
