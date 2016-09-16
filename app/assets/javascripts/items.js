@@ -20,6 +20,9 @@ $(document).on('turbolinks:load', function() {
     } else {
       $('.kind-panel').show();
     }
+
+    // no matter what we need to re-trigger unveil in case some things have become visible
+    $(window).trigger("lookup");
   });
 });
 
