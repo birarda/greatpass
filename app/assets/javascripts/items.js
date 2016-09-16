@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function() {
   $('.unveil-img').unveil(100);
 
-  var currentKinds = []
+  var currentKindStrings = null;
 
   $('#search__kind').change(function(){
     // the kind has just been changed

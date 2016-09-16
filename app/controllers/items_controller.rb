@@ -21,6 +21,8 @@ class ItemsController < ApplicationController
     @paint_options = UserItem.paint_colors.sort.map { |k, v| [k.titleize, v] }
     @paint_options.insert(0, ['Any', -1], ['None', -2])
 
+    @items = Item.all
+
     # check if we were passed any search parameters
     @search_params = permitted_search_params
 
