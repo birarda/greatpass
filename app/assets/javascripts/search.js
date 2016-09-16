@@ -14,16 +14,19 @@ $(document).on('turbolinks:load', function() {
   });
 
   // grab the initial options from the selectize object for item
-  var itemSelectize = $('#item-selection .selectized')[0].selectize;
+  var $rawItemSelect = $('#item-selection .selectized');
+  var itemSelectize = $rawItemSelect[0].selectize;
 
   var allItems = itemSelectize.options;
-  console.log(allItems);
 
   $('#search__kind').change(function(){
     // now we filter the list of items that can be selected to match the selected kinds
     var newKinds = $(this).val();
 
     var filteredItems = [];
+
+    // before we clear, we need to remember what was selected
+    var itemsSelectedBefore = $rawItemSelect.val();
 
     $.each(allItems, function(itemID, value){
       // use the itemKinds Object to see what kind this is
@@ -41,6 +44,22 @@ $(document).on('turbolinks:load', function() {
     itemSelectize.load(function(callback){
       callback(filteredItems);
     });
+
+    var newSelection = [];
+
+    // okay, now we need to re-select whatever was selected before
+    // as long as the kinds match
+    $.each(itemsSelectedBefore, function(index, itemIDString){
+      var itemID = parseInt(itemIDString)
+      var itemKind = itemKinds[itemID];
+
+      if (newKinds.indexOf(itemKind.toString()) != -1) {
+        newSelection.push(itemIDString);
+      }
+    });
+
+
+    itemSelectize.setValue(newSelection);
   });
 });
 
