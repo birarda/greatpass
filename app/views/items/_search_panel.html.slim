@@ -39,8 +39,13 @@
             { include_blank: 'All' }, { multiple: true, namespace: 'search' }
           .col-sm-4
             = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
+          .col-sm-6#list-radio-container
+            = f.form_group :search_type  do
+              = f.radio_button :search_type, 'i', label: 'Items players have', inline: true, checked: @search_params[:search_type] == 'i'
+              = f.radio_button :search_type, 'w', label: 'Items players want', inline: true, checked: @search_params[:search_type] == 'w'
+            end
       
-      .col-sm-12
+      .col-xs-12
         = f.button class: 'btn btn-success', id: 'search-submit-button' do
           span.glyphicon.glyphicon-search aria-hidden='true'
           - if @hero_user
@@ -48,11 +53,9 @@
             = @hero_user.platform_username
           - else
             |  Search
-      / .row
-      /   - if !@hero_user
-      /     .col-sm-6#list-radio-container
-      /       = f.form_group :search_type  do
-      /         = f.radio_button :search_type, 'i', label: 'Items players have', inline: true, checked: @search_params[:search_type] == 'i'
-      /         = f.radio_button :search_type, 'w', label: 'Items players want', inline: true, checked: @search_params[:search_type] == 'w'
-      /       end
+      
+      .col-xs-12
+        p.text-muted.text-center#inventory-count
+          | #{UserItem.inventory.count} items in player inventories
+      
         

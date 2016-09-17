@@ -12,14 +12,13 @@
   margin-bottom: 20px;
 }
 
-#list-radio-container {
-  @media (min-width: $screen-sm-min) {
-    float: right;
-  }
-}
-
 #popover-inventory-btn {
   margin-left: 5px;
+}
+
+#inventory-count {
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
 #advanced-search-toggle {
