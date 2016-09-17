@@ -27,12 +27,16 @@
 }
 
 #advanced-search-panel {
-  margin-top: 5px;
+  margin: 5px 0px;
   display: none;
   padding-top: 15px;
   background-color: #f9f9f9;
 }
 
 #search-submit-button {
-  margin-top: 15px;
+  margin-top: 10px;
+}
+
+#wishlist-count {
+  display: none;
 }

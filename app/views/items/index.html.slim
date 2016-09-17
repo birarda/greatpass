@@ -1,4 +1,4 @@
-= render 'search_panel', show_inventory_count: true
+= render 'search_panel', show_counts: true
     
 - cache ['v2', "#{cache_key_for_item_list}"] do
   - Item.all.group_by(&:kind).sort.each do |kind, items|

@@ -53,9 +53,11 @@
             = @hero_user.platform_username
           - else
             |  Search
-      
-      .col-xs-12
-        p.text-muted.text-center#inventory-count
-          | #{UserItem.inventory.count} items in player inventories
-      
+      - if defined?(show_counts) && show_counts
+        .col-xs-12
+          p.text-muted.text-center#inventory-count
+            | #{number_with_delimiter(UserItem.inventory.count, :delimiter => ',')} items in player inventories
+          p.text-muted.text-center#wishlist-count
+            | #{number_with_delimiter(UserItem.wishlist.count, :delimiter => ',')} items in player wishlists
+        
         
