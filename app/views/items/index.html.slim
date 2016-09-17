@@ -1,5 +1,8 @@
+h4 Rocket League Item Trading
+p.text-muted Find items in player inventories by searching or by clicking on a preview image
+
 = render 'search_panel', show_counts: true
-    
+
 - cache ['v2', "#{cache_key_for_item_list}"] do
   - Item.all.group_by(&:kind).sort.each do |kind, items|
     - if kind != Item.kinds[:crate]

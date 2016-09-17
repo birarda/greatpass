@@ -93,6 +93,13 @@ $(document).on('turbolinks:load', function() {
   if (rareClassVal || platformVal || gamertagVal || wishlistChecked) {
     $('#advanced-search-toggle').click();
   }
+
+  $('input[name=\\[search_type\\]]').change(function(){
+    var searchTypeInventory = $(this).val() == 'i';
+
+    $('#inventory-count').toggle(searchTypeInventory);
+    $('#wishlist-count').toggle(!searchTypeInventory);
+  })
 });
 
 

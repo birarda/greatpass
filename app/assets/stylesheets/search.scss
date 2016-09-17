@@ -16,11 +16,6 @@
   margin-left: 5px;
 }
 
-#inventory-count {
-  margin-top: 10px;
-  margin-bottom: 0px;
-}
-
 #advanced-search-toggle {
   margin-bottom: 5px;
   cursor: pointer;
@@ -35,6 +30,11 @@
 
 #search-submit-button {
   margin-top: 10px;
+}
+
+#inventory-count, #wishlist-count {
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
 #wishlist-count {
