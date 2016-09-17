@@ -58,11 +58,11 @@ class ItemsController < ApplicationController
       @search_params[:platform] = [platform_from_url_string(@search_params[:platform_string])]
     end
 
-    # if we have a current logged in user, default to searching on their platform
-    # @search_params[:platform] = User.platforms[current_user.platform] if current_user && !@search_params.has_key?(:platform)
-
     if @search_params.has_key?(:platform)
       query = query.where(users: { platform: @search_params[:platform] })
+    elsif current_user
+      # if we have a current logged in user, default to searching on their platform
+      query = query.where(users: { platform: User.platforms[current_user.platform] })
     end
 
     if @search_params.has_key?(:platform_username)
