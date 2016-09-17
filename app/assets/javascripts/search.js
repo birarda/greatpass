@@ -28,10 +28,7 @@ $(document).on('turbolinks:load', function() {
 
     var allItems = itemSelectize.options;
 
-    $('#search__kind').change(function(){
-      // now we filter the list of items that can be selected to match the selected kinds
-      var newKinds = $(this).val();
-
+    function updateItemsForTypes(newKinds) {
       var filteredItems = [];
 
       // before we clear, we need to remember what was selected
@@ -68,6 +65,13 @@ $(document).on('turbolinks:load', function() {
       });
 
       itemSelectize.setValue(newSelection);
+    }
+
+    updateItemsForTypes($('#search__kind').val())
+
+    $('#search__kind').change(function(){
+      // now we filter the list of items that can be selected to match the selected kinds
+      updateItemsForTypes($(this).val());
     });
   }
 
