@@ -1,26 +1,28 @@
 .panel.panel-default
   = bootstrap_form_tag url: search_path, html: { method: 'get', autocomplete: 'off' } do |f|
     .panel-body
-      .col-sm-6.col-md-3
-        = f.select :kind,
-          options_for_select(Item.kinds.sort.map { |k, v| [k.titleize, v] }, @search_params[:kind]), 
-        { include_blank: 'All', label: 'Type' }, { multiple: true, namespace: 'search' }
-      .col-sm-6.col-md-3#item-selection
+      - if !@hero_item
+        .col-sm-6.col-md-3
+          = f.select :kind,
+            options_for_select(Item.kinds.sort.map { |k, v| [k.titleize, v] }, @search_params[:kind]), 
+          { include_blank: 'All', label: 'Type' }, { multiple: true, namespace: 'search' }
+      #item-selection class="#{@hero_item ? 'col-sm-4' : 'col-sm-6 col-md-3'}" 
         = f.select :item_id, 
           options_for_select(@items.collect { |i| [ i.name, i.id, { 'data-kind-id': Item.kinds[i.kind] }]}, @search_params[:item_id]), 
           { include_blank: 'All' }, { multiple: true, namespace: 'search' }
         javascript:
           var itemKinds = #{@items.collect { |i| [i.id, Item.kinds[i.kind]] }.to_h.to_json.html_safe}
-      .clearfix.visible-sm
-      .col-sm-6.col-md-3
+      - if !@hero_item
+        .clearfix.visible-sm
+      div class="#{@hero_item ? 'col-sm-4' : 'col-sm-6 col-md-3'}" 
         = f.select :certification, 
           options_for_select(@certification_options, @search_params[:certification]), 
           { include_blank: 'Any / None' }, { multiple: true, namespace: 'search' }
-      .col-sm-6.col-md-3
+      div class="#{@hero_item ? 'col-sm-4' : 'col-sm-6 col-md-3'}" 
         = f.select :paint_color, 
           options_for_select(@paint_options, @search_params[:paint_color]), 
           { include_blank: 'Any / None' }, { multiple: true, namespace: 'search' }
-      .clearfix.visible-md.visible-lg
+      .clearfix
       
       .col-xs-12
         p#advanced-search-toggle
