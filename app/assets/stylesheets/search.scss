@@ -12,12 +12,37 @@
   margin-bottom: 20px;
 }
 
-#list-radio-container {
-  @media (min-width: $screen-sm-min) {
-    float: right;
-  }
-}
-
 #popover-inventory-btn {
   margin-left: 5px;
+}
+
+#advanced-search-toggle {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+#advanced-search-panel {
+  margin: 5px 0px;
+  display: none;
+  padding-top: 15px;
+  background-color: #f9f9f9;
+}
+
+#search-submit-button {
+  margin-top: 10px;
+}
+
+#inventory-count, #wishlist-count {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+#wishlist-count {
+  display: none;
+}
+
+#kind-selection, #rare-class-selection {
+  .selectize-dropdown-content {
+    max-height: 230px;
+  }
 }
