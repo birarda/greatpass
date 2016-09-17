@@ -40,3 +40,9 @@
 #wishlist-count {
   display: none;
 }
+
+#kind-selection, #rare-class-selection {
+  .selectize-dropdown-content {
+    max-height: 230px;
+  }
+}

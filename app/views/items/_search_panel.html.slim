@@ -2,7 +2,7 @@
   = bootstrap_form_tag url: search_path, html: { method: 'get', autocomplete: 'off' } do |f|
     .panel-body
       - if !@hero_item
-        .col-sm-6.col-md-3
+        #kind-selection.col-sm-6.col-md-3
           = f.select :kind,
             options_for_select(Item.kinds.sort.map { |k, v| [k.titleize, v] }, @search_params[:kind]), 
           { include_blank: 'All', label: 'Type' }, { multiple: true, namespace: 'search' }
@@ -31,7 +31,7 @@
             span.caret.caret-right
       
       .col-xs-12#advanced-search-panel
-        .col-sm-4
+        #rare-class-selection.col-sm-4
           = f.select :rare_class,
             options_for_select(Item.rare_classes.sort.map { |k, v| [k.titleize, v] }, @search_params[:rare_class]),
             { include_blank: 'All', label: 'Class' }, { multiple: true, namespace: 'search' }
