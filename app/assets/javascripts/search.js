@@ -2,63 +2,85 @@
 // All this logic will automatically be available in application.js.
 $(document).on('turbolinks:load', function() {
 
-  var $selectized_selects = [$('#search__item_id'), $('#search__certification'), $('#search__paint_color'), $('#search__rare_class'), $('#search__platform'), $('#search__kind')]
+  $('#search__item_id').selectize({
+    closeAfterSelect: true,
+    onDropdownClose: function(dropdown) {
+      $(dropdown).prev().find('input').blur();
+    },
+    sortField: 'text'
+  });
+
+  var $selectized_selects = [$('#search__certification'), $('#search__paint_color'), $('#search__rare_class'), $('#search__platform'), $('#search__kind')]
   $.each($selectized_selects, function(index, $select){
     $select.selectize({
       closeAfterSelect: true,
       onDropdownClose: function(dropdown) {
         $(dropdown).prev().find('input').blur();
-      },
-      sortField: 'text'
+      }
     });
   });
 
   // grab the initial options from the selectize object for item
   var $rawItemSelect = $('#item-selection .selectized');
-  var itemSelectize = $rawItemSelect[0].selectize;
 
-  var allItems = itemSelectize.options;
+  if ($rawItemSelect.length) {
+    var itemSelectize = $rawItemSelect[0].selectize;
 
-  $('#search__kind').change(function(){
-    // now we filter the list of items that can be selected to match the selected kinds
-    var newKinds = $(this).val();
+    var allItems = itemSelectize.options;
 
-    var filteredItems = [];
+    $('#search__kind').change(function(){
+      // now we filter the list of items that can be selected to match the selected kinds
+      var newKinds = $(this).val();
 
-    // before we clear, we need to remember what was selected
-    var itemsSelectedBefore = $rawItemSelect.val();
+      var filteredItems = [];
 
-    $.each(allItems, function(itemID, value){
-      // use the itemKinds Object to see what kind this is
-      var kind = itemKinds[itemID];
+      // before we clear, we need to remember what was selected
+      var itemsSelectedBefore = $rawItemSelect.val();
 
-      if (!newKinds || newKinds.indexOf(kind.toString()) != -1) {
-        filteredItems.push({
-          value: itemID,
-          text: value.text
-        })
-      }
+      $.each(allItems, function(itemID, value){
+        // use the itemKinds Object to see what kind this is
+        var kind = itemKinds[itemID];
+
+        if (!newKinds || newKinds.indexOf(kind.toString()) != -1) {
+          filteredItems.push({
+            value: itemID,
+            text: value.text
+          })
+        }
+      });
+
+      itemSelectize.clearOptions();
+      itemSelectize.load(function(callback){
+        callback(filteredItems);
+      });
+
+      var newSelection = [];
+
+      // okay, now we need to re-select whatever was selected before
+      // as long as the kinds match
+      $.each(itemsSelectedBefore, function(index, itemIDString){
+        var itemID = parseInt(itemIDString)
+        var itemKind = itemKinds[itemID];
+
+        if (!newKinds || newKinds.indexOf(itemKind.toString()) != -1) {
+          newSelection.push(itemIDString);
+        }
+      });
+
+      itemSelectize.setValue(newSelection);
     });
+  }
 
-    itemSelectize.clearOptions();
-    itemSelectize.load(function(callback){
-      callback(filteredItems);
-    });
-
-    var newSelection = [];
-
-    // okay, now we need to re-select whatever was selected before
-    // as long as the kinds match
-    $.each(itemsSelectedBefore, function(index, itemIDString){
-      var itemID = parseInt(itemIDString)
-      var itemKind = itemKinds[itemID];
-
-      if (!newKinds || newKinds.indexOf(itemKind.toString()) != -1) {
-        newSelection.push(itemIDString);
-      }
-    });
-
-    itemSelectize.setValue(newSelection);
+  // handle advanced search toggling
+  $('#advanced-search-toggle').click(function(){
+    var $caretSpan = $(this).find('span.caret');
+    if ($caretSpan.hasClass('caret-right')) {
+      $('#advanced-search-panel').show();
+      $caretSpan.removeClass('caret-right');
+    } else {
+      $('#advanced-search-panel').hide();
+      $caretSpan.addClass('caret-right');
+    }
   });
 });
 

@@ -4,7 +4,7 @@
 .col-sm-6.col-md-3
   = f.select :certification, 
     options_for_select(@certification_options, namespace == 'match_have' ? @have_params[:certification_id] : @want_params[:certification_id]), { include_blank: 'Any / None'}, { namespace: namespace, name: "#{namespace}[certification_id]" }
-.clearfix.visible-sm
+/ .clearfix.visible-sm
 .col-sm-6.col-md-3
   = f.select :paint_color, 
     options_for_select(@paint_options, namespace == 'match_have' ? @have_params[:paint_color_id] : @want_params[:paint_color_id]), { include_blank: 'Any / None' }, { namespace: namespace, name: "#{namespace}[paint_color_id]" }
