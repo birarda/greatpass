@@ -3,7 +3,7 @@ p.text-muted Find items in player inventories by searching or by clicking on a p
 
 = render 'search_panel', show_counts: true
 
-- cache ['v2', "#{cache_key_for_item_list}"] do
+- cache ['v3', "#{cache_key_for_item_list}"] do
   - Item.all.group_by(&:kind).sort.each do |kind, items|
     - if kind != Item.kinds[:crate]
       .panel.panel-default.kind-panel id="#{kind.pluralize.downcase}" data-kind-id="#{Item.kinds[kind]}"
@@ -11,7 +11,7 @@ p.text-muted Find items in player inventories by searching or by clicking on a p
           h4 = kind.pluralize.titleize
         .panel-body
           - items.each_with_index do |item, index|
-            .col-xs-6.col-sm-3.col-md-2.item-col data-item-id="#{item.id}" 
+            .col-xs-6.col-sm-3.col-md-2.col-lg-2.item-col data-item-id="#{item.id}"
               = link_to item_path(item_slug: item.url_slug) do
                 .item-tile
                   .image-container.center-block 
