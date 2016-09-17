@@ -33,11 +33,12 @@
           = f.select :rare_class,
             options_for_select(Item.rare_classes.sort.map { |k, v| [k.titleize, v] }, @search_params[:rare_class]),
             { include_blank: 'All', label: 'Class' }, { multiple: true, namespace: 'search' }
-        .col-sm-4
-          = f.select :platform, options_for_select(User.platforms.sort, @search_params[:platform]), 
-          { include_blank: 'All' }, { multiple: true, namespace: 'search' }
-        .col-sm-4
-          = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
+        - if !@hero_user
+          .col-sm-4
+            = f.select :platform, options_for_select(User.platforms.sort, @search_params[:platform]), 
+            { include_blank: 'All' }, { multiple: true, namespace: 'search' }
+          .col-sm-4
+            = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
       
       .col-sm-12
         = f.button class: 'btn btn-success', id: 'search-submit-button' do
