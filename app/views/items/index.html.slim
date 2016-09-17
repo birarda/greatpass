@@ -18,9 +18,3 @@ p.text-muted Find items in player inventories by searching or by clicking on a p
                     img.img-responsive.center-block.unveil-img data-src="#{item.game_preview.url}"
                     
                   p.text-center.item-name = item.name
-            - if (index + 1) % 2 == 0
-              / .clearfix.visible-xs
-            - if (index + 1) % 4 == 0
-              / .clearfix.visible-sm
-            - if (index + 1) % 6 == 0
-              / .clearfix.visible-md.visible-lg
