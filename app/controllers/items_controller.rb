@@ -10,7 +10,9 @@ class ItemsController < ApplicationController
 
     @items = Item.all
 
-    @search_params = {}
+    @search_params = {
+      search_type: 'i'
+    }
   end
 
   def search

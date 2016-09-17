@@ -82,6 +82,17 @@ $(document).on('turbolinks:load', function() {
       $caretSpan.addClass('caret-right');
     }
   });
+
+  // for a wishlist search, or a search that uses platform gamertag/platform/class
+  // show the advanced options so the user knows what search they are running
+  var rareClassVal = $('#search__rare_class').val();
+  var platformVal = $('#search__platform').val();
+  var gamertagVal = $('#search__platform_username').val();
+  var wishlistChecked = $('#_search_type_w').is(':checked');
+
+  if (rareClassVal || platformVal || gamertagVal || wishlistChecked) {
+    $('#advanced-search-toggle').click();
+  }
 });
 
 
