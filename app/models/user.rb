@@ -20,6 +20,7 @@
 #  platform_url           :string
 #  admin                  :boolean          default(FALSE)
 #  reddit_username        :string
+#  signup_code            :string
 #
 
 class User < ApplicationRecord

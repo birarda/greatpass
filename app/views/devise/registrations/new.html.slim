@@ -3,7 +3,7 @@
 h3
   | Sign up
 
-- if params[:code] == 'prl'
+- if current_page?('/prl') || (resource && resource.signup_code == 'prl')
   img src="http://placehold.it/400x80"
 
 .row
@@ -23,6 +23,8 @@ h3
           end
           
           = f.text_field :platform_username, label: 'Gamertag', help: 'Username on your platform (will be publicly displayed in searches)'
+          
+          = f.hidden_field :signup_code
           
           hr
             p.text-muted#contact-help

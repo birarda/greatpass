@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' }
+
+  devise_scope :user do
+    get '/prl', to: 'registrations#new'
+    get "/sign_up", to: "registrations#new", as: "new_user_registration"
+  end
+
+  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' }, controllers: { registrations: "registrations" }
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
