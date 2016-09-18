@@ -21,13 +21,18 @@
 #  admin                  :boolean          default(FALSE)
 #  reddit_username        :string
 #  signup_code            :string
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
 #
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable
 
   enum platform: [:Steam, :PSN, :Xbox]
 
@@ -41,6 +46,8 @@ class User < ApplicationRecord
   validates :platform_url, url: { no_local: true, allow_nil: true, allow_blank: true }
 
   before_validation :smart_add_platform_url_protocol
+
+  after_create :send_manual_optional_confirmation_instructions
 
   def inbox
     Conversation.includes(:last_message, :sender, :receiver)
@@ -59,5 +66,14 @@ class User < ApplicationRecord
     unless self.platform_url.blank? || self.platform_url[/\Ahttp:\/\//] || self.platform_url[/\Ahttps:\/\//]
       self.platform_url = "http://#{self.platform_url}"
     end
+  end
+
+  def confirmation_required?
+    false
+  end
+
+  def send_manual_optional_confirmation_instructions
+    self.skip_reconfirmation!
+    self.send_confirmation_instructions
   end
 end
