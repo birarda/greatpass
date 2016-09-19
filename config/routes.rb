@@ -41,6 +41,10 @@ Rails.application.routes.draw do
     resources 'threads', only: [:index, :show, :destroy]
     resources 'threads', only: [:create], constraints: { format: 'json' }
 
+    post 'threads/settings', to: 'threads#settings', constraints: { format: 'json' }
+
     get 'inbox', to: 'threads#index'
   end
+
+  post 'user/resend_confirmation', to: 'user#resend_confirmation', constraints: { format: 'json' }
 end
