@@ -25,7 +25,7 @@
 #  confirmed_at                :datetime
 #  confirmation_sent_at        :datetime
 #  unconfirmed_email           :string
-#  email_notifications_enabled :boolean
+#  email_notifications_enabled :boolean          default(FALSE)
 #
 
 class User < ApplicationRecord

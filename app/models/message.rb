@@ -23,6 +23,7 @@ class Message < ApplicationRecord
   validates :body, length: { maximum: 1000, minimum: 1 }
 
   before_create :remove_conversation_delete_flags
+  after_create :send_email_notification
 
   validate :matches_conversation
 
@@ -40,6 +41,12 @@ class Message < ApplicationRecord
       if !(self.sender_id == self.conversation.sender_id && self.receiver_id == self.conversation.receiver_id) &&
          !(self.receiver_id == self.conversation.sender_id && self.sender_id == self.conversation.receiver_id)
           errors.add(:message, 'must be sent in matching thread')
+      end
+    end
+
+    def send_email_notification
+      if self.receiver.email_notifications_enabled?
+        MessageMailer.message_notification_email(self).deliver_later
       end
     end
 end

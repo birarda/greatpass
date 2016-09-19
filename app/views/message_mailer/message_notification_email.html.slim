@@ -1,0 +1,18 @@
+p
+  = "#{@message.receiver.platform_username},"
+p
+  | You have a new message on Great Pass from 
+  strong = @message.sender.platform_username
+  | :
+hr
+p = @message.body
+hr
+p
+  | View the thread 
+  = link_to 'here', user_thread_url(@message.conversation)
+  | .
+  
+p
+  | Happy trading!
+p
+  | Great Pass
