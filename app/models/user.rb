@@ -2,32 +2,38 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :inet
-#  last_sign_in_ip        :inet
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  platform               :integer
-#  platform_username      :string
-#  platform_url           :string
-#  admin                  :boolean          default(FALSE)
-#  reddit_username        :string
-#  signup_code            :string
+#  id                          :integer          not null, primary key
+#  email                       :string           default(""), not null
+#  encrypted_password          :string           default(""), not null
+#  reset_password_token        :string
+#  reset_password_sent_at      :datetime
+#  remember_created_at         :datetime
+#  sign_in_count               :integer          default(0), not null
+#  current_sign_in_at          :datetime
+#  last_sign_in_at             :datetime
+#  current_sign_in_ip          :inet
+#  last_sign_in_ip             :inet
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  platform                    :integer
+#  platform_username           :string
+#  platform_url                :string
+#  admin                       :boolean          default(FALSE)
+#  reddit_username             :string
+#  signup_code                 :string
+#  confirmation_token          :string
+#  confirmed_at                :datetime
+#  confirmation_sent_at        :datetime
+#  unconfirmed_email           :string
+#  email_notifications_enabled :boolean          default(FALSE)
 #
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable
 
   enum platform: [:Steam, :PSN, :Xbox]
 
@@ -41,6 +47,8 @@ class User < ApplicationRecord
   validates :platform_url, url: { no_local: true, allow_nil: true, allow_blank: true }
 
   before_validation :smart_add_platform_url_protocol
+
+  after_create :send_manual_optional_confirmation_instructions
 
   def inbox
     Conversation.includes(:last_message, :sender, :receiver)
@@ -59,5 +67,14 @@ class User < ApplicationRecord
     unless self.platform_url.blank? || self.platform_url[/\Ahttp:\/\//] || self.platform_url[/\Ahttps:\/\//]
       self.platform_url = "http://#{self.platform_url}"
     end
+  end
+
+  def confirmation_required?
+    false
+  end
+
+  def send_manual_optional_confirmation_instructions
+    self.skip_reconfirmation!
+    self.send_confirmation_instructions
   end
 end

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   devise_scope :user do
     get '/prl', to: 'registrations#new'
     get "/sign_up", to: "registrations#new", as: "new_user_registration"
@@ -41,6 +46,10 @@ Rails.application.routes.draw do
     resources 'threads', only: [:index, :show, :destroy]
     resources 'threads', only: [:create], constraints: { format: 'json' }
 
+    post 'threads/settings', to: 'threads#settings', constraints: { format: 'json' }
+
     get 'inbox', to: 'threads#index'
   end
+
+  post 'user/resend_confirmation', to: 'user#resend_confirmation', constraints: { format: 'json' }
 end

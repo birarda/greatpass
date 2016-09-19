@@ -43,7 +43,21 @@ class User::ThreadsController < ApplicationController
     else
       render status: 400, json: { status: 'failure', errors: conversation.errors.full_messages }
     end
+  end
 
+  def settings
+
+    if params[:email_notifications] == 'true' || params[:email_notifications] == 'false'
+      if !current_user.confirmed?
+        render json: { status: 'failure', email_confirmed: false }, status: 400
+      else
+        # update the user's confirmation email setting
+        current_user.update(email_notifications_enabled: params[:email_notifications])
+        render json: { status: 'success', settings: { email_notifications_enabled: current_user.email_notifications_enabled }}
+      end
+    else
+      render json: { status: 'failure' }, status: 422
+    end
 
   end
 

@@ -5,3 +5,21 @@
 #message-form-errors {
   display: none;
 }
+
+#email-notification-row {
+  margin-bottom: 10px;
+
+  .loading-button {
+    display: none;
+  }
+
+  button.loading {
+    .clickable-button {
+      display: none;
+    }
+    .loading-button {
+      display: block;
+    }
+  }
+
+}

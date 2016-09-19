@@ -2,6 +2,27 @@
 
 h3 Inbox
 
+.row#email-notification-row
+  .col-xs-12
+    button.btn.btn-default#email-notifications-button type="button"
+      .clickable-button
+        span.checked-glyph class="glyphicon #{current_user.email_notifications_enabled ? 'glyphicon-check' : 'glyphicon-unchecked'}"
+        |  Email Notifications
+      .loading-button
+        span.glyphicon.glyphicon-refresh.spinning
+
+.modal.fade#notification-toggle-modal tabindex="-1" role="dialog"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true"
+            | &times;
+        h4.modal-title#message-modal-title Email Notifications
+      .modal-body
+        p
+        
+
 .row
   .col-xs-12
     p

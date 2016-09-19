@@ -78,6 +78,9 @@ gem 'whenever', require: false
 # add SitemapGenerator for better search indexing
 gem 'sitemap_generator'
 
+# use sidekiq for background jobs
+gem 'sidekiq'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -110,6 +113,7 @@ group :development do
   gem 'capistrano3-puma'
   gem 'dogapi', '>= 1.3.0'
   gem 'capistrano-file-permissions'
+  gem 'capistrano-sidekiq'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
