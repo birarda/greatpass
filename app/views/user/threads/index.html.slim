@@ -5,8 +5,11 @@ h3 Inbox
 .row#email-notification-row
   .col-xs-12
     button.btn.btn-default#email-notifications-button type="button"
-      span.glyphicon.glyphicon-unchecked
-      |  Email Notifications
+      .clickable-button
+        span.checked-glyph class="glyphicon #{current_user.email_notifications_enabled ? 'glyphicon-check' : 'glyphicon-unchecked'}"
+        |  Email Notifications
+      .loading-button
+        span.glyphicon.glyphicon-refresh.spinning
 
 .modal.fade#notification-toggle-modal tabindex="-1" role="dialog"
   .modal-dialog role="document"

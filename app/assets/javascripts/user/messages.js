@@ -37,13 +37,28 @@ $(document).on('turbolinks:load', function() {
 
   $('#email-notifications-button').click(function(){
     // setup a post to toggle email notifications for messages
-    var isDisabled = $(this).find('glyphicon').hasClass('glyphicon-unchecked');
+    var isDisabled = $(this).find('.checked-glyph').hasClass('glyphicon-unchecked');
+    var $button = $(this);
+
+    // disable the button and show the spinner
+    $button.addClass('loading');
+    $button.prop('disabled', true);
 
     $.post('/user/threads/settings', {
       email_notifications: isDisabled
-    }, function(data){
-      // set the button state to match the current notifications settings
+    }).done(function(data){
+      // read what the setting is now and update the button
+      var notificationsEnabled = data['settings']['email_notifications_enabled'];
 
+      var glyphSpan = $button.find('.checked-glyph')
+
+      if (notificationsEnabled) {
+        glyphSpan.addClass('glyphicon-check');
+        glyphSpan.removeClass('glyphicon-unchecked');
+      } else {
+        glyphSpan.addClass('glyphicon-unchecked');
+        glyphSpan.removeClass('glyphicon-check');
+      }
     }).fail(function(xhr){
 
       if (xhr.responseJSON && 'email_confirmed' in xhr.responseJSON && !xhr.responseJSON['email_confirmed']) {
@@ -60,6 +75,10 @@ $(document).on('turbolinks:load', function() {
       }
 
       $modal.modal();
+    }).always(function(data, textStatus, error){
+      // re-enable the button so it can be clicked again
+      $button.prop('disabled', false);
+      $button.removeClass('loading');
     });
 
     $(this).blur();
