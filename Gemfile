@@ -113,6 +113,7 @@ group :development do
   gem 'capistrano3-puma'
   gem 'dogapi', '>= 1.3.0'
   gem 'capistrano-file-permissions'
+  gem 'capistrano-sidekiq'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

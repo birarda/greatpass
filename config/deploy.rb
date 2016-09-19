@@ -42,6 +42,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'nginx', 'tmp/pids', 'tmp/
 set :file_permissions_chmod_mode, "0700"
 set :file_permissions_paths, ["lib/cron/db_backup.sh"]
 
+set :sidekiq_queue, 'greatpass_production_mailers'
+
 namespace :deploy do
 
   # after :restart, :clear_cache do
