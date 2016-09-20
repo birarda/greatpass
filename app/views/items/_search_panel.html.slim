@@ -40,12 +40,15 @@
             = f.select :platform, options_for_select(User.platforms.sort, @search_params[:platform]), 
             { include_blank: "#{current_user ? current_user.platform : 'All'}" }, { multiple: true, namespace: 'search' }
           .col-sm-4
-            = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All'
+            = f.text_field :platform_username, label: 'Gamertag', value: @search_params[:platform_username], placeholder: 'All', namespace: 'search'
           .col-sm-6#list-radio-container
             = f.form_group :search_type  do
               = f.radio_button :search_type, 'i', label: 'Items players have', inline: true, checked: @search_params[:search_type] == 'i'
               = f.radio_button :search_type, 'w', label: 'Items players want', inline: true, checked: @search_params[:search_type] == 'w'
             end
+        - else
+          = f.hidden_field :platform, value: User.platforms[@hero_user.platform]
+          = f.hidden_field :platform_username, value: @hero_user.platform_username
       
       .col-xs-12
         = f.button class: 'btn btn-success', id: 'search-submit-button' do
