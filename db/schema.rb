@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919012640) do
+ActiveRecord::Schema.define(version: 20160920014425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,11 +61,12 @@ ActiveRecord::Schema.define(version: 20160919012640) do
   create_table "user_items", force: :cascade do |t|
     t.integer  "item_id"
     t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "paint_color"
     t.integer  "certification"
     t.integer  "list"
+    t.float    "listed_percentage"
     t.index ["certification"], name: "index_user_items_on_certification", using: :btree
     t.index ["item_id"], name: "index_user_items_on_item_id", using: :btree
     t.index ["list"], name: "index_user_items_on_list", using: :btree

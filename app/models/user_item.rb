@@ -2,14 +2,15 @@
 #
 # Table name: user_items
 #
-#  id            :integer          not null, primary key
-#  item_id       :integer
-#  user_id       :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  paint_color   :integer
-#  certification :integer
-#  list          :integer
+#  id                :integer          not null, primary key
+#  item_id           :integer
+#  user_id           :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  paint_color       :integer
+#  certification     :integer
+#  list              :integer
+#  listed_percentage :float
 #
 
 class UserItem < ApplicationRecord
@@ -73,12 +74,15 @@ class UserItem < ApplicationRecord
 
       total_item_count = UserItem.where(item_id: self.item_id, certification: self.certification, paint_color: self.paint_color, list: self.list)
                                  .count('DISTINCT user_id')
-      if total_item_count == 0
-        total_item_count
-      else
+      listed_percentage = 0
+
+      if total_item_count != 0
         total_users = User.count
-        (100 * (total_item_count.to_f / total_users)).round(1)
+        listed_percentage = 100 * (total_item_count.to_f / total_users)
       end
+
+      self.update_column(:listed_percentage, listed_percentage)
+      listed_percentage.round(1)
     end
   end
 
