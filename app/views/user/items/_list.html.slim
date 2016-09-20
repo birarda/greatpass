@@ -80,7 +80,7 @@
               th Certification
               th Paint Color
               th Class
-              th Owned %
+              th = (list_type == 'inventory' ? 'Owned %' : 'Wanted %')
               th.glyphicon-cell Delete
           tbody
           - @items.each do |i|
