@@ -53,7 +53,7 @@ class Message < ApplicationRecord
 
     def send_email_notification
       if self.receiver.email_notifications_enabled?
-        MessageMailer.message_notification_email(self).deliver_later
+        MessageMailer.message_notification_email(self.id).deliver_later
       end
     end
 end

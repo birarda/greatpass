@@ -1,7 +1,9 @@
 p
   = "#{@message.receiver.platform_username}, "
 p
-  | You have a new message on Great Pass from 
+  | You have a new Great Pass message in 
+  strong = @message.conversation.subject
+  |  from 
   strong = @message.sender.platform_username
   | :
 hr
@@ -10,7 +12,10 @@ hr
 p
   | View the thread 
   = link_to 'here', user_thread_url(@message.conversation)
-  | .
+  | . 
+p  
+  | This notification was sent from a no-reply email address.
+  |  Replying to this email will not reply to the message thread.
   
 p
   | Happy trading!
