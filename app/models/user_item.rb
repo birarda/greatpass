@@ -92,8 +92,8 @@ class UserItem < ApplicationRecord
       # find or create the ItemVariant that represents this item
       ItemVariant.find_or_create_by({
         item_id: self.item_id,
-        certification: self.certification,
-        paint_color: self.paint_color
+        certification: UserItem.certifications[self.certification],
+        paint_color: UserItem.paint_colors[self.paint_color]
       })
     end
 

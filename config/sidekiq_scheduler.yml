@@ -1,0 +1,5 @@
+update_rare_percentages:
+  every: 5m
+  class: RarePercentageWorker
+  queue: default
+  description: 'Updates Owned/Wanted % for all item variants'
