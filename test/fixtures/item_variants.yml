@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item_id: 1
+  certification: 1
+  paint_color: 1
+  inventory_percentage: 1.5
+  wishlist_percentage: 1.5
+
+two:
+  item_id: 1
+  certification: 1
+  paint_color: 1
+  inventory_percentage: 1.5
+  wishlist_percentage: 1.5

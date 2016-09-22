@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920014425) do
+ActiveRecord::Schema.define(version: 20160922060858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20160920014425) do
     t.boolean  "sender_deleted",   default: false
     t.index ["receiver_id", "receiver_deleted"], name: "index_conversations_on_receiver_id_and_receiver_deleted", using: :btree
     t.index ["sender_id", "sender_deleted"], name: "index_conversations_on_sender_id_and_sender_deleted", using: :btree
+  end
+
+  create_table "item_variants", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "certification"
+    t.integer  "paint_color"
+    t.float    "inventory_percentage"
+    t.float    "wishlist_percentage"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["item_id", "certification", "paint_color"], name: "item_variant_id_cert_paint_index", unique: true, using: :btree
   end
 
   create_table "items", force: :cascade do |t|
@@ -61,12 +72,11 @@ ActiveRecord::Schema.define(version: 20160920014425) do
   create_table "user_items", force: :cascade do |t|
     t.integer  "item_id"
     t.integer  "user_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "paint_color"
     t.integer  "certification"
     t.integer  "list"
-    t.float    "listed_percentage"
     t.index ["certification"], name: "index_user_items_on_certification", using: :btree
     t.index ["item_id"], name: "index_user_items_on_item_id", using: :btree
     t.index ["list"], name: "index_user_items_on_list", using: :btree

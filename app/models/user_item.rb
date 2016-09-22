@@ -2,21 +2,17 @@
 #
 # Table name: user_items
 #
-#  id                :integer          not null, primary key
-#  item_id           :integer
-#  user_id           :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  paint_color       :integer
-#  certification     :integer
-#  list              :integer
-#  listed_percentage :float
+#  id            :integer          not null, primary key
+#  item_id       :integer
+#  user_id       :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  paint_color   :integer
+#  certification :integer
+#  list          :integer
 #
 
 class UserItem < ApplicationRecord
-  belongs_to :user
-  belongs_to :item
-
   enum list: [
     :inventory,
     :wishlist
@@ -56,8 +52,13 @@ class UserItem < ApplicationRecord
     :orange
   ]
 
+  belongs_to :user
+  belongs_to :item
+
   attr_accessor :certified
   attr_accessor :painted
+
+  after_create :optionally_add_missing_variant
 
   validates :item_id, presence: true
   # validates_uniqueness_of :item_id, scope: [:certification, :paint_color], message: 'is already in your inventory'
@@ -81,12 +82,20 @@ class UserItem < ApplicationRecord
         listed_percentage = 100 * (total_item_count.to_f / total_users)
       end
 
-      self.update_column(:listed_percentage, listed_percentage)
       listed_percentage.round(1)
     end
   end
 
   private
+
+    def optionally_add_missing_variant
+      # find or create the ItemVariant that represents this item
+      ItemVariant.find_or_create_by({
+        item_id: self.item_id,
+        certification: self.certification,
+        paint_color: self.paint_color
+      })
+    end
 
     def common_is_special
       if self.item && self.item.common_base? && (self.certification.nil? && self.paint_color.nil?)
